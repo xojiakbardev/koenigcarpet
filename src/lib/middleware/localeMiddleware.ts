@@ -1,4 +1,4 @@
-import { localeConfig } from "@/localization/config";
+import { Locale, localeConfig } from "@/localization/config";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { type NextRequest, NextResponse } from "next/server";

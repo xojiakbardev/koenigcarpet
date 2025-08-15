@@ -1,5 +1,5 @@
 export const localeConfig = {
-  defaultLocale: "uz",
+  defaultLocale: "en",
   locales: ["en", "uz", "ru"],
   cookieName: "NEXT_LANG",
   cookieMaxAge: 60 * 60 * 24 * 365,
