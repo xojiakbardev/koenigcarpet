@@ -3,7 +3,7 @@ import "../globals.css";
 import { FC, use } from "react";
 import { Locale, localeConfig } from "@/localization/config";
 import { LocaleProvider } from "@/components/providers/LocaleProvider";
-import { getDictionary } from "@/localization/dictiionary";
+import { getDictionary } from "@/localization/dictionary";
 
 
 export const metadata: Metadata = {

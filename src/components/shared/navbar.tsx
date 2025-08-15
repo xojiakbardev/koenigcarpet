@@ -46,6 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({
           : "absolute top-0 bg-transparent"
       )}
     >
+      {hasOption &&
           <div className="top-0 w-full bg-black text-white py-2">
       <div className="flex justify-center items-center gap-5 text-sm font-medium tracking-wider">
           <span className="text-white">CUSTOM SIZE</span>
@@ -54,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({
            <span className="text-white">|</span>
           <span className="text-white">CUSTOM DESIGN</span>
       </div>
-    </div>
+    </div>}
       
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         

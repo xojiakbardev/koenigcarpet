@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, ReactNode } from "react";
-import { Dictionary } from "@/localization/getDictionary";
+import { Dictionary } from "@/localization/dictionary";
 import { LocaleContext } from "@/context/localeContext";
 
 type LocaleProviderProps = {

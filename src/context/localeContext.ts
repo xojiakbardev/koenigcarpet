@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Dictionary } from "@/localization/getDictionary";
+import { Dictionary } from "@/localization/dictionary";
 
 export type LocaleContextType = {
   dictionary: Dictionary | object

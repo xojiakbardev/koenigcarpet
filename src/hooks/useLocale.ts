@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Locale, localeConfig } from "@/localization/localeConfig";
+import { Locale, localeConfig } from "@/localization/config";
 
 export function useLocale() {
   const pathName = usePathname();
