@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { ChevronDown, Check } from 'lucide-react'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import useDrawerStore from '@/hooks/useDrawerStore'
+import nProgress from "nprogress";
 
 interface SortOption {
   value: string
@@ -16,7 +17,7 @@ const ProductControl: React.FC = () => {
   const [grid, setGrid] = useQueryState('grid', false)
   const [sortBy, setSortBy] = useQueryState('sortBy', false)
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
-  const {open} = useDrawerStore()
+  const { open } = useDrawerStore()
 
   const sortOptions: SortOption[] = [
     { value: '', label: 'SORT BY' },
@@ -31,7 +32,7 @@ const ProductControl: React.FC = () => {
 
   const currentSort: SortOption = sortOptions.find(option => option.value === sortBy) || sortOptions[0]
 
- const dropdownRef = useOutsideClick(() => setIsDropdownOpen(false))
+  const dropdownRef = useOutsideClick(() => setIsDropdownOpen(false))
 
   const handleSortSelect = (value: string) => {
     setSortBy(value)
@@ -41,43 +42,40 @@ const ProductControl: React.FC = () => {
   return (
     <div className='flex gap-4 justify-end items-center bg-white p-4'>
       <div className='relative' ref={dropdownRef}>
-        <button 
+        <button
           className='cursor-pointer uppercase flex items-center gap-2 hover:text-gray-600 transition-colors'
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
           {currentSort.label}
-          <ChevronDown 
-            className={`w-4 h-4 transition-transform duration-200 ${
-              isDropdownOpen ? 'rotate-180' : ''
-            }`}
+          <ChevronDown
+            className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''
+              }`}
           />
         </button>
 
         {isDropdownOpen && (
           <div className='absolute top-full right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden'>
-              {sortOptions.map((option) => (
-                <button
-                  key={option.value}
-                  className={`w-full p-2 text-left hover:bg-gray-50 transition-colors flex items-center justify-between group ${
-                    currentSort.value === option.value ? 'bg-gray-100' : ''
+            {sortOptions.map((option) => (
+              <button
+                key={option.value}
+                className={`w-full p-2 text-left hover:bg-gray-50 transition-colors flex items-center justify-between group ${currentSort.value === option.value ? 'bg-gray-100' : ''
                   }`}
-                  onClick={() => handleSortSelect(option.value)}
-                >
-                  <span className={`text-xs font-medium whitespace-nowrap cursor-pointer ${
-                    currentSort.value === option.value ? 'text-black' : 'text-gray-700'
+                onClick={() => handleSortSelect(option.value)}
+              >
+                <span className={`text-xs font-medium whitespace-nowrap cursor-pointer ${currentSort.value === option.value ? 'text-black' : 'text-gray-700'
                   } group-hover:text-black transition-colors`}>
-                    {option.label}
-                  </span>
-                  {currentSort.value === option.value && (
-                    <Check className='w-4 h-4 text-black' />
-                  )}
-                </button>
-              ))}
+                  {option.label}
+                </span>
+                {currentSort.value === option.value && (
+                  <Check className='w-4 h-4 text-black' />
+                )}
+              </button>
+            ))}
           </div>
         )}
 
         {isDropdownOpen && (
-          <div 
+          <div
             className='fixed inset-0 z-40'
             onClick={() => setIsDropdownOpen(false)}
           />
@@ -90,21 +88,30 @@ const ProductControl: React.FC = () => {
         <button
           data-active={grid === '3'}
           className='cursor-pointer border-b-2 border-b-transparent data-[active=true]:border-b-black transition-all hover:text-gray-600'
-          onClick={() => setGrid('3')}
+          onClick={() => {
+            nProgress.start();
+            setGrid('3')
+          }}
         >
           3
         </button>
         <button
           data-active={grid === '4'}
           className='cursor-pointer border-b-2 border-b-transparent data-[active=true]:border-b-black transition-all hover:text-gray-600'
-          onClick={() => setGrid('4')}
+          onClick={() => {
+            nProgress.start();
+            setGrid('4')
+          }}
         >
           4
         </button>
         <button
           data-active={grid === '6'}
           className='cursor-pointer border-b-2 border-b-transparent data-[active=true]:border-b-black transition-all hover:text-gray-600'
-          onClick={() => setGrid('6')}
+          onClick={() => {
+            nProgress.start();
+            setGrid('6')
+          }}
         >
           6
         </button>

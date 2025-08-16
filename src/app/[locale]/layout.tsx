@@ -7,6 +7,7 @@ import { LocaleProvider } from "@/components/providers/LocaleProvider";
 import { getDictionary } from "@/localization/dictionary";
 import Sidebar from "@/components/shared/sidebar";
 import FilterDrawer from "@/components/shared/filterDrawer";
+import NextTopLoader from "nextjs-toploader";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,6 +30,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, params }) => {
           <Sidebar locale={locale}/>
           <FilterDrawer/>
         </LocaleProvider>
+         <NextTopLoader color="#3563E9" height={4} showSpinner={false} />
       </body>
     </html>
   );

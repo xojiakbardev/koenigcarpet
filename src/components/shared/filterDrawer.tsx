@@ -5,6 +5,7 @@ import { X, ChevronDown, Loader2 } from "lucide-react"
 import { useQueryState } from "@/hooks/useQueryState"
 import useDrawerStore from "@/hooks/useDrawerStore"
 import { usePathname } from "next/navigation"
+import nProgress from "nprogress"
 
 interface FilterOption {
   value: string
@@ -78,8 +79,9 @@ const FilterDrawer: React.FC = () => {
     style: styles || [],
     collection: collections || []
   }
-
+  
   const updateQuery = (key: FilterSection["key"], value: string) => {
+    nProgress.start()
     const setter = key === "color" ? setColors : key === "style" ? setStyles : setCollections
     const id = `${key}-${value}`
     setLoadingKey(id)
