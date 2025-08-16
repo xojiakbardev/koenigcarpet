@@ -15,8 +15,8 @@ interface SortOption {
 const ProductControl: React.FC = () => {
   const [grid, setGrid] = useQueryState('grid', false)
   const [sortBy, setSortBy] = useQueryState('sortBy', false)
-  const {open} = useDrawerStore()
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
+  const {open} = useDrawerStore()
 
   const sortOptions: SortOption[] = [
     { value: '', label: 'SORT BY' },

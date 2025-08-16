@@ -1,7 +1,4 @@
-"use client"
-
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useCallback, useMemo } from "react"
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 export function useQueryState<T extends boolean>(
   key: string,
@@ -12,43 +9,40 @@ export function useQueryState<T extends boolean>(
   (newValue: string) => void,
   () => void
 ] {
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
-  const router = useRouter()
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const values = useMemo(() => {
-    return (multiple ? searchParams.getAll(key) : searchParams.get(key) || "") as T extends true ? string[] : string
-  }, [searchParams, key, multiple])
+  const values = (
+    multiple ? searchParams.getAll(key) : searchParams.get(key) || ""
+  ) as T extends true ? string[] : string;
 
-  const setValue = useCallback(
-    (newValue: string) => {
-      const params = new URLSearchParams(searchParams.toString())
+  const setValue = (newValue: string) => {
+    const params = new URLSearchParams(searchParams.toString());
 
-      if (multiple) {
-        let currentValues = searchParams.getAll(key)
-        if (currentValues.includes(newValue)) {
-          currentValues = currentValues.filter((v) => v !== newValue)
-        } else {
-          currentValues.push(newValue)
-        }
-        currentValues.sort()
+    if (multiple) {
+      let currentValues = searchParams.getAll(key);
 
-        params.delete(key)
-        currentValues.forEach((v) => params.append(key, v))
-      } else {
-        params.set(key, newValue)
-      }
+      if (currentValues.includes(newValue)) {
+        currentValues = currentValues.filter((v) => v !== newValue);
+      } else {currentValues.push(newValue)}
 
-      router.push(`${path ?? pathname}?${params.toString()}`, { scroll: false })
-    },
-    [searchParams, pathname, path, router, key, multiple]
-  )
+      currentValues.sort();
 
-  const clearState = useCallback(() => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.delete(key)
-    router.push(`${path ?? pathname}?${params.toString()}`, { scroll: false })
-  }, [searchParams, pathname, path, router, key])
+      params.delete(key);
+      currentValues.forEach((v) => params.append(key, v));
+    } else {
+      params.set(key, newValue);
+    }
 
-  return [values, setValue, clearState] as const
+    router.push(`${path ?? pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  const clearState = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete(key);
+    router.push(`${path ?? pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  return [values, setValue, clearState] as const;
 }

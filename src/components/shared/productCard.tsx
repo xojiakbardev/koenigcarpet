@@ -1,8 +1,8 @@
 "use client";
 
 import { Heart } from "lucide-react";
-import Image from "next/image";
 import { FC, useState } from "react";
+import LazyImage from "./lazyImage";
 
 type Props = {
   product: {
@@ -33,12 +33,11 @@ const ProductCard: FC<Props> = ({ product }) => {
         className="relative w-full overflow-hidden aspect-[3/4]"
         onMouseLeave={handleMouseLeave}
       >
-        <Image
+        <LazyImage
+        fill
           src={product.images[currentImageIndex]}
           alt={product.name}
-          fill
           className="object-cover transition-opacity duration-500"
-          priority
         />
 
         <div className="absolute top-0 left-0 w-full h-full flex">

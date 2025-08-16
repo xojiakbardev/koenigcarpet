@@ -1,20 +1,21 @@
+import FilterProduct from '@/components/pages/filter/filterProduct'
 import Banner from '@/components/shared/banner'
 import Footer from '@/components/shared/footer'
-import ProductCard from '@/components/shared/productCard'
-import ProductControl from '@/components/shared/productControl'
-import ProductWrapper from '@/components/shared/productWrapper'
+// import ProductControl from '@/components/shared/productControl'
 import { Locale } from '@/localization/config'
 import { FC, use } from 'react'
 
 type FilteredRugsProps = {
-  params: Promise<{ locale: Locale, filter: string, slug: string }>
+  params: Promise<{ locale: Locale, filter:"color" | "style" | "collection", slug: string }>
   searchParams: Promise<Record<string, string>>
 }
 
-const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
+const FilteredRugs: FC<FilteredRugsProps> = ({ params }) => {
 
   const queryParams = use(params)
-  const grid = use(searchParams).grid
+  const filter = queryParams.filter
+  const slug = queryParams.slug
+
 
   const sampleProducts = [
     {
@@ -75,12 +76,8 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   return (
     <div>
       <Banner title={queryParams.slug.toLocaleUpperCase().replace("-", " ")} image={"/static/image1.png"} />
-      <ProductControl />
-      <ProductWrapper grid={grid}>
-        {sampleProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </ProductWrapper>
+      {/* <ProductControl /> */}
+      <FilterProduct products={sampleProducts} filter={filter} slug={slug}/>
       <Footer />
     </div>
   )
