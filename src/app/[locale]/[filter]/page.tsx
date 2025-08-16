@@ -8,15 +8,15 @@ import { FC, use } from "react"
 
 type RugsPageProps ={
   params:Promise<{filter:string}>
+  searchParams:Promise<Record<string,string>>
 }
 
 const VALID_FILTERS = ["all-rugs", "rugs-in-stock", "new-rugs"] as const;
 type FilterType = typeof VALID_FILTERS[number];
 
 
-const RugsPage:FC<RugsPageProps> = ({params}) => {
+const RugsPage:FC<RugsPageProps> = ({params, searchParams}) => {
   const filter = use(params).filter
-
 
   if (!VALID_FILTERS.includes(filter as FilterType)) {
     return notFound();
@@ -91,7 +91,7 @@ const RugsPage:FC<RugsPageProps> = ({params}) => {
     <div className="flex flex-col">
       <Banner title={title} image={images[filter]} />
       <ProductControl  />
-      <ProductWrapper>
+        <ProductWrapper grid={use(searchParams).grid}>
         {sampleProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
