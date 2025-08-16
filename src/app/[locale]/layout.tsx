@@ -6,6 +6,7 @@ import { Locale, localeConfig } from "@/localization/config";
 import { LocaleProvider } from "@/components/providers/LocaleProvider";
 import { getDictionary } from "@/localization/dictionary";
 import Sidebar from "@/components/shared/sidebar";
+import FilterDrawer from "@/components/shared/filterDrawer";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,6 +27,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, params }) => {
         <LocaleProvider dictionary={dictionary}>
           {children}
           <Sidebar locale={locale}/>
+          <FilterDrawer/>
         </LocaleProvider>
       </body>
     </html>
