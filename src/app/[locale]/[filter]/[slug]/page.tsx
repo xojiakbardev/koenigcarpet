@@ -1,9 +1,10 @@
 import FilterProduct from '@/components/pages/filter/filterProduct'
 import Banner from '@/components/shared/banner'
 import Footer from '@/components/shared/footer'
-// import ProductControl from '@/components/shared/productControl'
+import ProductControl from '@/components/shared/productControl'
 import { Locale } from '@/localization/config'
 import { FC, use } from 'react'
+import data from "@/context/data.json"
 
 type FilteredRugsProps = {
   params: Promise<{ locale: Locale, filter:"color" | "style" | "collection", slug: string }>
@@ -17,67 +18,13 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params }) => {
   const slug = queryParams.slug
 
 
-  const sampleProducts = [
-    {
-      id: 1,
-      name: "ASTRA WHITE - STONE - NOUGAT",
-      price: 1390.00,
-      images: ["/static/product/image.png", "/static/product/image2.png", "/static/product/image3.png"],
-      color: "BEYAZ",
-      style: "ABSTRACT",
-      collection: "AMORPH"
-    },
-    {
-      id: 2,
-      name: "BARON BEIGE - NOUGAT - GOLD",
-      price: 890.00,
-      images: ["/static/product/image.png", "/static/product/image2.png", "/static/product/image3.png"],
-      color: "BEIGE",
-      style: "CLASSIC",
-      collection: "CORAL"
-    },
-    {
-      id: 3,
-      name: "BARON ICE BLUE - MINT",
-      price: 890.00,
-      images: ["/static/product/image.png", "/static/product/image2.png", "/static/product/image3.png"],
-      color: "BLUE",
-      style: "ETHNIC",
-      collection: "ETHNIQUE"
-    },
-    {
-      id: 4,
-      name: "BLAST DARK BEIGE",
-      price: 815.00,
-      images: ["/static/product/image.png", "/static/product/image2.png", "/static/product/image3.png"],
-      color: "BEIGE",
-      style: "AMORPHOUS",
-      collection: "MARQUISE"
-    },
-    {
-      id: 5,
-      name: "BLAST LIGHT GREY",
-      price: 815.00,
-      images: ["/static/product/image.png", "/static/product/image2.png", "/static/product/image3.png"],
-      color: "ÇOK RENKLİ",
-      style: "ART",
-      collection: "MONOCHROME"
-    },
-    {
-      id: 6,
-      name: "BLAST WHITE - GOLD",
-      price: 815.00,
-      images: ["/static/product/image.png", "/static/product/image2.png", "/static/product/image3.png"],
-      color: "BEYAZ",
-      style: "ABSTRACT",
-      collection: "AMORPH"
-    }
-  ];
+
+
   return (
     <div>
-      <Banner title={queryParams.slug.toLocaleUpperCase().replace("-", " ")} image={"/static/image1.png"} />
-      {/* <ProductControl /> */}
-      <FilterProduct products={sampleProducts} filter={filter} slug={slug}/>
+      <Banner filter={filter} image={"/static/image1.png"} />
+      <ProductControl />
+      <FilterProduct products={data} filter={filter} slug={slug}/>
       <Footer />
     </div>
   )

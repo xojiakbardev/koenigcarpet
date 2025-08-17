@@ -4,6 +4,7 @@ import Footer from "@/components/shared/footer";
 import ProductControl from "@/components/shared/productControl";
 import { notFound } from "next/navigation";
 import { FC, use } from "react";
+import data from  "@/context/data.json"
 
 type RugsPageProps = {
   params: Promise<{ filter: string }>
@@ -26,26 +27,13 @@ const RugsPage: FC<RugsPageProps> = ({ params }) => {
     "new-rugs": "/static/image3.png",
   };
 
-  const title = filter.toLocaleUpperCase().replace("-", " ");
 
-  const sampleProducts = [
-    { id: 1, name: "ASTRA WHITE - STONE - NOUGAT", price: 1390, images: ["/static/product/image.png"], color: "BEYAZ", style: "ABSTRACT", collection: "AMORPH" },
-    { id: 2, name: "BARON BEIGE - NOUGAT - GOLD", price: 890, images: ["/static/product/image.png"], color: "BEIGE", style: "CLASSIC", collection: "CORAL" },
-    { id: 3, name: "BARON ICE BLUE - MINT", price: 1250, images: ["/static/product/image.png"], color: "BLUE", style: "ETHNIC", collection: "ETHNIQUE" },
-    { id: 4, name: "BLAST DARK BEIGE", price: 815, images: ["/static/product/image.png"], color: "BEIGE", style: "AMORPHOUS", collection: "MARQUISE" },
-    { id: 5, name: "NOVA MULTICOLOR DREAM", price: 1090, images: ["/static/product/image.png"], color: "ÇOK RENKLİ", style: "ART", collection: "MONOCHROME" },
-    { id: 6, name: "BLAST WHITE - GOLD", price: 740, images: ["/static/product/image.png"], color: "BEYAZ", style: "ABSTRACT", collection: "AMORPH" },
-    { id: 7, name: "EMERALD GREEN LUXE", price: 1650, images: ["/static/product/image.png"], color: "GREEN", style: "CLASSIC", collection: "CORAL" },
-    { id: 8, name: "ONYX BLACK MODERN", price: 980, images: ["/static/product/image.png"], color: "BLACK", style: "MODERN", collection: "MONOCHROME" },
-    { id: 9, name: "SUNSET ORANGE WAVE", price: 1320, images: ["/static/product/image.png"], color: "ORANGE", style: "ABSTRACT", collection: "MARQUISE" },
-    { id: 10, name: "SKY BLUE HARMONY", price: 920, images: ["/static/product/image.png"], color: "BLUE", style: "MODERN", collection: "ETHNIQUE" },
-  ];
 
   return (
     <div className="flex flex-col">
-      <Banner title={title} image={images[filter]} />
+      <Banner filter={filter} image={images[filter]} />
       <ProductControl />
-      <FilterProduct products={sampleProducts} />
+      <FilterProduct products={data} />
       <Footer />
     </div>
   );

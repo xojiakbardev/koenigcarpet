@@ -3,21 +3,18 @@
 import { Heart } from "lucide-react";
 import { FC, useState } from "react";
 import LazyImage from "./lazyImage";
+import { RugProduct } from "@/types/product";
 
 type Props = {
-  product: {
-    id: number;
-    name: string;
-    price: number;
-    images: string[];
-    color: string;
-    style: string;
-    collection: string;
-  }
+  product: RugProduct;
 }
 
 const ProductCard: FC<Props> = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentColorIndex, ] = useState(0);
+
+  const currentColor = product.colors[currentColorIndex];
+  const defaultSize = product.sizes[0]; 
 
   const handleMouseEnter = (idx: number) => {
     setCurrentImageIndex(idx);
@@ -34,14 +31,14 @@ const ProductCard: FC<Props> = ({ product }) => {
         onMouseLeave={handleMouseLeave}
       >
         <LazyImage
-        fill
-          src={product.images[currentImageIndex]}
+          fill
+          src={currentColor.images[currentImageIndex]}
           alt={product.name}
           className="object-cover transition-opacity duration-500"
         />
 
         <div className="absolute top-0 left-0 w-full h-full flex">
-          {product.images.map((_, idx) => (
+          {currentColor.images.map((_, idx) => (
             <div
               key={idx}
               onMouseEnter={() => handleMouseEnter(idx)}
@@ -56,7 +53,9 @@ const ProductCard: FC<Props> = ({ product }) => {
         <Heart className="w-5 h-5 text-gray-400 hover:text-red-500 transition-colors duration-200 cursor-pointer" />
       </div>
 
-      <p className="text-sm text-center text-gray-900">${product.price}</p>
+      <p className="text-sm text-center text-gray-900">
+        ${defaultSize.price} 
+      </p>
     </div>
   )
 }

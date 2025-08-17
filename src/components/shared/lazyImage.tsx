@@ -1,18 +1,17 @@
-import { Loader2 } from "lucide-react";
-import Image from "next/image";
+"use client";
+
+import clsx from "clsx";
+import { Loader2, AlertTriangle } from "lucide-react";
+import Image, { ImageProps } from "next/image";
 import { FC, useState, useRef, useEffect } from "react";
 
-type LazyImageProps = {
-  src: string;
-  alt: string;
-  width?: number;
-  height?: number;
-  fill?: boolean;
-  className?: string;
+type LazyImageProps = ImageProps & {
+  className?: string; 
 };
 
-const LazyImage: FC<LazyImageProps> = ({ src, alt, width, height, fill, className }) => {
+const LazyImage: FC<LazyImageProps> = ({ className, ...props }) => {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -29,21 +28,30 @@ const LazyImage: FC<LazyImageProps> = ({ src, alt, width, height, fill, classNam
   return (
     <div
       ref={ref}
-      className={`relative ${className || ""}`}
-      style={fill ? { width: "100%", height: "100%" } : undefined}
+      className={` ${className || ""}`}
+      style={props.fill ? { width: "100%", height: "100%" } : undefined}
     >
-      {loading && (
-        <Loader2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin" />
+      {loading && !error && (
+        <Loader2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin text-gray-400" />
       )}
 
-      {isVisible && (
+      {error && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-red-500">
+          <AlertTriangle className="w-6 h-6 mb-1" />
+          <span className="text-xs">Rasm yuklanmadi</span>
+        </div>
+      )}
+
+      {isVisible && !error && (
         <Image
-          src={src}
-          alt={alt}
-          {...(fill ? { fill: true, style: { objectFit: "cover" } } : { width, height })}
-          onLoadingComplete={() => setLoading(false)}
-          className={`transition-opacity duration-500 ${loading ? "opacity-0" : "opacity-100"}`}
-        />
+          {...props}
+          alt={props.alt || "Image"}
+          onLoad={() => setLoading(false)}
+          onError={() => setError(true)}
+          className={clsx(
+            "transition-opacity duration-500",
+            loading ? "opacity-0" : "opacity-100"
+          )}        />
       )}
     </div>
   );

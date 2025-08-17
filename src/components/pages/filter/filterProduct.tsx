@@ -2,22 +2,16 @@
 
 import ProductCard from "@/components/shared/productCard";
 import ProductWrapper from "@/components/shared/productWrapper";
+import { useFilterStore } from "@/hooks/useFilterDataStore";
 import { useQueryState } from "@/hooks/useQueryState";
-import { FC, useMemo } from "react";
-
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  images: string[];
-  color: string;
-  style: string;
-  collection: string;
-};
+import { filterProducts } from "@/lib/filterProduct";
+import { generateFilterData } from "@/lib/generateFilterData";
+import { RugProduct } from "@/types/product";
+import { FC, useEffect, useMemo } from "react";
 
 type Props = {
-  products: Product[];
-  filter?: "color" | "style" | "collection"; 
+  products: RugProduct[];
+  filter?: "color" | "style" | "collection" | "size";
   slug?: string;
 };
 
@@ -26,43 +20,47 @@ const FilterProduct: FC<Props> = ({ products, filter, slug }) => {
   const [colors] = useQueryState("colors", true);
   const [styles] = useQueryState("styles", true);
   const [collections] = useQueryState("collections", true);
+  const [sizes] = useQueryState("sizes", true);
+  const { setFilters } = useFilterStore()
 
-  
 
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      if (filter && slug) {
-        const productValue = product[filter].toLowerCase();
-        if (productValue !== slug.toLowerCase()) {
-          return false;
-        }
-      }
+  const filters = useMemo(() => {
+    const baseFilters: Record<string, string | string[]> = {
+      inStock: inStock === "true" ? ["IN_STOCK"] : [],
+      colors: colors.length > 0 ? colors : [],
+      styles: styles.length > 0 ? styles : [],
+      collections: collections.length > 0 ? collections : [],
+      sizes: sizes.length > 0 ? sizes : []
+    };
 
-      if (inStock === "true" && product.collection !== "IN_STOCK") {
-        return false;
-      }
+    if (filter && slug) {
+      // Nested propertylarni aniqlash
+      const nestedKey =
+        filter === "color" ? "colors.name" :
+          filter === "size" ? "sizes.size" :
+            filter;
+      baseFilters[nestedKey] = slug;
+    }
 
-      if (colors.length > 0 && !colors.includes(product.color.toLowerCase())) {
-        return false;
-      }
+    return baseFilters;
+  }, [inStock, colors, styles, collections, sizes, filter, slug]);
 
-      if (styles.length > 0 && !styles.includes(product.style.toLowerCase())) {
-        return false;
-      }
+  const filteredProducts = useMemo(() => filterProducts(products, filters), [products, filters]);
 
-      if (collections.length > 0 && !collections.includes(product.collection.toLowerCase())) {
-        return false;
-      }
 
-      return true;
-    });
-  }, [products, inStock, colors, styles, collections, filter, slug]);
+  const filterData = useMemo(() => generateFilterData(products), [products]);
+
+  useEffect(() => {
+    if (filterData) {
+      setFilters(filterData);
+    }
+  }, [filterData, setFilters]);
 
   return (
     <ProductWrapper>
       {filteredProducts.length > 0 ? (
         filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.name} product={product} />
         ))
       ) : (
         <p className="col-span-full text-center text-gray-500">

@@ -1,14 +1,11 @@
-export interface IFilterCarType{
-  id: number;
-  name: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-  cars_count: number
+export interface FilterOption {
+  value: string;
+  label: string;
+  count?: number;
 }
+
 export interface FilterData {
-  car_types: IFilterCarType[];
-  max_price: number;
-  min_price: number;
-  capacities: number[];
+  key: "color" | "style" | "collection" | "size";
+  title: string;
+  options: FilterOption[];
 }

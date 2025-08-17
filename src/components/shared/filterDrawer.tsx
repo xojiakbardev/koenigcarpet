@@ -6,83 +6,51 @@ import { useQueryState } from "@/hooks/useQueryState"
 import useDrawerStore from "@/hooks/useDrawerStore"
 import { usePathname } from "next/navigation"
 import nProgress from "nprogress"
+import { FilterData } from "@/types/filter"
+import { useFilterStore } from "@/hooks/useFilterDataStore"
 
-interface FilterOption {
-  value: string
-  label: string
-  count?: number
-}
 
-interface FilterSection {
-  key: "color" | "style" | "collection"
-  title: string
-  options: FilterOption[]
-}
 
-const filterSections: FilterSection[] = [
-  {
-    key: "color",
-    title: "COLOR",
-    options: [
-      { value: "beyaz", label: "BEYAZ", count: 24 },
-      { value: "beige", label: "BEIGE", count: 32 },
-      { value: "blue", label: "BLUE", count: 21 },
-      { value: "grey", label: "GREY", count: 28 },
-      { value: "red", label: "RED", count: 12 }
-    ]
-  },
-  {
-    key: "style",
-    title: "STYLE",
-    options: [
-      { value: "abstract", label: "ABSTRACT", count: 45 },
-      { value: "classic", label: "CLASSIC", count: 52 },
-      { value: "modern", label: "MODERN", count: 41 }
-    ]
-  },
-  {
-    key: "collection",
-    title: "COLLECTION",
-    options: [
-      { value: "amorph", label: "AMORPH", count: 28 },
-      { value: "coral", label: "CORAL", count: 19 },
-      { value: "marquise", label: "MARQUISE", count: 33 }
-    ]
-  }
-]
+
+
 
 const FilterDrawer: React.FC = () => {
   const { filterbar, close } = useDrawerStore()
+  const {filters: filterData} = useFilterStore()
 
   const [inStock, setInStock] = useQueryState("inStock", false)
   const [colors, setColors, clearColors] = useQueryState("colors", true)
   const [styles, setStyles, clearStyles] = useQueryState("styles", true)
   const [collections, setCollections, clearCollections] = useQueryState("collections", true)
+  const [sizes, setSizes, clearSizes] = useQueryState("collections", true)
 
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
   const [loadingKey, setLoadingKey] = useState<string | null>(null)
 
-  // 🌀 global transition
   const [isPending, startTransition] = useTransition()
 
-  // 🔎 URL path tekshirish
   const pathname = usePathname()
   const segments = pathname.split("/").filter(Boolean)
-  const secondLast = segments[segments.length - 2] as FilterSection["key"] | undefined
-  const hiddenKey: FilterSection["key"] | null =
-    secondLast && (["color", "style", "collection"] as const).includes(secondLast)
-      ? (secondLast as FilterSection["key"])
+  const secondLast = segments[segments.length - 2] as FilterData["key"] | undefined
+  const hiddenKey: FilterData["key"] | null =
+    secondLast && (["color", "style", "collection", "size"] as const).includes(secondLast)
+      ? (secondLast as FilterData["key"])
       : null
 
   const selectedValues = {
     color: colors || [],
     style: styles || [],
-    collection: collections || []
+    collection: collections || [],
+    size: sizes || []
   }
-  
-  const updateQuery = (key: FilterSection["key"], value: string) => {
+  const updateQuery = (key: FilterData["key"], value: string) => {
     nProgress.start()
-    const setter = key === "color" ? setColors : key === "style" ? setStyles : setCollections
+    const setter =
+      key === "color" ? setColors :
+        key === "style" ? setStyles :
+          key === "collection" ? setCollections :
+            setSizes
+
     const id = `${key}-${value}`
     setLoadingKey(id)
 
@@ -92,6 +60,7 @@ const FilterDrawer: React.FC = () => {
     })
   }
 
+
   const toggleSection = (key: string) => {
     setExpandedSection(prev => (prev === key ? null : key))
   }
@@ -99,16 +68,14 @@ const FilterDrawer: React.FC = () => {
   return (
     <div>
       <div
-        className={`fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 ${
-          filterbar ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 ${filterbar ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
         onClick={() => close("filterbar")}
       />
 
       <div
-        className={`fixed top-0 right-0 h-full w-full md:max-w-sm bg-white text-black shadow-xl z-50 transform transition-transform duration-300 ${
-          filterbar ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-full md:max-w-sm bg-white text-black shadow-xl z-50 transform transition-transform duration-300 ${filterbar ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         {/* Header */}
         <div className="flex items-center justify-between h-14 px-5 bg-black text-white">
@@ -146,20 +113,17 @@ const FilterDrawer: React.FC = () => {
             </div>
 
             {/* Filter Sections */}
-            {filterSections
+            {filterData
               .filter(section => section.key !== hiddenKey)
               .map(section => {
                 const isExpanded = expandedSection === section.key
                 const selectedCount =
                   selectedValues[section.key as keyof typeof selectedValues].length
-
                 const clearer =
-                  section.key === "color"
-                    ? clearColors
-                    : section.key === "style"
-                    ? clearStyles
-                    : clearCollections
-
+                  section.key === "color" ? clearColors :
+                    section.key === "style" ? clearStyles :
+                      section.key === "collection" ? clearCollections :
+                        clearSizes
                 return (
                   <div key={section.key} className="border-b border-gray-100 last:border-b-0">
                     <div className="flex items-center justify-between ">
@@ -179,9 +143,8 @@ const FilterDrawer: React.FC = () => {
                           )}
                         </div>
                         <ChevronDown
-                          className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${
-                            isExpanded ? "rotate-180" : ""
-                          }`}
+                          className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""
+                            }`}
                         />
                       </button>
                       {selectedCount > 0 && (
@@ -207,9 +170,8 @@ const FilterDrawer: React.FC = () => {
                     </div>
 
                     <div
-                      className={`overflow-hidden transition-all duration-300 ease-out ${
-                        isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                      }`}
+                      className={`overflow-hidden transition-all duration-300 ease-out ${isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                     >
                       <div className="px-5 pb-4 space-y-3">
                         {section.options.map(opt => {
