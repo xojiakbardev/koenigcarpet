@@ -7,8 +7,8 @@
       {
         "name": "RED",
         "images": [
-          "/static/product/RED_1.png",
           "/static/product/RED_2.png",
+          "/static/product/RED_1.png",
           "/static/product/RED_3.png",
           "/static/product/RED_4.png"
         ]
@@ -161,8 +161,8 @@
       {
         "name": "LIGHT GREY",
         "images": [
-          "/static/product/LIGHT GREY_1.png",
           "/static/product/LIGHT GREY_2.png",
+          "/static/product/LIGHT GREY_1.png",
           "/static/product/LIGHT GREY_3.png",
           "/static/product/LIGHT GREY_4.png"
         ]
@@ -247,8 +247,8 @@
       {
         "name": "RED",
         "images": [
-          "/static/product/RED_1.png",
           "/static/product/RED_2.png",
+          "/static/product/RED_1.png",
           "/static/product/RED_3.png",
           "/static/product/RED_4.png"
         ]
@@ -401,9 +401,9 @@
       {
         "name": "RED",
         "images": [
+          "/static/product/RED_3.png",
           "/static/product/RED_1.png",
           "/static/product/RED_2.png",
-          "/static/product/RED_3.png",
           "/static/product/RED_4.png"
         ]
       }
@@ -478,9 +478,9 @@
       {
         "name": "LIGHT GREY",
         "images": [
-          "/static/product/LIGHT GREY_1.png",
-          "/static/product/LIGHT GREY_2.png",
           "/static/product/LIGHT GREY_3.png",
+          "/static/product/LIGHT GREY_2.png",
+          "/static/product/LIGHT GREY_1.png",
           "/static/product/LIGHT GREY_4.png"
         ]
       }
@@ -546,10 +546,10 @@
       {
         "name": "RED",
         "images": [
+          "/static/product/RED_4.png",
           "/static/product/RED_1.png",
           "/static/product/RED_2.png",
-          "/static/product/RED_3.png",
-          "/static/product/RED_4.png"
+          "/static/product/RED_3.png"
         ]
       },
       {
@@ -632,10 +632,10 @@
       {
         "name": "LIGHT GREY",
         "images": [
+          "/static/product/LIGHT GREY_4.png",
           "/static/product/LIGHT GREY_1.png",
           "/static/product/LIGHT GREY_2.png",
-          "/static/product/LIGHT GREY_3.png",
-          "/static/product/LIGHT GREY_4.png"
+          "/static/product/LIGHT GREY_3.png"
         ]
       }
     ],

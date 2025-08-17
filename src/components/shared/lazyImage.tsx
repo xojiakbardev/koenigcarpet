@@ -38,7 +38,7 @@ const LazyImage: FC<LazyImageProps> = ({ className, ...props }) => {
       {error && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-red-500">
           <AlertTriangle className="w-6 h-6 mb-1" />
-          <span className="text-xs">Rasm yuklanmadi</span>
+          <span className="text-xs text-center">Rasm yuklanmadi</span>
         </div>
       )}
 
