@@ -3,18 +3,61 @@
 import { useQueryState } from "@/hooks/useQueryState";
 import { FC, ReactNode } from "react";
 
-type Props = { children: ReactNode };
+type Props = { 
+  children: ReactNode;
+  className?: string;
+};
 
-
-const ProductWrapper: FC<Props> = ({ children }) => {
-    const [grid] = useQueryState("grid", false)
+const ProductWrapper: FC<Props> = ({ children, className }) => {
+  const [grid] = useQueryState("grid", false);
+  
+  const validatedGrid = ["2", "3", "4", "5", "6"].includes(String(grid)) ? String(grid) : "4";
+  
   return (
     <div
-      data-grid={grid}
-      className="grid gap-4 p-10 bg-white grid-cols-3
-      data-[grid=3]:grid-cols-3
-      data-[grid=4]:grid-cols-4
-      data-[grid=6]:grid-cols-6"
+      data-grid={validatedGrid}
+      className={`
+        grid gap-3 p-4 bg-white transition-all duration-300
+        
+        grid-cols-2
+        min-[480px]:grid-cols-2
+        
+        sm:gap-4 sm:p-6
+        sm:data-[grid="2"]:grid-cols-2
+        sm:data-[grid="3"]:grid-cols-2
+        sm:data-[grid="4"]:grid-cols-2
+        sm:data-[grid="5"]:grid-cols-2
+        sm:data-[grid="6"]:grid-cols-2
+        
+        md:data-[grid="2"]:grid-cols-2
+        md:data-[grid="3"]:grid-cols-3
+        md:data-[grid="4"]:grid-cols-3
+        md:data-[grid="5"]:grid-cols-3
+        md:data-[grid="6"]:grid-cols-3
+        
+        lg:gap-5 lg:p-8
+        lg:data-[grid="2"]:grid-cols-2
+        lg:data-[grid="3"]:grid-cols-3
+        lg:data-[grid="4"]:grid-cols-4
+        lg:data-[grid="5"]:grid-cols-4
+        lg:data-[grid="6"]:grid-cols-4
+        
+        xl:gap-6 xl:p-10
+        xl:data-[grid="2"]:grid-cols-2
+        xl:data-[grid="3"]:grid-cols-3
+        xl:data-[grid="4"]:grid-cols-4
+        xl:data-[grid="5"]:grid-cols-5
+        xl:data-[grid="6"]:grid-cols-5
+        
+        2xl:gap-8
+        2xl:data-[grid="2"]:grid-cols-2
+        2xl:data-[grid="3"]:grid-cols-3
+        2xl:data-[grid="4"]:grid-cols-4
+        2xl:data-[grid="5"]:grid-cols-5
+        2xl:data-[grid="6"]:grid-cols-6
+        
+        ${className || ''}
+      `}
     >
       {children}
     </div>

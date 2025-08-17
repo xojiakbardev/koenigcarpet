@@ -3,28 +3,32 @@ import { RugProduct } from "@/types/product";
 type FilterValue = string | string[];
 type Filters = Record<string, FilterValue>;
 
-// Helper: nested yoki array ichidagi object qiymatni olish
+// Helper: product ichidan kerakli qiymatlarni olish
 const getPropertyValues = (obj: any, key: string): string[] => {
   const value = obj[key];
-
   if (value === undefined || value === null) return [];
 
+  // Agar array bo‘lsa
   if (Array.isArray(value)) {
     if (value.length === 0) return [];
 
-    // Array ichidagi object
+    // Array ichida object bo‘lsa (masalan colors[], sizes[])
     if (typeof value[0] === "object" && value[0] !== null) {
-      // subfield nomini topamiz: masalan 'colors' -> 'name', 'sizes' -> 'size'
-      const subKey = key === "colors" ? "name" : key === "sizes" ? "size" : null;
-      if (!subKey) return [];
-      return value.map(v => v[subKey]).filter(Boolean).map(v => String(v).toLowerCase());
-    } else {
-      // primitive array
-      return value.map(v => String(v).toLowerCase());
+      switch (key) {
+        case "colors":
+          return value.map(v => v.name).filter(Boolean).map(v => String(v).toLowerCase());
+        case "sizes":
+          return value.map(v => v.size).filter(Boolean).map(v => String(v).toLowerCase());
+        default:
+          return []; // boshqa array-objectlarni hozircha qo‘shmadik
+      }
     }
+
+    // Array primitive bo‘lsa
+    return value.map(v => String(v).toLowerCase());
   }
 
-  // Primitive qiymat
+  // Agar oddiy string yoki son bo‘lsa
   return [String(value).toLowerCase()];
 };
 
@@ -40,6 +44,7 @@ export const filterProducts = (products: RugProduct[], filters: Filters): RugPro
         String(v).toLowerCase()
       );
 
+      // Agar product property qiymatlari orasida hech bo‘lmasa 1 ta mos kelmasa -> filterdan chiqadi
       if (!filterValuesStr.some(v => propValues.includes(v))) return false;
     }
     return true;

@@ -1,4 +1,4 @@
-import FilterProduct from "@/components/pages/filter/filterProduct";
+import FilterProduct from "@/components/shared/filterProduct";
 import Banner from "@/components/shared/banner";
 import Footer from "@/components/shared/footer";
 import ProductControl from "@/components/shared/productControl";
@@ -41,7 +41,3 @@ const RugsPage: FC<RugsPageProps> = ({ params }) => {
 };
 
 export default RugsPage;
-
-// export async function generateStaticParams() {
-//   return VALID_FILTERS.map((filter) => ({ filter }));
-// }

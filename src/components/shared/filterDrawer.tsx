@@ -18,11 +18,11 @@ const FilterDrawer: React.FC = () => {
   const { filterbar, close } = useDrawerStore()
   const {filters: filterData} = useFilterStore()
 
-  const [inStock, setInStock] = useQueryState("inStock", false)
+  // const [inStock, setInStock] = useQueryState("inStock", false)
   const [colors, setColors, clearColors] = useQueryState("colors", true)
   const [styles, setStyles, clearStyles] = useQueryState("styles", true)
   const [collections, setCollections, clearCollections] = useQueryState("collections", true)
-  const [sizes, setSizes, clearSizes] = useQueryState("collections", true)
+  const [sizes, setSizes, clearSizes] = useQueryState("sizes", true)
 
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
   const [loadingKey, setLoadingKey] = useState<string | null>(null)
@@ -49,7 +49,8 @@ const FilterDrawer: React.FC = () => {
       key === "color" ? setColors :
         key === "style" ? setStyles :
           key === "collection" ? setCollections :
-            setSizes
+            key === "size" ? setSizes :
+              () => { }
 
     const id = `${key}-${value}`
     setLoadingKey(id)
@@ -92,7 +93,7 @@ const FilterDrawer: React.FC = () => {
         <div className="flex-1 flex flex-col">
           <div className="overflow-y-auto">
             {/* In Stock */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-100">
+            {/* <div className="flex items-center justify-between p-4 border-b border-gray-100">
               <span className="text-base font-medium text-gray-900">In Stock</span>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -110,7 +111,7 @@ const FilterDrawer: React.FC = () => {
                 />
                 <div className="w-12 h-7 bg-gray-200 peer-checked:bg-black rounded-full relative after:absolute after:top-[2px] after:left-[2px] after:w-6 after:h-6 after:bg-white after:rounded-full after:border after:border-gray-300 after:transition-all peer-checked:after:translate-x-5"></div>
               </label>
-            </div>
+            </div> */}
 
             {/* Filter Sections */}
             {filterData
