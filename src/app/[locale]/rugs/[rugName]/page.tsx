@@ -72,11 +72,11 @@ export async function generateMetadata({ params }: { params: Promise<{ rugName: 
     openGraph: {
       title: `${rug.name} | Carpet Store`,
       description: rug.description,
-      url: `https://carpet-store.com/rugs/${rugName}`,
+      url: `https://carpet-store-lake.vercel.app/rugs/${rugName}`,
       siteName: "Carpet Store",
       images: [
         {
-          url: `https://carpet-store.com${ogImage}`,
+          url: `https://carpet-store-lake.vercel.app${ogImage}`,
           width: 1200,
           height: 630,
           alt: rug.name,
@@ -88,10 +88,10 @@ export async function generateMetadata({ params }: { params: Promise<{ rugName: 
       card: "summary_large_image",
       title: `${rug.name} | Carpet Store`,
       description: rug.description,
-      images: [`https://carpet-store.com${ogImage}`],
+      images: [`https://carpet-store-lake.vercel.app${ogImage}`],
     },
     alternates: {
-      canonical: `https://carpet-store.com/rugs/${rugName}`,
+      canonical: `https://carpet-store-lake.vercel.app/rugs/${rugName}`,
     },
   };
 }
