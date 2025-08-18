@@ -4,6 +4,8 @@ import { Heart } from "lucide-react";
 import { FC, useState, useRef, useEffect } from "react";
 import LazyImage from "./lazyImage";
 import { RugProduct } from "@/types/product";
+import { useRouter } from "next/navigation";
+import { useLocale } from "@/hooks/useLocale";
 
 type Props = {
   product: RugProduct;
@@ -14,6 +16,8 @@ const ProductCard: FC<Props> = ({ product }) => {
   const [currentColorIndex] = useState(0);
   const [preloadedImages, setPreloadedImages] = useState<Set<number>>(new Set([0]));
   const preloadTriggered = useRef(false);
+  const router = useRouter();
+  const [locale] = useLocale();
 
   const currentColor = product.colors[currentColorIndex];
   const defaultSize = product.sizes[0];
@@ -52,8 +56,13 @@ const ProductCard: FC<Props> = ({ product }) => {
     return hoveredIndex !== null ? hoveredIndex : 0;
   };
 
+  const navigateToDetails = () => {
+    router.push(`/${locale}/rugs/${product.name}`);
+  };
+
   return (
-    <div className="group flex w-full flex-col">
+    <div className="group flex w-full flex-col"
+      onClick={navigateToDetails}>
       <div
         className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100"
         onMouseLeave={handleMouseLeave}

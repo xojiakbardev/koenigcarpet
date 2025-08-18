@@ -15,7 +15,7 @@ const SlideWrapper: FC<SlideWrapperProps> = ({ children, elem }) => {
   const touchStartY = useRef<number | null>(null);
 
   const scrollToSection = useCallback((index: number) => {
-    if (index < 0 || index > children.length) return; // children.length -> oxirgi elem (Footer)
+    if (index < 0 || index > children.length) return; 
     isScrolling.current = true;
     setActiveIndex(index);
     sectionRefs.current[index]?.scrollIntoView({

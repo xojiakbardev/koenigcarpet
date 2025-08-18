@@ -48,7 +48,7 @@ const Navbar: React.FC<NavbarProps> = ({fixed = false}) => {
     
     <nav className="text-white w-full z-50 transition-all duration-500">
       
-      <div className="mx-auto px-14 flex items-center justify-between h-16">
+      <div className="mx-auto px-4 md:px-10 flex items-center justify-between h-16">
         
 
         <div className="flex items-center gap-4 text-2xl font-bold cursor-pointer">
@@ -76,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({fixed = false}) => {
       scrolled && "top-0"
     )}>
       
-      <div className="mx-auto px-14 flex items-center justify-between h-16">
+      <div className="mx-auto px-4 md:px-10 flex items-center justify-between h-16">
         
 
         <div className="flex items-center gap-4 text-2xl font-bold cursor-pointer">

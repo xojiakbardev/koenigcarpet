@@ -49,10 +49,10 @@ const ProductControl: React.FC = () => {
   // dropdown outside-click (desktop/mobil alohida)
 
   const handleSortSelect = (value: string) => {
+    nProgress.start()
     if (value === 'default') {
       clearSortBy()
     } else {
-      nProgress.start()
       setSortBy(value)
     }
     setIsDropdownOpen(false)
@@ -81,7 +81,7 @@ const ProductControl: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-3 bg-white p-4 relative">
+    <div className="flex flex-col gap-3 bg-white py-4 px-4 md:px-10 relative">
       {/* Active filter badges */}
       {badges.length > 0 && (
         <div className="flex flex-wrap gap-1">

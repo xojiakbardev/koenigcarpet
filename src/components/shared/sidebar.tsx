@@ -39,7 +39,7 @@ export default function Sidebar({ locale }: SidebarProps) {
 
         <div className="p-5 overflow-y-auto h-full">
                         <div> 
-        <Link href={`/${locale}`} className="text-2xl font-bold uppercase py-4">Logo</Link>
+        <Link href={`/${locale}`} className="text-2xl font-bold uppercase py-4 mb-4 border-b">Logo</Link>
       </div>
           {SIDEBAR_LINKS.map((item) => (
             <div key={item.title} className="mb-2">

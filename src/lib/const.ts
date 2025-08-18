@@ -40,7 +40,7 @@ export const SIDEBAR_LINKS = [
     ]
   },
   {
-    "title": "color",
+    "title": "colors",
     "children": [
       { "title": "beige" },
       { "title": "white" },

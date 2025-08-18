@@ -9,7 +9,7 @@ type Props = {
 
 const Banner: FC<Props> = ({ filter, image }) => {
   return (
-    <div className='w-full overflow-hidden'>
+    <div className='w-full overflow-hidden relative'>
       <Navbar />
       <div className='flex justify-center items-center pt-20 pb-30'>
         <h1 className='text-4xl md:text-7xl font-bold text-white'>
