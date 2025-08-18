@@ -36,9 +36,9 @@ export const generateFilterData = (products: RugProduct[]): FilterData[] => {
     }));
 
   return [
-    { key: "color", title: "Rang", options: mapToOptions(colorMap) },
-    { key: "style", title: "Uslub", options: mapToOptions(styleMap) },
-    { key: "collection", title: "Kolleksiya", options: mapToOptions(collectionMap) },
-    { key: "size", title: "O‘lcham", options: mapToOptions(sizeMap) },
+    { key: "color", title: "Colors", options: mapToOptions(colorMap) },
+    { key: "style", title: "Styles", options: mapToOptions(styleMap) },
+    { key: "collection", title: "Collectiond", options: mapToOptions(collectionMap) },
+    { key: "size", title: "Sizes", options: mapToOptions(sizeMap) },
   ];
 };

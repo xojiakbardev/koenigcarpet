@@ -1,6 +1,6 @@
 export const localeConfig = {
   defaultLocale: "en",
-  locales: ["en", "uz", "ru"],
+  locales: ["en"],
   cookieName: "NEXT_LANG",
   cookieMaxAge: 60 * 60 * 24 * 365,
   ignoredPaths: ["image.png"],

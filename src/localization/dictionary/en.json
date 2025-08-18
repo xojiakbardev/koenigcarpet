@@ -1,5 +1,72 @@
 {
-  "auth": {
-    "loginSuccess": "Вход выполнен успешно"
+  "meta": {
+    "title": "Carpet Store - Premium Rugs Online",
+    "description": "Buy premium rugs and carpets online. Handmade, custom sizes, and modern designs.",
+    "keywords": ["rugs", "carpet", "handmade rugs", "modern carpets", "custom rugs"],
+    "openGraph": {
+      "title": "Carpet Store - Premium Rugs Online",
+      "description": "Buy premium rugs and carpets online. Handmade, custom sizes, and modern designs.",
+      "image": "https://carpet-store.com/og-root.jpg"
+    },
+    "twitter": {
+      "title": "Carpet Store - Premium Rugs Online",
+      "description": "Buy premium rugs and carpets online. Handmade, custom sizes, and modern designs.",
+      "image": "https://carpet-store.com/og-root.jpg"
+    }
+  },
+  "header": {
+    "custom-size": "CUSTOM SIZE",
+    "custom-color": "CUSTOM COLOR",
+    "custom-design": "CUSTOM DESIGN"
+  },
+  "footer": {
+    "placeholder": "Enter your e-mail...",
+    "send": "Send",
+    "policies": "POLICIES",
+    "sales": "Sales",
+    "privacy": "Privacy",
+    "delivery-return": "Delivery and Return",
+    "company": "COMPANY",
+    "blog": "Blog",
+    "contact": "Contact",
+    "about-us": "About Us",
+    "support": "SUPPORT",
+    "faq": "FAQ",
+    "whatsapp-line": "WhatsApp Line",
+    "copyright": "© 2023 BM HOME All rights reserved."
+  },
+  "home": {
+    "categories": {
+      "all-ruges": {
+        "title": "ALL RUGS",
+        "description": "MADE TO ORDER RUG MODELS"
+      },
+      "new-ruges": {
+        "title": "NEW RUGS",
+        "description": "LATEST COLLECTIONS OF RUGS"
+      }
+    },
+    "meta": {
+      "title": "Carpet Store | Premium Rugs & Carpets",
+      "description": "Discover our wide collection of handmade and premium machine-woven carpets. Shop rugs by size, color, and design for your home.",
+      "keywords": [
+        "carpet",
+        "rugs",
+        "handmade rugs",
+        "oriental carpets",
+        "luxury carpets",
+        "buy carpets online"
+      ],
+      "openGraph": {
+        "title": "Carpet Store | Premium Rugs & Carpets",
+        "description": "Discover premium rugs and carpets in various sizes, colors, and designs. Perfect for living rooms, bedrooms, and offices.",
+        "image": "https://carpet-store.com/og-home.jpg"
+      },
+      "twitter": {
+        "title": "Carpet Store | Premium Rugs & Carpets",
+        "description": "Shop premium rugs & carpets with modern and traditional designs.",
+        "image": "https://carpet-store.com/og-home.jpg"
+      }
+    }
   }
 }

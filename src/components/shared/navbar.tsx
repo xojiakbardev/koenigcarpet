@@ -7,6 +7,7 @@ import useDrawerStore from "@/hooks/useDrawerStore";
 import CartButton from "./cartButton";
 import { useLocale } from "@/hooks/useLocale";
 import Link from "next/link";
+import { useDictionary } from "@/hooks/useDictionary";
 
 interface NavbarProps {
   fixed?: boolean; 
@@ -16,6 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({fixed = false}) => {
   const [scrolled, setScrolled] = useState(false);
   const { open } = useDrawerStore()
   const [locale] = useLocale();
+  const {dictionary} = useDictionary();
 
   useEffect(() => {
     if (fixed) return; 
@@ -38,11 +40,11 @@ const Navbar: React.FC<NavbarProps> = ({fixed = false}) => {
 <header className={fixed ? "fixed top-0 w-full z-30" : ""}>
     <div className="w-full bg-black  py-2">
       <div className="flex text-white justify-center items-center gap-5 text-xs font-light tracking-wider">
-          <span>CUSTOM SIZE</span>
+          <span>{dictionary?.header["custom-size"]}</span>
            <span>|</span>
-          <span>CUSTOM COLOR</span>
+          <span>{dictionary?.header["custom-color"]}</span>
            <span>|</span>
-          <span>CUSTOM DESIGN</span>
+          <span>{dictionary?.header["custom-design"]}</span>
       </div>
     </div>
     
@@ -72,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({fixed = false}) => {
       </div>
     </nav>
 
-    <nav className={clsx("w-full z-50 transition-all duration-500 fixed -top-full bg-white text-black",
+    <nav className={clsx("shadow w-full z-50 transition-all duration-500 fixed -top-full bg-white text-black",
       scrolled && "top-0"
     )}>
       
