@@ -8,5 +8,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/"],
+  matcher: ['/((?!_next).*)'],
 };

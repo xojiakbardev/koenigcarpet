@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: { params: Promise<{ rugName: 
     ...rug.sizes.map(s => s.size)
   ].join(", ");
 
-  const ogImage = rug.colors?.[0]?.images?.[0] || "/static/default-rug.jpg";
+  const ogImage = rug.colors[0].images[0]
 
   return {
     title: `${rug.name} | Carpet Store`,

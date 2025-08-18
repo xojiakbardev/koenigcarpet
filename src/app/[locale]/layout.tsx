@@ -61,7 +61,7 @@ return {
     openGraph: {
       title: dictionary.meta.openGraph.title ,
       description: dictionary.meta.openGraph.description ,
-      url: `https://carpet-store.com/${locale}`,
+      url: `https://carpet-store-lake.vercel.app/${locale}`,
       siteName: "Carpet Store",
       images: [
         {
@@ -81,11 +81,11 @@ return {
       images: [dictionary.meta.twitter.image],
     },
     alternates: {
-      canonical: `https://carpet-store.com/${locale}`,
+      canonical: `https://carpet-store-lake.vercel.app/${locale}`,
       languages: {
-        en: "https://carpet-store.com/en",
-        ru: "https://carpet-store.com/ru",
-        uz: "https://carpet-store.com/uz",
+        en: "https://carpet-store-lake.vercel.app/en",
+        ru: "https://carpet-store-lake.vercel.app/ru",
+        uz: "https://carpet-store-lake.vercel.app/uz",
       },
     },
   };

@@ -3,12 +3,9 @@ import "server-only";
 import { cookies } from "next/headers";
 import { Locale, localeConfig } from "./config";
 
-export const dictionaries = {
-  en: async () => {
-    const dictModule = await import("./dictionary/en.json");
-    return dictModule.default;
-  }
-};
+const dictionaries = {
+  en: () => import('./dictionary/en.json').then((module) => module.default)
+}
 
 export const getDictionary = async (locale?: Locale) => {
   let localeIn = locale;
