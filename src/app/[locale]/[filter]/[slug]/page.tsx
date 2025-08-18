@@ -22,7 +22,7 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params }) => {
 
   return (
     <div>
-      <Banner filter={filter} image={"/static/image1.png"} />
+      <Banner filter={decodeURIComponent(filter)} image={"/static/image1.png"} />
       <ProductControl />
       <FilterProduct products={data} filter={filter} slug={slug}/>
       <Footer />
