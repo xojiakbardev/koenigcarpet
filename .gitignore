@@ -13,6 +13,11 @@
 # testing
 /coverage
 
+product_links.json
+products_data.json
+pyt.py
+.venv
+
 # next.js
 /.next/
 /out/
