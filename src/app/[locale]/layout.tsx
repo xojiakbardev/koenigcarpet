@@ -8,6 +8,7 @@ import { getDictionary } from "@/localization/dictionary";
 import Sidebar from "@/components/shared/sidebar";
 import FilterDrawer from "@/components/shared/filterDrawer";
 import NextTopLoader from "nextjs-toploader";
+import { notFound } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,10 @@ type RootLayoutProps = Readonly<{
 const RootLayout: FC<RootLayoutProps> = ({ children, params }) => {
   const locale = use(params).locale;
   const dictionary = use(getDictionary(locale));
+
+  if (!localeConfig.locales.includes(locale)) {
+    return notFound();
+  }
 
   return (
     <html lang={locale}>

@@ -9,11 +9,6 @@ import nProgress from "nprogress"
 import { FilterData } from "@/types/filter"
 import { useFilterStore } from "@/hooks/useFilterDataStore"
 
-
-
-
-
-
 const FilterDrawer: React.FC = () => {
   const { filterbar, close } = useDrawerStore()
   const {filters: filterData} = useFilterStore()

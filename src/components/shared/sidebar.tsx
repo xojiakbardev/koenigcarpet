@@ -25,22 +25,20 @@ export default function Sidebar({ locale }: SidebarProps) {
   return (
     <div>
       <div
-        className={`fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 ${
-          sidebar ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 ${sidebar ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
         onClick={() => close("sidebar")}
       />
 
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white text-black shadow-xl z-50 transform transition-transform duration-300 ${
-          sidebar ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 h-full w-64 bg-white text-black shadow-xl z-50 transform transition-transform duration-300 ${sidebar ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
 
         <div className="p-5 overflow-y-auto h-full">
-                        <div> 
-        <Link href={`/${locale}`} className="text-2xl font-bold uppercase py-4 mb-4 border-b">Logo</Link>
-      </div>
+          <div className="w-full mb-4 border-b py-2">
+            <Link href={`/${locale}`} className="text-2xl font-bold uppercase">Logo</Link>
+          </div>
           {SIDEBAR_LINKS.map((item) => (
             <div key={item.title} className="mb-2">
               {item.children ? (
@@ -54,14 +52,13 @@ export default function Sidebar({ locale }: SidebarProps) {
                   </button>
 
                   <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      expanded[item.title] ? "max-h-96 mt-1" : "max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-300 ${expanded[item.title] ? "max-h-96 mt-1" : "max-h-0"
+                      }`}
                   >
                     {item.children.map((child) => {
                       const childPath = `/${item.title.replace(/\s+/g, "-").toLowerCase()}/${child.title
-                            .replace(/\s+/g, "-")
-                            .toLowerCase()}`;
+                        .replace(/\s+/g, "-")
+                        .toLowerCase()}`;
                       return (
                         <a
                           key={child.title}

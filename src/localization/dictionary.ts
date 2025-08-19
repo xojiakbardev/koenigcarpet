@@ -4,7 +4,8 @@ import { cookies } from "next/headers";
 import { Locale, localeConfig } from "./config";
 
 const dictionaries = {
-  en: () => import('./dictionary/en.json').then((module) => module.default)
+  en: () => import('./dictionary/en.json').then((module) => module.default),
+  ru: () => import('./dictionary/ru.json').then((module) => module.default)
 }
 
 export const getDictionary = async (locale?: Locale) => {
