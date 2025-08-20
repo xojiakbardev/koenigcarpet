@@ -4,14 +4,14 @@ import Footer from "@/components/shared/footer";
 import ProductControl from "@/components/shared/productControl";
 import { notFound } from "next/navigation";
 import { FC, use } from "react";
-import data from  "@/context/data.json"
+import { RugProduct } from "@/types/product";
 
 type RugsPageProps = {
   params: Promise<{ filter: string }>
   searchParams: Promise<Record<string, string>>
 };
 
-const VALID_FILTERS = ["all-rugs", "rugs-in-stock", "new-rugs"] as const;
+const VALID_FILTERS = ["all-rugs", "rugs-in-stock", "new-rugs", "runners"] as const;
 type FilterType = typeof VALID_FILTERS[number];
 
 const RugsPage: FC<RugsPageProps> = ({ params }) => {
@@ -25,19 +25,24 @@ const RugsPage: FC<RugsPageProps> = ({ params }) => {
     "all-rugs": "/static/image1.png",
     "rugs-in-stock": "/static/image2.png",
     "new-rugs": "/static/image3.png",
+    "runners": "/static/image4.png",
   };
 
+  const limit = 12;
+  const data = use(import("@/context/data.json").then((module) => module.default)) as RugProduct[];
 
 
   return (
     <div className="flex flex-col">
       <Banner filter={filter} image={images[filter]} />
       <ProductControl />
-      <FilterProduct products={data} />
+      <FilterProduct
+        allProducts={data}
+        limit={limit}
+      />
       <Footer />
     </div>
   );
-
 };
 
 export default RugsPage;

@@ -73,19 +73,17 @@ const FilterDrawer: React.FC = () => {
         className={`fixed top-0 right-0 h-full w-full md:max-w-sm bg-white text-black shadow-xl z-50 transform transition-transform duration-300 ${filterbar ? "translate-x-0" : "translate-x-full"
           }`}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between h-14 px-5 bg-black text-white">
-          <h2 className="text-base font-medium tracking-wider uppercase">Filter By</h2>
+        <div className="flex items-center justify-end p-5 border-b border-gray-400 relative">
           <button
             onClick={() => close("filterbar")}
-            disabled={isPending} // ⛔ pending paytida yopilmasin
-            className="cursor-pointer flex items-center justify-center w-7 h-7 rounded-full hover:bg-white/10 transition disabled:opacity-50"
+            className="absolute top-2 left-2 cursor-pointer"
           >
-            <X className="w-4 h-4" />
+            <X className="size-6" />
           </button>
+          <h2 className="text-base font-medium tracking-wider uppercase">Filter By</h2>
         </div>
 
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col py-4">
           <div className="overflow-y-auto">
             {/* In Stock */}
             {/* <div className="flex items-center justify-between p-4 border-b border-gray-100">
@@ -166,10 +164,10 @@ const FilterDrawer: React.FC = () => {
                     </div>
 
                     <div
-                      className={`overflow-hidden transition-all duration-300 ease-out ${isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                      className={`overflow-auto transition-all duration-300 ease-out ${isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                         }`}
                     >
-                      <div className="px-5 pb-4 space-y-3">
+                      <div className="px-5 py-4 space-y-3">
                         {section.options.map(opt => {
                           const keyId = `${section.key}-${opt.value}`
                           const isLoading = loadingKey === keyId && isPending

@@ -1,31 +1,28 @@
 "use client"
 
-import { useQueryState } from "@/hooks/useQueryState"
+import { Locale } from "@/localization/config"
 import { RugProduct } from "@/types/product"
 import Image from "next/image"
 import { FC } from "react"
 
 type Props = {
     rug: RugProduct
+    locale:Locale, 
+    relatedProducts:RugProduct[]
 }
 
-const RugImages: FC<Props> = ({ rug }) => {
-    const [color] = useQueryState("color", false)
+const RugImages: FC<Props> = ({ rug, locale }) => {
 
-    let selectedColor = rug.colors.find(c => c.name === color)
 
-    if (!selectedColor) {
-        selectedColor = rug.colors[0]
-    }
 
     return (
         <div className="flex flex-col">
-            {selectedColor.images.map((image, index) => (
+            {rug.images.map((image, index) => (
                 <figure key={index} className="w-full">
                     <Image
                         key={index}
                         src={image}
-                        alt={`${rug.name} - ${selectedColor.name}`}
+                        alt={`${rug.product_name[locale]}`}
                         width={270}
                         height={387}
                         priority

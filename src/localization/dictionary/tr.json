@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "title": "Carpet Store - Premium Rugs Online",
+    "description": "Buy premium rugs and carpets online. Handmade, custom sizes, and modern designs.",
+    "keywords": [
+      "rugs",
+      "carpet",
+      "handmade rugs",
+      "modern carpets",
+      "custom rugs"
+    ],
+    "openGraph": {
+      "title": "Carpet Store - Premium Rugs Online",
+      "description": "Buy premium rugs and carpets online. Handmade, custom sizes, and modern designs.",
+      "image": "https://carpet-store-lake.vercel.app/og-root.jpg"
+    },
+    "twitter": {
+      "title": "Carpet Store - Premium Rugs Online",
+      "description": "Buy premium rugs and carpets online. Handmade, custom sizes, and modern designs.",
+      "image": "https://carpet-store-lake.vercel.app/og-root.jpg"
+    }
+  },
+  "header": {
+    "custom-size": "CUSTOM SIZE",
+    "custom-color": "CUSTOM COLOR",
+    "custom-design": "CUSTOM DESIGN"
+  },
+  "footer": {
+    "placeholder": "Enter your e-mail...",
+    "send": "Send",
+    "policies": "POLICIES",
+    "sales": "Sales",
+    "privacy": "Privacy",
+    "delivery-return": "Delivery and Return",
+    "company": "COMPANY",
+    "blog": "Blog",
+    "contact": "Contact",
+    "about-us": "About Us",
+    "support": "SUPPORT",
+    "faq": "FAQ",
+    "whatsapp-line": "WhatsApp Line",
+    "copyright": "© 2025 BM HOME All rights reserved."
+  },
+  "home": {
+    "categories": {
+      "all-ruges": {
+        "title": "ALL RUGS",
+        "description": "MADE TO ORDER RUG MODELS"
+      },
+      "new-ruges": {
+        "title": "NEW RUGS",
+        "description": "LATEST COLLECTIONS OF RUGS"
+      }
+    },
+    "meta": {
+      "title": "Carpet Store | Premium Rugs & Carpets",
+      "description": "Discover our wide collection of handmade and premium machine-woven carpets. Shop rugs by size, color, and design for your home.",
+      "keywords": [
+        "carpet",
+        "rugs",
+        "handmade rugs",
+        "oriental carpets",
+        "luxury carpets",
+        "buy carpets online"
+      ],
+      "openGraph": {
+        "title": "Carpet Store | Premium Rugs & Carpets",
+        "description": "Discover premium rugs and carpets in various sizes, colors, and designs. Perfect for living rooms, bedrooms, and offices.",
+        "image": "https://carpet-store-lake.vercel.app/og-home.jpg"
+      },
+      "twitter": {
+        "title": "Carpet Store | Premium Rugs & Carpets",
+        "description": "Shop premium rugs & carpets with modern and traditional designs.",
+        "image": "https://carpet-store-lake.vercel.app/og-home.jpg"
+      }
+    }
+  },
+  "faq": {
+    "faq": "Sıkça Sorulan Sorular",
+    "items": [
+      {
+        "title": "alışveriş",
+        "icon": "ShoppingBag",
+        "sections": [
+          {
+            "title": "WEB SİTESİ",
+            "texts": [
+              "BM Home'da misafir kullanıcı veya kayıtlı müşteri olarak alışveriş yapabilirsiniz.",
+              "Kaydolmak çok kolaydır. Bilgileriniz gelecekteki alışverişleriniz için saklanacaktır.",
+              "Misafir kullanıcı olarak alışveriş yaparsanız, sipariş detayları onay e-postasıyla gönderilecektir."
+            ]
+          },
+          {
+            "title": "SHOWROOM",
+            "texts": [
+              "Ürünlerimizi fabrikamızdaki showroom'umuzda detaylı olarak inceleyebilir ve satın alabilirsiniz.",
+              "Müşterilerimize daha iyi hizmet verebilmek için showroom ziyaretlerini randevu sistemi ile gerçekleştiriyoruz.",
+              "Randevunuzu WhatsApp hattımız üzerinden alabilirsiniz."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "hesap",
+        "icon": "User",
+        "sections": [
+          {
+            "title": "BM HOME HESABINIZ",
+            "texts": [
+              "Kolayca kayıt olabilir ve bilgilerinizin gelecekteki alışverişler için saklanmasını sağlayabilirsiniz."
+            ]
+          },
+          {
+            "title": "FAVORİLER",
+            "texts": [
+              "Beğendiğiniz ürünleri üzerindeki kalp ikonuna tıklayarak kaydedebilirsiniz.",
+              "Bu seçeneği kullanabilmek için kayıtlı müşteri olmanız gerekir."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "ödeme",
+        "icon": "CreditCard",
+        "sections": [
+          {
+            "title": "ÖDEME SEÇENEKLERİ",
+            "texts": [
+              "Ödemenizi banka havalesi veya kredi kartı ile yapabilirsiniz."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "fatura",
+        "icon": "FileText",
+        "sections": [
+          {
+            "title": "FATURA",
+            "texts": [
+              "Siparişiniz için bireysel veya kurumsal fatura talep edebilirsiniz.",
+              "Faturanızı siparişinizle birlikte gönderiyoruz."
+            ]
+          },
+          {
+            "title": "KAYIP FATURA",
+            "texts": [
+              "Faturanızın PDF dosyasını talep etmek için WhatsApp hattımız üzerinden bizimle iletişime geçebilirsiniz."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "teslimat",
+        "icon": "Truck",
+        "sections": [
+          {
+            "title": "TESLİMAT",
+            "texts": [
+              "Kargo ücreti müşteriye aittir.",
+              "Ürünlerimizi 14–21 iş günü içinde üretiyor ve gönderiyoruz."
+            ]
+          },
+          {
+            "title": "EKSİK / HASARLI TESLİMAT",
+            "texts": [
+              "Paketi kurye önünde açmalı ve siparişinizi kontrol etmelisiniz.",
+              "Eksik veya hasarlı ürünleri fark ederseniz, kuryeden rapor formu alıp doldurun.",
+              "Destek hattımız üzerinden bizimle iletişime geçin."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "iade",
+        "icon": "RotateCcw",
+        "sections": [
+          {
+            "title": "STANDART ÜRÜNLER",
+            "texts": [
+              "Kullanılmamış ürünleri 14 gün içinde, orijinal ambalajında ve Yurtiçi Kargo anlaşma kodumuz ile iade edebilirsiniz.",
+              "İade kargo ücreti müşteriye aittir.",
+              "Ürün kötü paketleme nedeniyle hasar görürse sorumluluk müşteriye aittir."
+            ]
+          },
+          {
+            "title": "ÖZEL ÜRÜNLER",
+            "texts": [
+              "Özel ölçü, renk veya desenli ürünlerin iadesini kabul etmiyoruz."
+            ]
+          },
+          {
+            "title": "PARA İADESİ",
+            "texts": [
+              "İade, orijinal ödeme yöntemi ile yapılır.",
+              "İade tamamlandığında onay e-postası gönderilir.",
+              "14 gün içinde iade görmezseniz bankanızla iletişime geçin."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "ürün kullanımı",
+        "icon": "Package",
+        "sections": [
+          {
+            "title": "ÜRÜN TÜRLERİ",
+            "texts": [
+              "Halılarımız dokuma teknikleri, desenler, renk sayısı, ağırlık ve tasarım farklarına göre değişir.",
+              "Bu nedenle fiyatlandırma ürün kategorisine göre farklılık gösterir."
+            ]
+          },
+          {
+            "title": "ÖLÇÜ FARKLILIKLARI",
+            "texts": [
+              "Halılar boyama ve/veya yıkama sonrası çekebilir.",
+              "Çekme oranı partiden partiye değişebilir.",
+              "+/- %3 ölçü sapmaları normal kabul edilir."
+            ]
+          },
+          {
+            "title": "KENAR DALGALANMASI",
+            "texts": [
+              "Boyama/yıkama nedeniyle kenarlarda dalgalanma olabilir.",
+              "Dalgalanmayı azaltmak için kenarları silindirik bir cisimle bastırın."
+            ]
+          },
+          {
+            "title": "KAYMA",
+            "texts": [
+              "Halı kaymasını önlemek için kaymaz bant veya kaymaz paspas kullanın."
+            ]
+          },
+          {
+            "title": "GARANTİ",
+            "texts": [
+              "Halılarımız üretim hatalarına karşı 1 yıl garantilidir.",
+              "Sorun yaşarsanız, fotoğraf ve açıklama ile destek hattımızla iletişime geçin.",
+              "Duruma göre ürün değişimi veya iade yapılabilir."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "özel üretim",
+        "icon": "Brush",
+        "sections": [
+          {
+            "title": "ÖZEL ÖLÇÜ",
+            "texts": [
+              "240 cm genişliğe ve 1500 cm uzunluğa kadar halı üretebiliriz.",
+              "Özel ölçü üretimlerinde fiyat farklılıkları uygulanır."
+            ]
+          },
+          {
+            "title": "ÖZEL RENK SEÇENEĞİ",
+            "texts": [
+              "Seçeneklerimizden seçtiğiniz renklere göre özel sipariş üretebiliriz, ek ücret yoktur."
+            ]
+          },
+          {
+            "title": "ÖZEL DESEN TASARIMI",
+            "texts": [
+              "Tercihleriniz doğrultusunda özel tasarımlar oluşturabiliriz.",
+              "Özel tasarım fiyatları adede göre belirlenir."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "gizlilik",
+        "icon": "ShieldCheck",
+        "sections": [
+          {
+            "title": "GİZLİLİK POLİTİKASI",
+            "texts": [
+              "BM Home, web sitesinde paylaşılan müşteri kişisel verilerini korur.",
+              "Gizli bilgiler izin olmadan üçüncü kişilerle paylaşılmaz.",
+              "Her iki taraf da ticari ve teknik bilgileri gizli tutmakla yükümlüdür.",
+              "Gizlilik, satın alma ile başlar ve satıştan sonra da devam eder."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "satış",
+        "icon": "FileSignature",
+        "sections": [
+          {
+            "title": "SATIŞ SÖZLEŞMESİ",
+            "texts": [
+              "Bu sözleşme bmhome.com.tr üzerindeki alışveriş koşullarını düzenler.",
+              "Müşteri, sözleşme ve kullanım politikalarının tüm koşullarına uymayı kabul eder.",
+              "BM Home, hizmet detaylarını değiştirme hakkını saklı tutar.",
+              "Uyuşmazlıklar İstanbul mahkemelerinde çözülür."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "shared": {
+    "loadMore": "Daha fazla göster",
+    "ourProjects": "ÜRÜNLERIMIZ",
+    "rugDetail": "HALI AYRILMALAR",
+    "features": "ÜRÜN ÖZELLİKLERİ",
+    "produced": "14 iş gününde sipariş verildikten sonra üretildi.",
+    "notFound": "Halı bulunamadı",
+    "colors": "RENKLER",
+    "styles": "STİLLER",
+    "collections": "KOLEKSİYONLAR",
+    "sizes": "BEDENLER",
+    "sortBy": "Sıralama",
+    "sortByPrice": "Fiyat'a göre sırala"
+  }
+}

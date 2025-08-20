@@ -3,84 +3,103 @@
 import { useState } from "react";
 import useDrawerStore from "@/hooks/useDrawerStore";
 import { SIDEBAR_LINKS } from "@/lib/const";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 type SidebarProps = {
   locale: string;
 };
 
-type ExpandedState = {
-  [key: string]: boolean;
-};
-
 export default function Sidebar({ locale }: SidebarProps) {
   const { sidebar, close } = useDrawerStore();
-  const [expanded, setExpanded] = useState<ExpandedState>({});
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
-  const toggleExpand = (title: string) => {
-    setExpanded((prev) => ({ ...prev, [title]: !prev[title] }));
+  const toggleSection = (title: string) => {
+    setExpandedSection(prev => (prev === title ? null : title));
   };
 
   return (
     <div>
+      {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 ${sidebar ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-          }`}
+        className={`fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 ${
+          sidebar ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
         onClick={() => close("sidebar")}
       />
 
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white text-black shadow-xl z-50 transform transition-transform duration-300 ${sidebar ? "translate-x-0" : "-translate-x-full"
-          }`}
+        className={`fixed top-0 left-0 h-full w-64 bg-white text-black shadow-xl z-50 transform transition-transform duration-300 ${
+          sidebar ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
+        <div className="overflow-y-auto h-full">
+          <div className="w-full mb-4 border-b  p-3 border-gray-400 relative">
+            <Link href={`/${locale}`}>
+              <Image
+                src="/logo-dark.png"
+                alt="Logo"
+                width={850}
+                height={430}
+                priority
+                className="w-34 object-contain"
+              />
+            </Link>
 
-        <div className="p-5 overflow-y-auto h-full">
-          <div className="w-full mb-4 border-b py-2">
-            <Link href={`/${locale}`} className="text-2xl font-bold uppercase">Logo</Link>
+            <button onClick={() => close("sidebar")} className="absolute top-2 right-2 cursor-pointer">
+              <X className="size-6" />
+            </button>
           </div>
-          {SIDEBAR_LINKS.map((item) => (
-            <div key={item.title} className="mb-2">
-              {item.children ? (
-                <div>
-                  <button
-                    onClick={() => toggleExpand(item.title)}
-                    className="capitalize flex justify-between items-center w-full font-semibold cursor-pointer p-2 hover:bg-gray-100 rounded transition-colors duration-200"
+
+          {/* Sidebar Links */}
+          {SIDEBAR_LINKS.map(item => {
+            const isExpanded = expandedSection === item.title;
+
+            return (
+              <div key={item.title} className="mb-2 border-b border-gray-100 last:border-b-0">
+                {item.children ? (
+                  <>
+                    <button
+                      onClick={() => toggleSection(item.title)}
+                      className="flex justify-between items-center w-full font-semibold px-5 py-2 hover:bg-gray-100 rounded transition-colors duration-200 capitalize"
+                    >
+                      {item.title}
+                      {isExpanded ? <ChevronUp /> : <ChevronDown />}
+                    </button>
+
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ease-out ${
+                        isExpanded ? "max-h-96 mt-1 opacity-100" : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      {item.children.map(child => {
+                        const childPath = `/${item.title.replace(/\s+/g, "-").toLowerCase()}/${child.title
+                          .replace(/\s+/g, "-")
+                          .toLowerCase()}`;
+                        return (
+                          <Link
+                            key={child.title}
+                            href={`/${locale}${childPath}`}
+                            className="block pl-6 py-1 hover:bg-gray-100 rounded transition-colors duration-200 capitalize"
+                          >
+                            {child.title}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </>
+                ) : (
+                  <Link
+                    href={`/${locale}${item.path}`}
+                    className="flex capitalize font-semibold px-5 py-2 hover:bg-gray-100 rounded transition-colors duration-200"
                   >
                     {item.title}
-                    {expanded[item.title] ? <ChevronUp /> : <ChevronDown />}
-                  </button>
-
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${expanded[item.title] ? "max-h-96 mt-1" : "max-h-0"
-                      }`}
-                  >
-                    {item.children.map((child) => {
-                      const childPath = `/${item.title.replace(/\s+/g, "-").toLowerCase()}/${child.title
-                        .replace(/\s+/g, "-")
-                        .toLowerCase()}`;
-                      return (
-                        <a
-                          key={child.title}
-                          href={`/${locale}${childPath}`}
-                          className="block pl-6 py-1 hover:bg-gray-100 rounded transition-colors duration-200 capitalize"
-                        >
-                          {child.title}
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : (
-                <a
-                  href={`/${locale}${item.path}`}
-                  className="flex capitalize font-semibold p-2 hover:bg-gray-100 rounded transition-colors duration-200 cursor-pointer"
-                >
-                  {item.title}
-                </a>
-              )}
-            </div>
-          ))}
+                  </Link>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

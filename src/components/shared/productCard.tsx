@@ -6,6 +6,7 @@ import LazyImage from "./lazyImage";
 import { RugProduct } from "@/types/product";
 import { useRouter } from "next/navigation";
 import { useLocale } from "@/hooks/useLocale";
+import nProgress from "nprogress";
 
 type Props = {
   product: RugProduct;
@@ -19,13 +20,11 @@ const ProductCard: FC<Props> = ({ product }) => {
   const router = useRouter();
   const [locale] = useLocale();
 
-  const currentColor = product.colors[currentColorIndex];
-  const defaultSize = product.sizes[0];
 
   useEffect(() => {
     if (hoveredIndex !== null && !preloadTriggered.current) {
       preloadTriggered.current = true;
-      currentColor.images.forEach((_, idx) => {
+      product.images.forEach((_, idx) => {
         if (idx > 0) {
           setTimeout(() => {
             setPreloadedImages(prev => new Set(prev).add(idx));
@@ -33,7 +32,7 @@ const ProductCard: FC<Props> = ({ product }) => {
         }
       });
     }
-  }, [hoveredIndex, currentColor.images]);
+  }, [hoveredIndex, product.images]);
 
   useEffect(() => {
     setPreloadedImages(new Set([0]));
@@ -57,7 +56,8 @@ const ProductCard: FC<Props> = ({ product }) => {
   };
 
   const navigateToDetails = () => {
-    router.push(`/${locale}/rugs/${product.name}`);
+    nProgress.start()
+    router.push(`/${locale}/rugs/${product.id}`);
   };
 
   return (
@@ -67,7 +67,7 @@ const ProductCard: FC<Props> = ({ product }) => {
         className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100"
         onMouseLeave={handleMouseLeave}
       >
-        {currentColor.images.map((src, idx) => {
+        {product.images.map((src, idx) => {
           const shouldRender = preloadedImages.has(idx);
           const isActive = getActiveImageIndex() === idx;
           
@@ -83,7 +83,7 @@ const ProductCard: FC<Props> = ({ product }) => {
                   fill
                   src={src}
                   showPlaceholder={false}
-                  alt={`${product.name} - rasm ${idx + 1}`}
+                  alt={`${product.product_name[locale]} - ${idx + 1}`}
                   className="object-cover"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
@@ -93,19 +93,19 @@ const ProductCard: FC<Props> = ({ product }) => {
         })}
 
         <div className="absolute inset-0 flex z-20">
-          {currentColor.images.map((_, idx) => (
+          {product.images.map((_, idx) => (
             <div
               key={`segment-${idx}`}
               onMouseEnter={() => handleMouseEnterArea(idx)}
               className="flex-1 cursor-pointer"
-              style={{ width: `${100 / currentColor.images.length}%` }}
+              style={{ width: `${100 / product.images.length}%` }}
             />
           ))}
         </div>
 
-        {currentColor.images.length > 1 && (
+        {product.images.length > 1 && (
           <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1 z-20">
-            {currentColor.images.map((_, idx) => (
+            {product.images.map((_, idx) => (
               <div
                 key={`indicator-${idx}`}
                 className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
@@ -122,10 +122,10 @@ const ProductCard: FC<Props> = ({ product }) => {
       <div className="mt-3 flex items-start justify-between px-1">
         <div className="flex-1 min-w-0">
           <h3 className="text-sm font-medium text-gray-900 truncate">
-            {product.name}
+            {product.product_name[locale]}
           </h3>
           <p className="text-center text-sm text-gray-700 mt-1">
-            ${defaultSize.price}
+            ${product.price}
           </p>
         </div>
         

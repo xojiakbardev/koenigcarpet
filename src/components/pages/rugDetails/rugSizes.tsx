@@ -1,38 +1,16 @@
 "use client";
 
-import { RugProduct } from "@/types/product";
 import { FC, useState } from "react";
+import { RugProduct } from "@/types/product";
 
-type Props = {
-  rug: RugProduct;
-};
-
-const RugSize: FC<Props> = ({ rug }) => {
+const RugSize: FC<{ rug: RugProduct }> = ({ rug }) => {
   const [customWidth, setCustomWidth] = useState<number | "">("");
   const [customHeight, setCustomHeight] = useState<number | "">("");
   const [selectSizeType, setSelectSizeType] = useState<"standard" | "custom">("standard");
-  const [selectSize, setSelectSize] = useState<RugProduct["sizes"][0]>();
+  const [selectSize, setSelectSize] = useState<string>();
 
   const sizes = rug.sizes || [];
 
-  const avgPricePerM2 =
-    sizes.length > 0
-      ? sizes.reduce((acc, size) => acc + size.price_per_m2, 0) / sizes.length
-      : 0;
-
-  const calculateCustomPrice = () => {
-    if (customWidth && customHeight) {
-      const area = (customWidth / 100) * (customHeight / 100);
-      const price = area * avgPricePerM2;
-      setSelectSize({
-        size: `${customWidth} x ${customHeight}`,
-        price,
-        price_per_m2: avgPricePerM2,
-      });
-    } else {
-      setSelectSize(undefined);
-    }
-  };
 
   return (
     <div className="mt-6">
@@ -62,13 +40,12 @@ const RugSize: FC<Props> = ({ rug }) => {
             {sizes.map((size, i) => (
               <button
                 key={i}
-                data-selected={size.size === selectSize?.size}
-                onClick={() => setSelectSize(size)}
+                data-selected={size === selectSize}
+                onClick={() => setSelectSize( size)}
                 className="text-sm border px-4 py-2 cursor-pointer transition hover:bg-gray-100
                 data-[selected=true]:bg-black data-[selected=true]:text-white"
               >
-                {size.size} <br />
-                <span className="text-sm text-gray-600">${size.price.toFixed(2)}</span>
+                {size} <br />
               </button>
             ))}
           </div>
@@ -95,7 +72,6 @@ const RugSize: FC<Props> = ({ rug }) => {
               className="w-full p-2 border"
             />
             <button
-              onClick={calculateCustomPrice}
               className="border border-black text-black w-full px-4 py-2 cursor-pointer hover:text-white hover:bg-black transition"
             >
               Calculate Price
@@ -106,8 +82,7 @@ const RugSize: FC<Props> = ({ rug }) => {
 
       {selectSize && (
         <div className="flex items-center justify-between flex-wrap mt-4 p-2 border bg-gray-50">
-          <p className="font-medium text-gray-800">Selected Size: {selectSize.size}</p>
-          <p className="text-gray-600">Price: ${selectSize.price.toFixed(2)}</p>
+          <p className="font-medium text-gray-800">Selected Size: {selectSize}</p>
         </div>
       )}
     </div>
