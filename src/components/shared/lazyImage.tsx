@@ -128,7 +128,6 @@ const LazyImage: FC<LazyImageProps> = ({
         >
           <div className="flex flex-col items-center space-y-2">
             <Loader2 className="w-6 h-6 animate-spin text-gray-500" />
-            <span className="text-xs text-gray-500 font-medium">Yuklanmoqda...</span>
           </div>
         </div>
       )}
@@ -142,7 +141,6 @@ const LazyImage: FC<LazyImageProps> = ({
         >
           <div className="flex flex-col items-center space-y-2 text-red-500">
             <AlertTriangle className="w-6 h-6" />
-            <span className="text-xs font-medium">Yuklanmadi</span>
           </div>
         </div>
       )}
