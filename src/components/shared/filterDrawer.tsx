@@ -14,9 +14,9 @@ const FilterDrawer: React.FC = () => {
   const {filters: filterData} = useFilterStore()
 
   // const [inStock, setInStock] = useQueryState("inStock", false)
-  const [colors, setColors, clearColors] = useQueryState("colors", true)
-  const [styles, setStyles, clearStyles] = useQueryState("styles", true)
-  const [collections, setCollections, clearCollections] = useQueryState("collections", true)
+  const [colors, setColors, clearColors] = useQueryState("color", true)
+  const [styles, setStyles, clearStyles] = useQueryState("style", true)
+  const [collections, setCollections, clearCollections] = useQueryState("collection", true)
   const [sizes, setSizes, clearSizes] = useQueryState("sizes", true)
 
   const [expandedSection, setExpandedSection] = useState<string | null>(null)

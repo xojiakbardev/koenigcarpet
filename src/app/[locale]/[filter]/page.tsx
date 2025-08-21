@@ -3,16 +3,28 @@ import Banner from "@/components/shared/banner";
 import Footer from "@/components/shared/footer";
 import ProductControl from "@/components/shared/productControl";
 import { notFound } from "next/navigation";
-import { FC, use } from "react";
+import { FC, Suspense, use } from "react";
 import { RugProduct } from "@/types/product";
+import { filterProducts } from "@/lib/filterProduct";
 
 type RugsPageProps = {
-  params: Promise<{ filter: string }>
-  searchParams: Promise<Record<string, string>>
+  params: Promise<{ filter: string }>;
+  searchParams: Promise<Record<string, string>>;
 };
 
-const VALID_FILTERS = ["all-rugs", "rugs-in-stock", "new-rugs", "runners"] as const;
-type FilterType = typeof VALID_FILTERS[number];
+const VALID_FILTERS = [
+  "all-rugs",
+  "rugs-in-stock",
+  "new-rugs",
+  "runners",
+  "marquise",
+  "oriental",
+  "amorph",
+  "ethnique",
+  "shell",
+] as const;
+
+type FilterType = (typeof VALID_FILTERS)[number];
 
 const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   const filter = use(params).filter;
@@ -23,23 +35,60 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   }
 
   const images: Record<string, string> = {
-    "all-rugs": "/static/image1.png",
-    "rugs-in-stock": "/static/image2.png",
-    "new-rugs": "/static/image3.png",
-    "runners": "/static/image4.png",
+    "all-rugs": "/static/banner/all-rugs.png",
+    "rugs-in-stock": "/static/banner/rugs-in-stock.png",
+    "new-rugs": "/static/banner/new-rugs.jpg",
+    runners: "/static/banner/runners.png",
+    marquise: "/static/banner/marquise.png",
+    oriental: "/static/banner/oriental.jpg",
+    amorph: "/static/banner/amorph.png",
+    ethnique: "/static/banner/ethnique.png",
+    shell: "/static/banner/shell.png",
   };
 
   const limit = 12;
-  const data = use(import("@/context/data.json").then((module) => module.default)) as RugProduct[];
+  const data = use(
+    import("@/context/data.json").then((module) => module.default)
+  ) as RugProduct[];
 
+  // filterga qarab kerakli filter object yasaymiz
+  let filters: Record<string, string | string[]> = {};
+
+  switch (filter) {
+    case "all-rugs":
+      filters = {};
+      break;
+    case "rugs-in-stock":
+      filters = { inStock: ["IN_STOCK"] };
+      break;
+    case "new-rugs":
+      filters = { tag: ["new"] }; 
+      break;
+    case "runners":
+      filters = { category: ["runner"] };
+      break;
+    case "marquise":
+    case "oriental":
+    case "amorph":
+    case "ethnique":
+    case "shell":
+      filters = { collection: [filter] };
+      break;
+    default:
+      filters = {};
+  }
+
+  const filteredRugs = filterProducts(data, filters);
 
   return (
     <div className="flex flex-col">
       <Banner filter={filter} image={images[filter]} />
-      <ProductControl searchParams={urlSearchParams}/>
+      <Suspense fallback={null}>
+        <ProductControl />
+      </Suspense>
       <FilterProduct
         searchParams={urlSearchParams}
-        allProducts={data}
+        allProducts={filteredRugs}
         limit={limit}
       />
       <Footer />
@@ -48,7 +97,6 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
 };
 
 export default RugsPage;
-
 
 export const generateStaticParams = async () => {
   return VALID_FILTERS.map((filter) => ({ filter }));

@@ -3,7 +3,7 @@ import Banner from '@/components/shared/banner'
 import Footer from '@/components/shared/footer'
 import ProductControl from '@/components/shared/productControl'
 import { Locale, localeConfig } from '@/localization/config'
-import { FC, use } from 'react'
+import { FC, Suspense, use } from 'react'
 import { RugProduct } from '@/types/product'
 
 type FilteredRugsProps = {
@@ -24,7 +24,9 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   return (
     <div>
       <Banner filter={decodeURIComponent(filter)} image={"/static/image1.png"} />
-      <ProductControl searchParams={urlSearchParams}/>
+            <Suspense fallback={null}>
+              <ProductControl />
+            </Suspense>
       <FilterProduct searchParams={urlSearchParams} allProducts={data} filter={filter} slug={slug} limit={12}/>
       <Footer />
     </div>

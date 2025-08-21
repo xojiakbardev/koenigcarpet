@@ -6,16 +6,23 @@ import { HOME_CATEGORIES } from "@/lib/const";
 import type { Metadata } from "next";
 import { getDictionary } from "@/localization/dictionary";
 import { Locale } from "@/localization/config";
+import { use } from "react";
 
 
-export default function Home() {
+type Props = {
+  params: Promise<{ locale: Locale }>
+};
+
+export default function Home({ params }: Props) {
+
+  const pathParams = use(params);
 
   return (
     <div className="h-screen w-full overflow-hidden relative">
       <Navbar fixed />
       <SlideWrapper elem={<Footer />}>
-        {HOME_CATEGORIES.map((category) => (
-          <Category key={category.title} category={category} />
+        {HOME_CATEGORIES[pathParams.locale].map((category) => (
+          <Category key={category.title} category={category}/>
         ))}
       </SlideWrapper>
     </div>

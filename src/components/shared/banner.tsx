@@ -11,7 +11,7 @@ const Banner: FC<Props> = ({ filter, image }) => {
   return (
     <div className='w-full overflow-hidden relative'>
       <Navbar />
-      <div className='flex justify-center items-center pt-20 pb-30'>
+      <div className='flex justify-center items-center pt-20 pb-5 md:pb-30'>
         <h1 className='text-4xl md:text-7xl font-bold text-white p-10 text-center'>
           {filter?.toUpperCase().replace('-', ' ')}
         </h1>

@@ -6,22 +6,24 @@ import Link from "next/link";
 import { FC } from "react";
 
 interface CategoryProps {
-  category:{title: string;
-  description: string;
-  image: string;
-  type: string;
-}
+  category: {
+    title: string;
+    description: string;
+    image: string;
+    path: string
+  }
 }
 
-const Category: FC<CategoryProps> = ({ category}) => {
+const Category: FC<CategoryProps> = ({ category }) => {
   const [locale] = useLocale()
+  const path = `/${locale}/${category.path}`
   return (
     <div className="h-full w-full flex flex-col items-center justify-center relative">
       <Image src={category.image} alt={category.title} fill priority className="object-cover" />
       <div className="absolute inset-0 bg-black/20"></div>
       <div className="relative z-10 text-center text-white px-4">
         <Link
-          href={`/${locale}/${category.type}/${category.title.toLocaleLowerCase().replace(" ", "-")}`}
+          href={path}
           className="text-5xl md:text-7xl font-semibold drop-shadow-lg"
         >
           {category.title}

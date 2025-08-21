@@ -34,9 +34,9 @@ const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug, searchPara
 
 
   const inStock = searchParams.inStock === "true";
-  const colors = toList(searchParams.colors);
-  const styles = toList(searchParams.styles);
-  const collections = toList(searchParams.collections);
+  const colors = toList(searchParams.color);
+  const styles = toList(searchParams.style);
+  const collections = toList(searchParams.collection);
   const sizes = toList(searchParams.sizes);
   const sortBy = searchParams.sortBy as string | undefined;
 
@@ -49,21 +49,31 @@ const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug, searchPara
       sizes: sizes.length > 0 ? sizes : [],
     };
 
-    if (filter && slug) {
-      const nestedKey =
-        filter === "color"
-          ? "color.key"
-          : filter === "size"
-            ? "sizes"
-            : filter;
-      baseFilters[nestedKey] = slug;
+  if (filter && slug) {
+    switch (filter) {
+      case "color":
+        baseFilters.colors =  [slug];
+        break;
+      case "style":
+        baseFilters.style = Array.isArray(slug) ? slug : [slug];
+        break;
+      case "collection":
+        baseFilters.collection = Array.isArray(slug) ? slug : [slug];
+        break;
+      case "size":
+        baseFilters.sizes = Array.isArray(slug) ? slug : [slug];
+        break;
+      default:
+        baseFilters[filter] = Array.isArray(slug) ? slug : [slug];
     }
+  }
+
 
     return baseFilters;
   }, [inStock, colors, styles, collections, sizes, filter, slug]);
 
   const filteredProducts = useMemo(() => {
-    let result = filterProducts(displayed, filters);
+    let result = filterProducts(allProducts, filters);
 
     const getPrice = (p: RugProduct) => parseFloat(p.price) || 0;
 
@@ -108,7 +118,7 @@ const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug, searchPara
     }
 
     return result;
-  }, [displayed, filters, sortBy, locale]);
+  }, [allProducts, filters, sortBy, locale]);
 
   const filterData = useMemo(
     () => generateFilterData(allProducts, locale, dictionary),
@@ -135,8 +145,8 @@ const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug, searchPara
 
   return (
     <ProductWrapper searchParams={searchParams}>
-      {filteredProducts.length > 0 ? (
-        filteredProducts.map((product, i) => <ProductCard key={i} product={product} />)
+      {displayed.length > 0 ? (
+        displayed.map((product, i) => <ProductCard key={i} product={product} />)
       ) : (
         <p className="col-span-full text-center text-gray-500">
           {dictionary?.shared.notFound}
