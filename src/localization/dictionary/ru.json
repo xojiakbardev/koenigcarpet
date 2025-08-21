@@ -312,5 +312,28 @@
     "sizes": "РАЗМЕРЫ",
     "sortBy": "СОРТИРОВКА",
     "sortByPrice": "СОРТИРОВКА ПО ЦЕНЕ"
-  }
+  },
+  "cart":{
+      "basket": "Корзина",
+      "clearCart": "Очистить корзину",
+      "freeShipping": "Бесплатная доставка применена к вашей корзине",
+      "continueShopping": "Продолжить покупки",
+      "campaigns": "Акции",
+      "orderSummary": "Итого заказа",
+      "basketAmount": "Сумма корзины",
+      "shippingCost": "Стоимость доставки",
+      "free": "Бесплатно",
+      "discount": "Скидка",
+      "totalAmount": "Общая сумма",
+      "completeShopping": "Завершить покупку",
+      "redeemGiftVoucher": "Использовать подарочный ваучер",
+      "lastViewed": "Последние | Просмотренные",
+      "addToBasket": "В корзину",
+      "inBasket": "В корзине",
+      "piece": "Штук",
+      "yourCustomizations": "Ваши настройки",
+      "quantity": "Количество",
+      "secondProductDiscount": "2-й товар скидка 10%",
+      "allBankTransferDiscount": "Все заказы БАНКОВСКИЙ ПЕРЕВОД скидка 5%"
+    }
 }

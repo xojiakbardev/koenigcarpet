@@ -79,6 +79,7 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   }
 
   const filteredRugs = filterProducts(data, filters);
+  const rugs = filteredRugs.slice(0, 20)
 
   return (
     <div className="flex flex-col">
@@ -88,7 +89,7 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
       </Suspense>
       <FilterProduct
         searchParams={urlSearchParams}
-        allProducts={filteredRugs}
+        allProducts={rugs}
         limit={limit}
       />
       <Footer />

@@ -72,14 +72,16 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
             </Link>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <button className="cursor-pointer p-2 rounded-full transition">
-              <Search className="w-6 h-6" />
+              <Search className="size-4 md:size-6" />
             </button>
             <button className="cursor-pointer p-2 rounded-full transition">
-              <Heart className="w-6 h-6" />
+              <Heart className="size-4 md:size-6" />
             </button>
+            <Link href={`/${locale}/cart`}>
             <CartButton />
+            </Link>
           </div>
         </div>
       </nav>
@@ -116,7 +118,11 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
             <button className="cursor-pointer p-2 rounded-full transition">
               <Heart className="w-6 h-6" />
             </button>
+                        <Link href={`/${locale}/cart`}>
+
             <CartButton />
+                        </Link>
+
           </div>
         </div>
       </nav>

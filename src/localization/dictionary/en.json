@@ -312,5 +312,28 @@
     "sizes": "SIZES",
     "sortBy": "SORT BY",
     "sortByPrice": "SORT BY PRICE"
-  }
+  },
+  "cart":{
+      "basket": "Basket",
+      "clearCart": "Clear Cart",
+      "freeShipping": "Your free shipping right has been applied to your cart",
+      "continueShopping": "Continue Shopping",
+      "campaigns": "Campaigns",
+      "orderSummary": "Order Summary",
+      "basketAmount": "Basket amount",
+      "shippingCost": "Shipping cost",
+      "free": "Free",
+      "discount": "Discount",
+      "totalAmount": "Total amount",
+      "completeShopping": "Complete Shopping",
+      "redeemGiftVoucher": "Redeem Gift Voucher",
+      "lastViewed": "Last | Viewed",
+      "addToBasket": "Add to Basket",
+      "inBasket": "In Basket",
+      "piece": "Piece",
+      "yourCustomizations": "Your Customizations",
+      "quantity": "Quantity",
+      "secondProductDiscount": "2nd Product 10% Discount",
+      "allBankTransferDiscount": "All BANK TRANSFER Orders 5% Discount"
+    }
 }

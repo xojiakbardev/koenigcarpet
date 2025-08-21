@@ -312,5 +312,28 @@
     "sizes": "BEDENLER",
     "sortBy": "Sıralama",
     "sortByPrice": "Fiyat'a göre sırala"
-  }
+  },
+  "cart":{
+      "basket": "Sepet",
+      "clearCart": "Sepeti Temizle",
+      "freeShipping": "Ücretsiz kargo hakkınız sepetinize uygulandı",
+      "continueShopping": "Alışverişe Devam Et",
+      "campaigns": "Kampanyalar",
+      "orderSummary": "Sipariş Özeti",
+      "basketAmount": "Sepet tutarı",
+      "shippingCost": "Kargo ücreti",
+      "free": "Ücretsiz",
+      "discount": "İndirim",
+      "totalAmount": "Toplam tutar",
+      "completeShopping": "Alışverişi Tamamla",
+      "redeemGiftVoucher": "Hediye Çeki Kullan",
+      "lastViewed": "Son | Görüntülenen",
+      "addToBasket": "Sepete Ekle",
+      "inBasket": "Sepette",
+      "piece": "Adet",
+      "yourCustomizations": "Özelleştirmeleriniz",
+      "quantity": "Miktar",
+      "secondProductDiscount": "2. Ürünü %10 İndirim",
+      "allBankTransferDiscount": "Tüm HAVALE Siparişlerinde %5 İndirim"
+    }
 }

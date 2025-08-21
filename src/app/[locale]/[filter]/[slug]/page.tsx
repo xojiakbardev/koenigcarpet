@@ -20,6 +20,7 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
 
 
   const data = use(import("@/context/data.json").then((module) => module.default)) as RugProduct[]
+  const rugs = data.slice(0, 20)
 
   return (
     <div>
@@ -27,7 +28,7 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
             <Suspense fallback={null}>
               <ProductControl />
             </Suspense>
-      <FilterProduct searchParams={urlSearchParams} allProducts={data} filter={filter} slug={slug} limit={12}/>
+      <FilterProduct searchParams={urlSearchParams} allProducts={rugs} filter={filter} slug={slug} limit={12}/>
       <Footer />
     </div>
   )

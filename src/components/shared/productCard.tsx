@@ -7,6 +7,7 @@ import { RugProduct } from "@/types/product";
 import { useRouter } from "next/navigation";
 import { useLocale } from "@/hooks/useLocale";
 import nProgress from "nprogress";
+import { useCartStore } from '@/hooks/useCartStore';
 
 type Props = {
   product: RugProduct;
@@ -19,6 +20,7 @@ const ProductCard: FC<Props> = ({ product }) => {
   const preloadTriggered = useRef(false);
   const router = useRouter();
   const [locale] = useLocale();
+  const {addToCart} = useCartStore()
 
 
   useEffect(() => {
@@ -60,9 +62,15 @@ const ProductCard: FC<Props> = ({ product }) => {
     router.push(`/${locale}/rugs/${product.id}`);
   };
 
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation(); 
+    addToCart(product); 
+  };
   return (
-    <div className="group flex w-full flex-col"
-      onClick={navigateToDetails}>
+    <div 
+      className="group flex w-full flex-col cursor-pointer"
+      onClick={navigateToDetails}
+    >
       <div
         className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100"
         onMouseLeave={handleMouseLeave}
@@ -117,6 +125,15 @@ const ProductCard: FC<Props> = ({ product }) => {
             ))}
           </div>
         )}
+
+        <button
+          onClick={handleAddToCart}
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 cursor-pointer hover:shadow-lg transition
+                     bg-white text-gray-900 px-4 py-2 rounded-lg shadow-md
+                     opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30"
+        >
+          Add to Cart
+        </button>
       </div>
 
       <div className="mt-3 flex items-start justify-between px-1">
@@ -132,6 +149,7 @@ const ProductCard: FC<Props> = ({ product }) => {
         <button 
           className="ml-2 p-1 rounded-full hover:bg-gray-100 transition-colors duration-200 group/heart"
           aria-label="Add to wishlist"
+          onClick={(e) => e.stopPropagation()}
         >
           <Heart className="h-4 w-4 text-gray-400 group-hover/heart:text-red-500 transition-colors duration-200" />
         </button>

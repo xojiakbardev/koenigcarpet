@@ -153,13 +153,13 @@ const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug, searchPara
         </p>
       )}
 
-      {hasMore && (
+      {/* {hasMore && (
         <div className="col-span-full flex">
           <button className="m-auto border p-2 cursor-pointer" onClick={loadMore}>
             {dictionary?.shared.loadMore}
           </button>
         </div>
-      )}
+      )} */}
     </ProductWrapper>
   );
 };
