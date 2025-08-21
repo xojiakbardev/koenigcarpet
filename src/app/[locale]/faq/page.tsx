@@ -18,12 +18,9 @@ const Faq: FC<Props> = ({ params }) => {
             <Banner filter={dict.faq.faq} image="/static/image1.png" />
             <FaqAccordion />
             <Footer />
-
         </>
     )
 }
-
-export const dynamic = "force-dynamic";
 
 
 export default Faq

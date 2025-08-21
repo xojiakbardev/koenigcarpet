@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
-import { FC, use } from "react";
+import { FC, Suspense, use } from "react";
 import { Locale, localeConfig } from "@/localization/config";
 import { LocaleProvider } from "@/components/providers/LocaleProvider";
 import { getDictionary } from "@/localization/dictionary";
@@ -35,7 +35,9 @@ const RootLayout: FC<RootLayoutProps> = ({ children, params }) => {
         <LocaleProvider dictionary={dictionary}>
           {children}
           <Sidebar locale={locale} />
-          <FilterDrawer />
+          <Suspense fallback={null}>
+            <FilterDrawer />
+          </Suspense>
         </LocaleProvider>
         <NextTopLoader color="#3563E9" height={4} showSpinner={false} />
       </body>
@@ -59,13 +61,13 @@ export async function generateMetadata({
   const locale = (await params).locale
   const dictionary = await getDictionary(locale);
 
-return {
+  return {
     title: dictionary.meta.title,
     description: dictionary.meta.description,
     keywords: dictionary.meta.keywords,
     openGraph: {
-      title: dictionary.meta.openGraph.title ,
-      description: dictionary.meta.openGraph.description ,
+      title: dictionary.meta.openGraph.title,
+      description: dictionary.meta.openGraph.description,
       url: `https://carpet-store-lake.vercel.app/${locale}`,
       siteName: "Carpet Store",
       images: [

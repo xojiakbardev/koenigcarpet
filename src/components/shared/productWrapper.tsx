@@ -1,15 +1,15 @@
 "use client";
 
-import { useQueryState } from "@/hooks/useQueryState";
 import { FC, ReactNode } from "react";
 
 type Props = { 
   children: ReactNode;
   className?: string;
+  searchParams: Record<string, string | string[]>
 };
 
-const ProductWrapper: FC<Props> = ({ children, className }) => {
-  const [grid] = useQueryState("grid", false);
+const ProductWrapper: FC<Props> = ({ children, className, searchParams }) => {
+  const grid = searchParams.grid
   
   const validatedGrid = ["2", "3", "4", "5", "6"].includes(String(grid)) ? String(grid) : "4";
   

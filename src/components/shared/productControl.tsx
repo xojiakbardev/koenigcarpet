@@ -1,10 +1,10 @@
 "use client"
 
-import { useQueryState } from '@/hooks/useQueryState'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { ChevronDown, Check, X } from 'lucide-react'
 import useDrawerStore from '@/hooks/useDrawerStore'
 import nProgress from "nprogress";
+import { useRouter } from 'next/navigation'
 
 interface SortOption {
   value: string
@@ -16,21 +16,46 @@ const toList = (v: any): string[] => {
   return Array.isArray(v) ? v : [v]
 }
 
-const ProductControl: React.FC = () => {
-  // grid & sort
-  const [grid, setGrid] = useQueryState('grid', false)
-  const [sortBy, setSortBy, clearSortBy] = useQueryState('sortBy', false)
+interface Props {
+  searchParams: Record<string, string>
+}
+
+
+const ProductControl: FC<Props> = ({ searchParams }) => {
+  const router = useRouter()
+
+  const grid = searchParams.grid
+  const sortBy = searchParams.sortBy
+  const colors = searchParams.colors
+  const styles = searchParams.styles
+  const collections = searchParams.collections
+  const sizes = searchParams.sizes
+  const inStock = searchParams.inStock
+
+  const setGrid = (value: string) => {
+    nProgress.start()
+    const params = new URLSearchParams(window.location.search)
+    params.set('grid', value)
+    router.push(`?${params.toString()}`, { scroll: false })
+  }
+
+  const setParams = (key: string, value: string) => {
+    nProgress.start()
+    const params = new URLSearchParams(window.location.search)
+    params.set(key, value)
+    router.push(`?${params.toString()}`, { scroll: false })
+  }
+
+  const clearParams = (key: string) => {
+    nProgress.start()
+    const params = new URLSearchParams(window.location.search)
+    params.delete(key)
+    router.push(`?${params.toString()}`, { scroll: false })
+  }
+
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
 
-  // drawer
   const { open } = useDrawerStore()
-
-  // filters (ko‘p qiymatlilar uchun 3-return clear funksiyasidan foydalandik)
-  const [inStock, , clearInStock] = useQueryState("inStock", false)
-  const [colors, , clearColors] = useQueryState("colors", true)
-  const [styles, , clearStyles] = useQueryState("styles", true)
-  const [collections, , clearCollections] = useQueryState("collections", true)
-  const [sizes, , clearSizes] = useQueryState("sizes", true)
 
   // sort tanlovlari ("" EMAS!)
   const sortOptions: SortOption[] = [
@@ -51,9 +76,9 @@ const ProductControl: React.FC = () => {
   const handleSortSelect = (value: string) => {
     nProgress.start()
     if (value === 'default') {
-      clearSortBy()
+      clearParams('sortBy')
     } else {
-      setSortBy(value)
+      setParams('sortBy', value)
     }
     setIsDropdownOpen(false)
   }
@@ -61,23 +86,23 @@ const ProductControl: React.FC = () => {
   // badge’lar
   const badges: { label: string; onClear: () => void }[] = []
   if (inStock) {
-    badges.push({ label: 'In Stock', onClear: () => clearInStock() })
+    badges.push({ label: 'In Stock', onClear: () => clearParams('inStock') })
   }
   const colorsList = toList(colors)
   if (colorsList.length) {
-    badges.push({ label: `Colors: ${colorsList.join(', ')}`, onClear: () => clearColors() })
+    badges.push({ label: `Colors: ${colorsList.join(', ')}`, onClear: () => clearParams('colors') })
   }
   const stylesList = toList(styles)
   if (stylesList.length) {
-    badges.push({ label: `Styles: ${stylesList.join(', ')}`, onClear: () => clearStyles() })
+    badges.push({ label: `Styles: ${stylesList.join(', ')}`, onClear: () => clearParams('styles') })
   }
   const collectionsList = toList(collections)
   if (collectionsList.length) {
-    badges.push({ label: `Collections: ${collectionsList.join(', ')}`, onClear: () => clearCollections() })
+    badges.push({ label: `Collections: ${collectionsList.join(', ')}`, onClear: () => clearParams('collections') })
   }
   const sizesList = toList(sizes)
   if (sizesList.length) {
-    badges.push({ label: `Sizes: ${sizesList.join(', ')}`, onClear: () => clearSizes() })
+    badges.push({ label: `Sizes: ${sizesList.join(', ')}`, onClear: () => clearParams('sizes') })
   }
 
   return (

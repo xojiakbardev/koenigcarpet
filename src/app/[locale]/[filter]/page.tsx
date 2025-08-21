@@ -14,8 +14,9 @@ type RugsPageProps = {
 const VALID_FILTERS = ["all-rugs", "rugs-in-stock", "new-rugs", "runners"] as const;
 type FilterType = typeof VALID_FILTERS[number];
 
-const RugsPage: FC<RugsPageProps> = ({ params }) => {
+const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   const filter = use(params).filter;
+  const urlSearchParams = use(searchParams);
 
   if (!VALID_FILTERS.includes(filter as FilterType)) {
     return notFound();
@@ -35,8 +36,9 @@ const RugsPage: FC<RugsPageProps> = ({ params }) => {
   return (
     <div className="flex flex-col">
       <Banner filter={filter} image={images[filter]} />
-      <ProductControl />
+      <ProductControl searchParams={urlSearchParams}/>
       <FilterProduct
+        searchParams={urlSearchParams}
         allProducts={data}
         limit={limit}
       />
@@ -46,3 +48,8 @@ const RugsPage: FC<RugsPageProps> = ({ params }) => {
 };
 
 export default RugsPage;
+
+
+export const generateStaticParams = async () => {
+  return VALID_FILTERS.map((filter) => ({ filter }));
+};

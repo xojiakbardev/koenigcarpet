@@ -53,6 +53,3 @@ export default function Page({ params }: ProductDetailsProps) {
     </>
   );
 }
-
-
-export const dynamic = "force-dynamic";

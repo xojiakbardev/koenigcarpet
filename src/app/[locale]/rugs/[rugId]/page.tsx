@@ -112,9 +112,7 @@ export async function generateMetadata({ params }: ProductDetailsProps): Promise
 }
 
 
-// export const generateStaticParams = async () => {
-//   const data = await import("@/context/data.json").then((module) => module.default) as RugProduct[]
-//   return data.map((rug) => ({ rugId: rug.id.toString() }))
-// }
-
-export const dynamic = "force-dynamic";
+export const generateStaticParams = async () => {
+  const data = await import("@/context/data.json").then((module) => module.default) as RugProduct[]
+  return data.map((rug) => ({ rugId: rug.id.toString() }))
+}

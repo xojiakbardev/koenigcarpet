@@ -3,7 +3,6 @@
 import ProductCard from "@/components/shared/productCard";
 import ProductWrapper from "@/components/shared/productWrapper";
 import { useFilterStore } from "@/hooks/useFilterDataStore";
-import { useQueryState } from "@/hooks/useQueryState";
 import { filterProducts } from "@/lib/filterProduct";
 import { generateFilterData } from "@/lib/generateFilterData";
 import { RugProduct } from "@/types/product";
@@ -17,30 +16,33 @@ type Props = {
   limit: number;
   filter?: "color" | "style" | "collection" | "size";
   slug?: string;
+  searchParams: Record<string, string | string[]>;
 };
 
-const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug }) => {
-  const [inStock] = useQueryState("inStock", false);
-  const [colors] = useQueryState("colors", true);
-  const [styles] = useQueryState("styles", true);
-  const [collections] = useQueryState("collections", true);
-  const [sizes] = useQueryState("sizes", true);
-  const [sortBy] = useQueryState("sortBy", false);
-  const {dictionary} = useDictionary()
+const toList = (v: any): string[] => (Array.isArray(v) ? v : v ? [v] : []);
 
+const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug, searchParams }) => {
+  const { dictionary } = useDictionary();
   const { setFilters } = useFilterStore();
   const [locale] = useLocale();
 
-  // page state
+
   const [currentPage, setCurrentPage] = useState(1);
   const [displayed, setDisplayed] = useState<RugProduct[]>(() =>
     allProducts.slice(0, limit)
   );
 
-  // filterlar
+
+  const inStock = searchParams.inStock === "true";
+  const colors = toList(searchParams.colors);
+  const styles = toList(searchParams.styles);
+  const collections = toList(searchParams.collections);
+  const sizes = toList(searchParams.sizes);
+  const sortBy = searchParams.sortBy as string | undefined;
+
   const filters = useMemo(() => {
     const baseFilters: Record<string, string | string[]> = {
-      inStock: inStock === "true" ? ["IN_STOCK"] : [],
+      inStock: inStock ? ["IN_STOCK"] : [],
       colors: colors.length > 0 ? colors : [],
       style: styles.length > 0 ? styles : [],
       collection: collections.length > 0 ? collections : [],
@@ -52,17 +54,17 @@ const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug }) => {
         filter === "color"
           ? "color.key"
           : filter === "size"
-          ? "sizes"
-          : filter;
+            ? "sizes"
+            : filter;
       baseFilters[nestedKey] = slug;
     }
 
     return baseFilters;
   }, [inStock, colors, styles, collections, sizes, filter, slug]);
 
-
   const filteredProducts = useMemo(() => {
     let result = filterProducts(displayed, filters);
+
     const getPrice = (p: RugProduct) => parseFloat(p.price) || 0;
 
     switch (sortBy) {
@@ -118,7 +120,7 @@ const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug }) => {
   }, [filterData, setFilters]);
 
   const loadMore = () => {
-    nProgress.start()
+    nProgress.start();
     const nextPage = currentPage + 1;
     const start = (nextPage - 1) * limit;
     const end = start + limit;
@@ -126,17 +128,15 @@ const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug }) => {
 
     setDisplayed((prev) => [...prev, ...nextProducts]);
     setCurrentPage(nextPage);
-    nProgress.done()
+    nProgress.done();
   };
 
-  const hasMore = currentPage * limit < allProducts.length;
+  const hasMore = currentPage * limit < allProducts.length && filteredProducts.length > 0;
 
   return (
-    <ProductWrapper>
+    <ProductWrapper searchParams={searchParams}>
       {filteredProducts.length > 0 ? (
-        filteredProducts.map((product, i) => (
-          <ProductCard key={i} product={product} />
-        ))
+        filteredProducts.map((product, i) => <ProductCard key={i} product={product} />)
       ) : (
         <p className="col-span-full text-center text-gray-500">
           {dictionary?.shared.notFound}
@@ -145,10 +145,7 @@ const FilterProduct: FC<Props> = ({ allProducts, limit, filter, slug }) => {
 
       {hasMore && (
         <div className="col-span-full flex">
-          <button
-            className="m-auto border p-2 cursor-pointer"
-            onClick={loadMore}
-          >
+          <button className="m-auto border p-2 cursor-pointer" onClick={loadMore}>
             {dictionary?.shared.loadMore}
           </button>
         </div>

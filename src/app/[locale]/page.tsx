@@ -3,27 +3,24 @@ import SlideWrapper from "@/components/pages/home/slideWrapper";
 import Footer from "@/components/shared/footer";
 import Navbar from "@/components/shared/navbar";
 import { HOME_CATEGORIES } from "@/lib/const";
+import type { Metadata } from "next";
+import { getDictionary } from "@/localization/dictionary";
+import { Locale } from "@/localization/config";
 
 
 export default function Home() {
 
   return (
-   <div className="h-screen w-full overflow-hidden relative">
-    <Navbar fixed />
-    <SlideWrapper elem={<Footer />}>
+    <div className="h-screen w-full overflow-hidden relative">
+      <Navbar fixed />
+      <SlideWrapper elem={<Footer />}>
         {HOME_CATEGORIES.map((category) => (
           <Category key={category.title} category={category} />
         ))}
-    </SlideWrapper>
-   </div>
+      </SlideWrapper>
+    </div>
   );
 }
-export const dynamic = "force-dynamic";
-
-
-import type { Metadata } from "next";
-import { getDictionary } from "@/localization/dictionary";
-import { Locale } from "@/localization/config";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const locale = (await params).locale;
