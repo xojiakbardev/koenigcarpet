@@ -313,6 +313,40 @@
     "sortBy": "SORT BY",
     "sortByPrice": "SORT BY PRICE"
   },
+  "contacts":{
+  "Address":{
+    "name":"Address",
+    "value": "Kaliningrad, M. Gvardii St. 34k2"
+  },
+  "Phone":{
+    "name":"Phone",
+    "value": "+7 (906) 230-20-22"
+  },
+  "E-Mail":{
+    "name": "E-Mail",
+    "value": "salon@koenigroom.ru"
+  },
+  "WhatsApp":{
+        "name": "WhatsApp",
+    "value": "7 (906) 230-20-22"
+  },
+          "Instagram":{
+        "name": "Instagram",
+        "value": "koenigroom"
+      },
+  "social":{
+    "label": "Social Media",
+    "icon": "Share2",
+    "value": [
+      { "platform": "Instagram", "username": "koenigroom", "link": "https://instagram.com/koenigroom" },
+      { "platform": "Facebook", "username": "koenigroom", "link": "https://facebook.com/koenigroom" },
+      { "platform": "Linkedin", "username": "koenigroom", "link": "https://linkedin.com/company/koenigroom" },
+      { "platform": "MessageCircle", "username": "WhatsApp", "link": "https://wa.me/79062302022" }
+    ]
+  }
+
+
+  },
   "cart":{
       "basket": "Basket",
       "clearCart": "Clear Cart",

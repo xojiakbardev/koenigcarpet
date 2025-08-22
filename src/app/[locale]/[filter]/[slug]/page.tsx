@@ -5,6 +5,11 @@ import ProductControl from '@/components/shared/productControl'
 import { Locale, localeConfig } from '@/localization/config'
 import { FC, Suspense, use } from 'react'
 import { RugProduct } from '@/types/product'
+import { filterProducts } from "@/lib/filterProduct";
+import data from "@/context/data.json";
+import { generateFilterData } from "@/lib/generateFilterData";
+import {getDictionary} from "@/localization/dictionary"
+
 
 type FilteredRugsProps = {
   params: Promise<{ locale: Locale, filter:"color" | "style" | "collection", slug: string }>
@@ -13,22 +18,40 @@ type FilteredRugsProps = {
 
 const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
 
-  const queryParams = use(params)
-  const urlSearchParams = use(searchParams)
-  const filter = queryParams.filter
-  const slug = queryParams.slug
+  const urlSearchParams = use(searchParams);
+  const pathParams = use(params)
+  const dict = use(getDictionary())  
 
+  const filteredRugs = filterProducts(data, urlSearchParams);
+  
 
-  const data = use(import("@/context/data.json").then((module) => module.default)) as RugProduct[]
-  const rugs = data.slice(0, 20)
+  const pageRaw = urlSearchParams.page;
+  const perPageRaw = urlSearchParams.perPage;
+  
+  const perPage = Math.max(1, Math.min(parseInt(perPageRaw as string) || 12, 200));
+  const currentPage = Math.max(1, parseInt(pageRaw as string) || 1);
+  
+  const start = (currentPage - 1) * perPage;
+  const end = start + perPage;
+  const displayedRugs = filteredRugs.slice(start, end);
+
+  const filterData=generateFilterData(data, pathParams.locale, dict)
 
   return (
     <div>
-      <Banner filter={decodeURIComponent(filter)} image={"/static/image1.png"} />
+      <Banner filter={decodeURIComponent(pathParams.filter)} image={"/static/image1.png"} />
             <Suspense fallback={null}>
               <ProductControl />
             </Suspense>
-      <FilterProduct searchParams={urlSearchParams} allProducts={rugs} filter={filter} slug={slug} limit={12}/>
+
+      <FilterProduct
+        searchParams={urlSearchParams}
+        rugs={displayedRugs}
+        perPage={12}
+        rugsCount={filteredRugs.length}
+        filterData={filterData}
+
+      />
       <Footer />
     </div>
   )

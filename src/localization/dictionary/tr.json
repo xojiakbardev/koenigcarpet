@@ -313,6 +313,38 @@
     "sortBy": "Sıralama",
     "sortByPrice": "Fiyat'a göre sırala"
   },
+   "contacts": {
+      "Address": {
+        "name": "Adres",
+        "value": "Kaliningrad, M. Gvardii Cd. 34k2"
+      },
+      "Phone": {
+        "name": "Telefon",
+        "value": "+7 (906) 230-20-22"
+      },
+      "E-Mail": {
+        "name": "E-Posta",
+        "value": "salon@koenigroom.ru"
+      },
+        "WhatsApp":{
+        "name": "Vatsap",
+        "value": "7 (906) 230-20-22"
+      },
+        "Instagram":{
+        "name": "Sosyal Medya",
+        "value": "koenigroom"
+      },
+      "social": {
+        "label": "Sosyal Medya",
+        "icon": "Share2",
+        "value": [
+          { "platform": "Instagram", "username": "koenigroom", "link": "https://instagram.com/koenigroom" },
+          { "platform": "Facebook", "username": "koenigroom", "link": "https://facebook.com/koenigroom" },
+          { "platform": "Linkedin", "username": "koenigroom", "link": "https://linkedin.com/company/koenigroom" },
+          { "platform": "MessageCircle", "username": "WhatsApp", "link": "https://wa.me/79062302022" }
+        ]
+      }
+  },
   "cart":{
       "basket": "Sepet",
       "clearCart": "Sepeti Temizle",

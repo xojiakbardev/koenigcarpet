@@ -67,7 +67,7 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
                 width={850}
                 height={430}
                 priority
-                className="w-40 object-contain"
+                className="w-30 object-contain"
               />
             </Link>
           </div>
@@ -106,7 +106,7 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
                 width={850}
                 height={430}
                 priority
-                className="w-34 object-contain"
+                className="w-30 object-contain"
               />
             </Link>
           </div>

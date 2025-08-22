@@ -313,6 +313,39 @@
     "sortBy": "СОРТИРОВКА",
     "sortByPrice": "СОРТИРОВКА ПО ЦЕНЕ"
   },
+   "contacts": {
+      "Address": {
+        "name": "Адрес",
+        "value": "Калининград, ул. М. Гвардии 34к2"
+      },
+      "Phone": {
+        "name": "Телефон",
+        "value": "+7 (906) 230-20-22"
+      },
+      "E-Mail": {
+        "name": "Эл. почта",
+        "value": "salon@koenigroom.ru"
+      },
+        "WhatsApp":{
+        "name":  "Ватсап",
+    "value": "7 (906) 230-20-22"
+  },
+          "Instagram":{
+        "name": "Соц.сети",
+        "value": "koenigroom"
+      },
+      "social": {
+        "label": "Соц. сети",
+        "icon": "Share2",
+        "value": [
+          { "platform": "Instagram", "username": "koenigroom", "link": "https://instagram.com/koenigroom" },
+          { "platform": "Facebook", "username": "koenigroom", "link": "https://facebook.com/koenigroom" },
+          { "platform": "Linkedin", "username": "koenigroom", "link": "https://linkedin.com/company/koenigroom" },
+          { "platform": "MessageCircle", "username": "WhatsApp", "link": "https://wa.me/79062302022" }
+        ]
+      }
+    }
+,
   "cart":{
       "basket": "Корзина",
       "clearCart": "Очистить корзину",

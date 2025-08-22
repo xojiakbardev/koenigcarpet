@@ -4,11 +4,15 @@ import Footer from "@/components/shared/footer";
 import ProductControl from "@/components/shared/productControl";
 import { notFound } from "next/navigation";
 import { FC, Suspense, use } from "react";
-import { RugProduct } from "@/types/product";
 import { filterProducts } from "@/lib/filterProduct";
+import { generateFilterData } from "@/lib/generateFilterData";
+import data from "@/context/data.json";
+import {Locale} from "@/localization/config"
+import {getDictionary} from "@/localization/dictionary"
+
 
 type RugsPageProps = {
-  params: Promise<{ filter: string }>;
+  params: Promise<{ filter: string, locale:Locale }>;
   searchParams: Promise<Record<string, string>>;
 };
 
@@ -18,7 +22,7 @@ const VALID_FILTERS = [
   "new-rugs",
   "runners",
   "marquise",
-  "oriental",
+  "oriential",
   "amorph",
   "ethnique",
   "shell",
@@ -29,6 +33,8 @@ type FilterType = (typeof VALID_FILTERS)[number];
 const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   const filter = use(params).filter;
   const urlSearchParams = use(searchParams);
+  const pathParams = use(params)
+  const dict = use(getDictionary())
 
   if (!VALID_FILTERS.includes(filter as FilterType)) {
     return notFound();
@@ -40,46 +46,34 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
     "new-rugs": "/static/banner/new-rugs.jpg",
     runners: "/static/banner/runners.png",
     marquise: "/static/banner/marquise.png",
-    oriental: "/static/banner/oriental.jpg",
+    oriential: "/static/banner/oriental.jpg",
     amorph: "/static/banner/amorph.png",
     ethnique: "/static/banner/ethnique.png",
     shell: "/static/banner/shell.png",
   };
 
-  const limit = 12;
-  const data = use(
-    import("@/context/data.json").then((module) => module.default)
-  ) as RugProduct[];
-
-  // filterga qarab kerakli filter object yasaymiz
-  let filters: Record<string, string | string[]> = {};
-
-  switch (filter) {
-    case "all-rugs":
-      filters = {};
-      break;
-    case "rugs-in-stock":
-      filters = { inStock: ["IN_STOCK"] };
-      break;
-    case "new-rugs":
-      filters = { tag: ["new"] }; 
-      break;
-    case "runners":
-      filters = { category: ["runner"] };
-      break;
-    case "marquise":
-    case "oriental":
-    case "amorph":
-    case "ethnique":
-    case "shell":
-      filters = { collection: [filter] };
-      break;
-    default:
-      filters = {};
-  }
-
-  const filteredRugs = filterProducts(data, filters);
-  const rugs = filteredRugs.slice(0, 20)
+  
+const mergedSearchParams = {
+  ...urlSearchParams,
+  ...(filter !== "all-rugs" &&
+    ["marquise", "oriental", "amorph", "ethnique", "shell"].includes(filter)
+      ? { collection: filter }
+      : {}),
+};
+  const filteredRugs = filterProducts(data, mergedSearchParams);
+  
+  
+  const pageRaw = urlSearchParams.page;
+  const perPageRaw = urlSearchParams.perPage;
+  
+  const perPage = Math.max(1, Math.min(parseInt(perPageRaw as string) || 12, 200));
+  const currentPage = Math.max(1, parseInt(pageRaw as string) || 1);
+  
+  const start = (currentPage - 1) * perPage;
+  const end = start + perPage;
+  const displayedRugs = filteredRugs.slice(start, end);
+  
+  const filterData=generateFilterData(data, pathParams.locale, dict)
 
   return (
     <div className="flex flex-col">
@@ -87,11 +81,15 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
       <Suspense fallback={null}>
         <ProductControl />
       </Suspense>
+
       <FilterProduct
         searchParams={urlSearchParams}
-        allProducts={rugs}
-        limit={limit}
+        rugs={displayedRugs}
+        perPage={12}
+        rugsCount={filteredRugs.length}
+        filterData={filterData}
       />
+
       <Footer />
     </div>
   );
