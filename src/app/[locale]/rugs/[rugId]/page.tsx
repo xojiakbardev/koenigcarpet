@@ -87,11 +87,11 @@ export async function generateMetadata({ params }: ProductDetailsProps): Promise
     openGraph: {
       title: `${productName} | Carpet Store`,
       description: description,
-      url: `https://carpet-store-lake.vercel.app/rugs/${rugId}`,
+      url: `https://www.koenigcarpet.ru/rugs/${rugId}`,
       siteName: "Carpet Store",
       images: [
         {
-          url: `https://carpet-store-lake.vercel.app${ogImage}`,
+          url: `https://www.koenigcarpet.ru${ogImage}`,
           width: 1200,
           height: 630,
           alt: productName,
@@ -103,10 +103,10 @@ export async function generateMetadata({ params }: ProductDetailsProps): Promise
       card: "summary_large_image",
       title: `${productName} | Carpet Store`,
       description: description,
-      images: [`https://carpet-store-lake.vercel.app${ogImage}`],
+      images: [`https://www.koenigcarpet.ru${ogImage}`],
     },
     alternates: {
-      canonical: `https://carpet-store-lake.vercel.app/rugs/${rugId}`,
+      canonical: `https://www.koenigcarpet.ru/rugs/${rugId}`,
     },
   };
 }

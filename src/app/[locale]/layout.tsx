@@ -70,7 +70,7 @@ export async function generateMetadata({
     openGraph: {
       title: dictionary.meta.openGraph.title,
       description: dictionary.meta.openGraph.description,
-      url: `https://carpet-store-lake.vercel.app/${locale}`,
+      url: `https://www.koenigcarpet.ru/${locale}`,
       siteName: "Carpet Store",
       images: [
         {
@@ -90,11 +90,11 @@ export async function generateMetadata({
       images: [dictionary.meta.twitter.image],
     },
     alternates: {
-      canonical: `https://carpet-store-lake.vercel.app/${locale}`,
+      canonical: `https://www.koenigcarpet.ru/${locale}`,
       languages: {
-        en: "https://carpet-store-lake.vercel.app/en",
-        ru: "https://carpet-store-lake.vercel.app/ru",
-        uz: "https://carpet-store-lake.vercel.app/uz",
+        en: "https://www.koenigcarpet.ru/en",
+        ru: "https://www.koenigcarpet.ru/ru",
+        uz: "https://www.koenigcarpet.ru/uz",
       },
     },
   };
