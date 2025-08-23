@@ -311,62 +311,298 @@
     "collections": "КОЛЛЕКЦИИ",
     "sizes": "РАЗМЕРЫ",
     "sortBy": "СОРТИРОВКА",
-    "sortByPrice": "СОРТИРОВКА ПО ЦЕНЕ"
-  },
-   "contacts": {
-      "Address": {
-        "name": "Адрес",
-        "value": "Калининград, ул. М. Гвардии 34к2"
+    "sortByPrice": "СОРТИРОВКА ПО ЦЕНЕ",
+    "sideBarLinks": [
+      {
+        "title": "Все ковры",
+        "path": "/all-rugs"
       },
-      "Phone": {
-        "name": "Телефон",
-        "value": "+7 (906) 230-20-22"
+      {
+        "title": "Ковры в наличии",
+        "path": "/rugs-in-stock"
       },
-      "E-Mail": {
-        "name": "Эл. почта",
-        "value": "salon@koenigroom.ru"
+      {
+        "title": "Новые ковры",
+        "path": "/new-rugs"
       },
-        "WhatsApp":{
-        "name":  "Ватсап",
-    "value": "7 (906) 230-20-22"
-  },
-          "Instagram":{
-        "name": "Соц.сети",
-        "value": "koenigroom"
+            {
+        "title": "Дорожки",
+        "path": "/runners"
       },
-      "social": {
-        "label": "Соц. сети",
-        "icon": "Share2",
-        "value": [
-          { "platform": "Instagram", "username": "koenigroom", "link": "https://instagram.com/koenigroom" },
-          { "platform": "Facebook", "username": "koenigroom", "link": "https://facebook.com/koenigroom" },
-          { "platform": "Linkedin", "username": "koenigroom", "link": "https://linkedin.com/company/koenigroom" },
-          { "platform": "MessageCircle", "username": "WhatsApp", "link": "https://wa.me/79062302022" }
+      {
+        "title": "Наши проекты",
+        "path": "/our-projects"
+      },
+      {
+        "title": "Коллекция",
+        "children": [
+          {
+            "title": "Amorph",
+            "value": "amorph"
+          },
+          {
+            "title": "Coral",
+            "value": "coral"
+          },
+          {
+            "title": "Crystal",
+            "value": "crystal"
+          },
+          {
+            "title": "Ethnique",
+            "value": "ethnique"
+          },
+          {
+            "title": "Istanbul",
+            "value": "istanbul"
+          },
+          {
+            "title": "Marquise",
+            "value": "marquise"
+          },
+          {
+            "title": "Marrakesh",
+            "value": "marrakesh"
+          },
+          {
+            "title": "Monochrome",
+            "value": "monochrome"
+          },
+          {
+            "title": "Naturale",
+            "value": "naturale"
+          },
+          {
+            "title": "Oriental",
+            "value": "oriental"
+          },
+          {
+            "title": "Patch",
+            "value": "patch"
+          },
+          {
+            "title": "Pearl",
+            "value": "pearl"
+          },
+          {
+            "title": "Plain",
+            "value": "plain"
+          },
+          {
+            "title": "Sapphire",
+            "value": "sapphire"
+          },
+          {
+            "title": "Shell",
+            "value": "shell"
+          },
+          {
+            "title": "Trinity",
+            "value": "trinity"
+          },
+          {
+            "title": "Vintage",
+            "value": "vintage"
+          }
+        ],
+        "path": "/collection"
+      },
+      {
+        "title": "Цвета",
+        "path": "/colors",
+        "children": [
+          {
+            "title": "Бежевый",
+            "value": "beige"
+          },
+          {
+            "title": "Белый",
+            "value": "white"
+          },
+          {
+            "title": "Многоцветный",
+            "value": "multi-color"
+          },
+          {
+            "title": "Экрю",
+            "value": "ecru"
+          },
+          {
+            "title": "Серый",
+            "value": "grey"
+          },
+          {
+            "title": "Коричневый",
+            "value": "brown"
+          },
+          {
+            "title": "Красный",
+            "value": "red"
+          },
+          {
+            "title": "Синий",
+            "value": "blue"
+          },
+          {
+            "title": "Фиолетовый",
+            "value": "purple"
+          },
+          {
+            "title": "Розовый",
+            "value": "pink"
+          },
+          {
+            "title": "Желтый",
+            "value": "yellow"
+          },
+          {
+            "title": "Черный",
+            "value": "black"
+          },
+          {
+            "title": "Оранжевый",
+            "value": "orange"
+          },
+          {
+            "title": "Зеленый",
+            "value": "green"
+          }
         ]
+      },
+      {
+        "title": "Стиль",
+        "children": [
+          {
+            "title": "Абстрактный",
+            "value": "abstract"
+          },
+          {
+            "title": "Аморфный",
+            "value": "amorphous"
+          },
+          {
+            "title": "Искусство",
+            "value": "art"
+          },
+          {
+            "title": "Арт Деко",
+            "value": "art deco"
+          },
+          {
+            "title": "С рамкой",
+            "value": "bordered"
+          },
+          {
+            "title": "Цветочный",
+            "value": "floral"
+          },
+          {
+            "title": "Однотонный",
+            "value": "solid"
+          },
+          {
+            "title": "Этнический",
+            "value": "ethnic"
+          },
+          {
+            "title": "Геометрический",
+            "value": "geometric"
+          },
+          {
+            "title": "Классический",
+            "value": "classic"
+          },
+          {
+            "title": "Современный",
+            "value": "modern"
+          },
+          {
+            "title": "Пэчворк",
+            "value": "patchwork"
+          }
+        ],
+        "path": "/style"
+      },
+
+      {
+        "title": "Контакты",
+        "path": "/contact"
+      },
+      {
+        "title": "Вопрос-ответ",
+        "path": "/faq"
       }
+    ]
+  },
+  "contacts": {
+    "Address": {
+      "name": "Адрес",
+      "value": "Калининград, ул. М. Гвардии 34к2"
+    },
+    "Phone": {
+      "name": "Телефон",
+      "value": "+7 (906) 230-20-22"
+    },
+    "E-Mail": {
+      "name": "Эл. почта",
+      "value": "salon@koenigroom.ru"
+    },
+    "WhatsApp": {
+      "name": "Ватсап",
+      "value": "7 (906) 230-20-22"
+    },
+    "Instagram": {
+      "name": "Соц.сети",
+      "value": "koenigroom"
+    },
+    "social": {
+      "label": "Соц. сети",
+      "icon": "Share2",
+      "value": [
+        {
+          "platform": "Instagram",
+          "username": "koenigroom",
+          "link": "https://instagram.com/koenigroom"
+        },
+        {
+          "platform": "Facebook",
+          "username": "koenigroom",
+          "link": "https://facebook.com/koenigroom"
+        },
+        {
+          "platform": "Linkedin",
+          "username": "koenigroom",
+          "link": "https://linkedin.com/company/koenigroom"
+        },
+        {
+          "platform": "MessageCircle",
+          "username": "WhatsApp",
+          "link": "https://wa.me/79062302022"
+        }
+      ]
     }
-,
-  "cart":{
-      "basket": "Корзина",
-      "clearCart": "Очистить корзину",
-      "freeShipping": "Бесплатная доставка применена к вашей корзине",
-      "continueShopping": "Продолжить покупки",
-      "campaigns": "Акции",
-      "orderSummary": "Итого заказа",
-      "basketAmount": "Сумма корзины",
-      "shippingCost": "Стоимость доставки",
-      "free": "Бесплатно",
-      "discount": "Скидка",
-      "totalAmount": "Общая сумма",
-      "completeShopping": "Завершить покупку",
-      "redeemGiftVoucher": "Использовать подарочный ваучер",
-      "lastViewed": "Последние | Просмотренные",
-      "addToBasket": "В корзину",
-      "inBasket": "В корзине",
-      "piece": "Штук",
-      "yourCustomizations": "Ваши настройки",
-      "quantity": "Количество",
-      "secondProductDiscount": "2-й товар скидка 10%",
-      "allBankTransferDiscount": "Все заказы БАНКОВСКИЙ ПЕРЕВОД скидка 5%"
-    }
+  },
+  "cart": {
+    "basket": "Корзина",
+    "clearCart": "Очистить корзину",
+    "freeShipping": "Бесплатная доставка применена к вашей корзине",
+    "continueShopping": "Продолжить покупки",
+    "campaigns": "Акции",
+    "orderSummary": "Итого заказа",
+    "basketAmount": "Сумма корзины",
+    "shippingCost": "Стоимость доставки",
+    "free": "Бесплатно",
+    "discount": "Скидка",
+    "totalAmount": "Общая сумма",
+    "completeShopping": "Завершить покупку",
+    "redeemGiftVoucher": "Использовать подарочный ваучер",
+    "lastViewed": "Последние | Просмотренные",
+    "addToBasket": "В корзину",
+    "inBasket": "В корзине",
+    "piece": "Штук",
+    "yourCustomizations": "Ваши настройки",
+    "quantity": "Количество",
+    "secondProductDiscount": "2-й товар скидка 10%",
+    "allBankTransferDiscount": "Все заказы БАНКОВСКИЙ ПЕРЕВОД скидка 5%"
+  }
 }

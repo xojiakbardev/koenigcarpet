@@ -311,63 +311,297 @@
     "collections": "COLLECTIONS",
     "sizes": "SIZES",
     "sortBy": "SORT BY",
-    "sortByPrice": "SORT BY PRICE"
-  },
-  "contacts":{
-  "Address":{
-    "name":"Address",
-    "value": "Kaliningrad, M. Gvardii St. 34k2"
-  },
-  "Phone":{
-    "name":"Phone",
-    "value": "+7 (906) 230-20-22"
-  },
-  "E-Mail":{
-    "name": "E-Mail",
-    "value": "salon@koenigroom.ru"
-  },
-  "WhatsApp":{
-        "name": "WhatsApp",
-    "value": "7 (906) 230-20-22"
-  },
-          "Instagram":{
-        "name": "Instagram",
-        "value": "koenigroom"
+    "sortByPrice": "SORT BY PRICE",
+    "sideBarLinks": [
+      {
+        "title": "All Rugs",
+        "path": "/all-rugs"
       },
-  "social":{
-    "label": "Social Media",
-    "icon": "Share2",
-    "value": [
-      { "platform": "Instagram", "username": "koenigroom", "link": "https://instagram.com/koenigroom" },
-      { "platform": "Facebook", "username": "koenigroom", "link": "https://facebook.com/koenigroom" },
-      { "platform": "Linkedin", "username": "koenigroom", "link": "https://linkedin.com/company/koenigroom" },
-      { "platform": "MessageCircle", "username": "WhatsApp", "link": "https://wa.me/79062302022" }
+      {
+        "title": "Rugs in Stock",
+        "path": "/rugs-in-stock"
+      },
+      {
+        "title": "New Rugs",
+        "path": "/new-rugs"
+      },
+      {
+        "title": "Runners",
+        "path": "/runners"
+      },
+      {
+        "title": "Our Projects",
+        "path": "/our-projects"
+      },
+      {
+        "title": "Collection",
+        "children": [
+          {
+            "title": "Amorph",
+            "value": "amorph"
+          },
+          {
+            "title": "Coral",
+            "value": "coral"
+          },
+          {
+            "title": "Crystal",
+            "value": "crystal"
+          },
+          {
+            "title": "Ethnique",
+            "value": "ethnique"
+          },
+          {
+            "title": "Istanbul",
+            "value": "istanbul"
+          },
+          {
+            "title": "Marquise",
+            "value": "marquise"
+          },
+          {
+            "title": "Marrakesh",
+            "value": "marrakesh"
+          },
+          {
+            "title": "Monochrome",
+            "value": "monochrome"
+          },
+          {
+            "title": "Naturale",
+            "value": "naturale"
+          },
+          {
+            "title": "Oriental",
+            "value": "oriental"
+          },
+          {
+            "title": "Patch",
+            "value": "patch"
+          },
+          {
+            "title": "Pearl",
+            "value": "pearl"
+          },
+          {
+            "title": "Plain",
+            "value": "plain"
+          },
+          {
+            "title": "Sapphire",
+            "value": "sapphire"
+          },
+          {
+            "title": "Shell",
+            "value": "shell"
+          },
+          {
+            "title": "Trinity",
+            "value": "trinity"
+          },
+          {
+            "title": "Vintage",
+            "value": "vintage"
+          }
+        ],
+        "path": "/collection"
+      },
+      {
+        "title": "Colors",
+        "children": [
+          {
+            "title": "Beige",
+            "value": "beige"
+          },
+          {
+            "title": "White",
+            "value": "white"
+          },
+          {
+            "title": "Multi-color",
+            "value": "multi-color"
+          },
+          {
+            "title": "Ecru",
+            "value": "ecru"
+          },
+          {
+            "title": "Grey",
+            "value": "grey"
+          },
+          {
+            "title": "Brown",
+            "value": "brown"
+          },
+          {
+            "title": "Red",
+            "value": "red"
+          },
+          {
+            "title": "Blue",
+            "value": "blue"
+          },
+          {
+            "title": "Purple",
+            "value": "purple"
+          },
+          {
+            "title": "Pink",
+            "value": "pink"
+          },
+          {
+            "title": "Yellow",
+            "value": "yellow"
+          },
+          {
+            "title": "Black",
+            "value": "black"
+          },
+          {
+            "title": "Orange",
+            "value": "orange"
+          },
+          {
+            "title": "Green",
+            "value": "green"
+          }
+        ],
+        "path": "/colors"
+      },
+      {
+        "title": "Style",
+        "children": [
+          {
+            "title": "Abstract",
+            "value": "abstract"
+          },
+          {
+            "title": "Amorphous",
+            "value": "amorphous"
+          },
+          {
+            "title": "Art",
+            "value": "art"
+          },
+          {
+            "title": "Art Deco",
+            "value": "art deco"
+          },
+          {
+            "title": "Bordered",
+            "value": "bordered"
+          },
+          {
+            "title": "Floral",
+            "value": "floral"
+          },
+          {
+            "title": "Solid",
+            "value": "solid"
+          },
+          {
+            "title": "Ethnic",
+            "value": "ethnic"
+          },
+          {
+            "title": "Geometric",
+            "value": "geometric"
+          },
+          {
+            "title": "Classic",
+            "value": "classic"
+          },
+          {
+            "title": "Modern",
+            "value": "modern"
+          },
+          {
+            "title": "Patchwork",
+            "value": "patchwork"
+          }
+        ],
+        "path": "/style"
+      },
+      {
+        "title": "Contact",
+        "path": "/contact"
+      },
+      {
+        "title": "FAQ",
+        "path": "/faq"
+      }
     ]
-  }
-
-
   },
-  "cart":{
-      "basket": "Basket",
-      "clearCart": "Clear Cart",
-      "freeShipping": "Your free shipping right has been applied to your cart",
-      "continueShopping": "Continue Shopping",
-      "campaigns": "Campaigns",
-      "orderSummary": "Order Summary",
-      "basketAmount": "Basket amount",
-      "shippingCost": "Shipping cost",
-      "free": "Free",
-      "discount": "Discount",
-      "totalAmount": "Total amount",
-      "completeShopping": "Complete Shopping",
-      "redeemGiftVoucher": "Redeem Gift Voucher",
-      "lastViewed": "Last | Viewed",
-      "addToBasket": "Add to Basket",
-      "inBasket": "In Basket",
-      "piece": "Piece",
-      "yourCustomizations": "Your Customizations",
-      "quantity": "Quantity",
-      "secondProductDiscount": "2nd Product 10% Discount",
-      "allBankTransferDiscount": "All BANK TRANSFER Orders 5% Discount"
+  "contacts": {
+    "Address": {
+      "name": "Address",
+      "value": "Kaliningrad, M. Gvardii St. 34k2"
+    },
+    "Phone": {
+      "name": "Phone",
+      "value": "+7 (906) 230-20-22"
+    },
+    "E-Mail": {
+      "name": "E-Mail",
+      "value": "salon@koenigroom.ru"
+    },
+    "WhatsApp": {
+      "name": "WhatsApp",
+      "value": "7 (906) 230-20-22"
+    },
+    "Instagram": {
+      "name": "Instagram",
+      "value": "koenigroom"
+    },
+    "social": {
+      "label": "Social Media",
+      "icon": "Share2",
+      "value": [
+        {
+          "platform": "Instagram",
+          "username": "koenigroom",
+          "link": "https://instagram.com/koenigroom"
+        },
+        {
+          "platform": "Facebook",
+          "username": "koenigroom",
+          "link": "https://facebook.com/koenigroom"
+        },
+        {
+          "platform": "Linkedin",
+          "username": "koenigroom",
+          "link": "https://linkedin.com/company/koenigroom"
+        },
+        {
+          "platform": "MessageCircle",
+          "username": "WhatsApp",
+          "link": "https://wa.me/79062302022"
+        }
+      ]
     }
+  },
+  "cart": {
+    "basket": "Basket",
+    "clearCart": "Clear Cart",
+    "freeShipping": "Your free shipping right has been applied to your cart",
+    "continueShopping": "Continue Shopping",
+    "campaigns": "Campaigns",
+    "orderSummary": "Order Summary",
+    "basketAmount": "Basket amount",
+    "shippingCost": "Shipping cost",
+    "free": "Free",
+    "discount": "Discount",
+    "totalAmount": "Total amount",
+    "completeShopping": "Complete Shopping",
+    "redeemGiftVoucher": "Redeem Gift Voucher",
+    "lastViewed": "Last | Viewed",
+    "addToBasket": "Add to Basket",
+    "inBasket": "In Basket",
+    "piece": "Piece",
+    "yourCustomizations": "Your Customizations",
+    "quantity": "Quantity",
+    "secondProductDiscount": "2nd Product 10% Discount",
+    "allBankTransferDiscount": "All BANK TRANSFER Orders 5% Discount"
+  }
 }

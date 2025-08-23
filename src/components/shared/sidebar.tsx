@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import useDrawerStore from "@/hooks/useDrawerStore";
-import { SIDEBAR_LINKS } from "@/lib/const";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useDictionary } from "@/hooks/useDictionary";
 
 type SidebarProps = {
   locale: string;
@@ -14,6 +14,7 @@ type SidebarProps = {
 export default function Sidebar({ locale }: SidebarProps) {
   const { sidebar, close } = useDrawerStore();
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const {dictionary} = useDictionary()
 
   const toggleSection = (title: string) => {
     setExpandedSection(prev => (prev === title ? null : title));
@@ -21,7 +22,6 @@ export default function Sidebar({ locale }: SidebarProps) {
 
   return (
     <div>
-      {/* Overlay */}
       <div
         className={`fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 ${
           sidebar ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -53,7 +53,7 @@ export default function Sidebar({ locale }: SidebarProps) {
           </div>
 
           {/* Sidebar Links */}
-          {SIDEBAR_LINKS.map(item => {
+          {dictionary?.shared.sideBarLinks.map(item => {
             const isExpanded = expandedSection === item.title;
 
             return (

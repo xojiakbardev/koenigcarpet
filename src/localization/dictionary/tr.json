@@ -21,9 +21,9 @@
     }
   },
   "header": {
-    "custom-size": "CUSTOM SIZE",
-    "custom-color": "CUSTOM COLOR",
-    "custom-design": "CUSTOM DESIGN"
+    "custom-size": "ÖZEL BOYUT",
+    "custom-color": "ÖZEL RENK",
+    "custom-design": "ÖZEL TASARIM"
   },
   "footer": {
     "placeholder": "Enter your e-mail...",
@@ -311,61 +311,297 @@
     "collections": "KOLEKSİYONLAR",
     "sizes": "BEDENLER",
     "sortBy": "Sıralama",
-    "sortByPrice": "Fiyat'a göre sırala"
-  },
-   "contacts": {
-      "Address": {
-        "name": "Adres",
-        "value": "Kaliningrad, M. Gvardii Cd. 34k2"
+    "sortByPrice": "Fiyat'a göre sırala",
+    "sideBarLinks": [
+      {
+        "title": "Tüm Halılar",
+        "path": "/all-rugs"
       },
-      "Phone": {
-        "name": "Telefon",
-        "value": "+7 (906) 230-20-22"
+      {
+        "title": "Stokta Halılar",
+        "path": "/rugs-in-stock"
       },
-      "E-Mail": {
-        "name": "E-Posta",
-        "value": "salon@koenigroom.ru"
+      {
+        "title": "Yeni Halılar",
+        "path": "/new-rugs"
       },
-        "WhatsApp":{
-        "name": "Vatsap",
-        "value": "7 (906) 230-20-22"
+      {
+        "title": "Koşu Halıları",
+        "path": "/runners"
       },
-        "Instagram":{
-        "name": "Sosyal Medya",
-        "value": "koenigroom"
+      {
+        "title": "Projelerimiz",
+        "path": "/our-projects"
       },
-      "social": {
-        "label": "Sosyal Medya",
-        "icon": "Share2",
-        "value": [
-          { "platform": "Instagram", "username": "koenigroom", "link": "https://instagram.com/koenigroom" },
-          { "platform": "Facebook", "username": "koenigroom", "link": "https://facebook.com/koenigroom" },
-          { "platform": "Linkedin", "username": "koenigroom", "link": "https://linkedin.com/company/koenigroom" },
-          { "platform": "MessageCircle", "username": "WhatsApp", "link": "https://wa.me/79062302022" }
-        ]
+      {
+        "title": "Koleksiyon",
+        "children": [
+          {
+            "title": "Amorf",
+            "value": "amorph"
+          },
+          {
+            "title": "Coral",
+            "value": "coral"
+          },
+          {
+            "title": "Crystal",
+            "value": "crystal"
+          },
+          {
+            "title": "Ethnique",
+            "value": "ethnique"
+          },
+          {
+            "title": "Istanbul",
+            "value": "istanbul"
+          },
+          {
+            "title": "Marquise",
+            "value": "marquise"
+          },
+          {
+            "title": "Marrakesh",
+            "value": "marrakesh"
+          },
+          {
+            "title": "Monokrom",
+            "value": "monochrome"
+          },
+          {
+            "title": "Naturale",
+            "value": "naturale"
+          },
+          {
+            "title": "Oriental",
+            "value": "oriental"
+          },
+          {
+            "title": "Patch",
+            "value": "patch"
+          },
+          {
+            "title": "Pearl",
+            "value": "pearl"
+          },
+          {
+            "title": "Plain",
+            "value": "plain"
+          },
+          {
+            "title": "Sapphire",
+            "value": "sapphire"
+          },
+          {
+            "title": "Shell",
+            "value": "shell"
+          },
+          {
+            "title": "Trinity",
+            "value": "trinity"
+          },
+          {
+            "title": "Vintage",
+            "value": "vintage"
+          }
+        ],
+        "path": "/collections"
+      },
+      {
+        "title": "Renkler",
+        "children": [
+          {
+            "title": "Bej",
+            "value": "beige"
+          },
+          {
+            "title": "Beyaz",
+            "value": "white"
+          },
+          {
+            "title": "Çok Renkli",
+            "value": "multi-color"
+          },
+          {
+            "title": "Ecru",
+            "value": "ecru"
+          },
+          {
+            "title": "Gri",
+            "value": "grey"
+          },
+          {
+            "title": "Kahverengi",
+            "value": "brown"
+          },
+          {
+            "title": "Kırmızı",
+            "value": "red"
+          },
+          {
+            "title": "Mavi",
+            "value": "blue"
+          },
+          {
+            "title": "Mor",
+            "value": "purple"
+          },
+          {
+            "title": "Pembe",
+            "value": "pink"
+          },
+          {
+            "title": "Sarı",
+            "value": "yellow"
+          },
+          {
+            "title": "Siyah",
+            "value": "black"
+          },
+          {
+            "title": "Turuncu",
+            "value": "orange"
+          },
+          {
+            "title": "Yeşil",
+            "value": "green"
+          }
+        ],
+        "path": "/colors"
+      },
+      {
+        "title": "Stil",
+        "children": [
+          {
+            "title": "Soyut",
+            "value": "abstract"
+          },
+          {
+            "title": "Amorf",
+            "value": "amorphous"
+          },
+          {
+            "title": "Sanat",
+            "value": "art"
+          },
+          {
+            "title": "Art Deco",
+            "value": "art deco"
+          },
+          {
+            "title": "Kenarlı",
+            "value": "bordered"
+          },
+          {
+            "title": "Çiçekli",
+            "value": "floral"
+          },
+          {
+            "title": "Düz",
+            "value": "solid"
+          },
+          {
+            "title": "Etnik",
+            "value": "ethnic"
+          },
+          {
+            "title": "Geometrik",
+            "value": "geometric"
+          },
+          {
+            "title": "Klasik",
+            "value": "classic"
+          },
+          {
+            "title": "Modern",
+            "value": "modern"
+          },
+          {
+            "title": "Patchwork",
+            "value": "patchwork"
+          }
+        ],
+        "path": "/styles"
+      },
+      {
+        "title": "İletişim",
+        "path": "/contact"
+      },
+      {
+        "title": "SSS",
+        "path": "/faq"
       }
+    ]
   },
-  "cart":{
-      "basket": "Sepet",
-      "clearCart": "Sepeti Temizle",
-      "freeShipping": "Ücretsiz kargo hakkınız sepetinize uygulandı",
-      "continueShopping": "Alışverişe Devam Et",
-      "campaigns": "Kampanyalar",
-      "orderSummary": "Sipariş Özeti",
-      "basketAmount": "Sepet tutarı",
-      "shippingCost": "Kargo ücreti",
-      "free": "Ücretsiz",
-      "discount": "İndirim",
-      "totalAmount": "Toplam tutar",
-      "completeShopping": "Alışverişi Tamamla",
-      "redeemGiftVoucher": "Hediye Çeki Kullan",
-      "lastViewed": "Son | Görüntülenen",
-      "addToBasket": "Sepete Ekle",
-      "inBasket": "Sepette",
-      "piece": "Adet",
-      "yourCustomizations": "Özelleştirmeleriniz",
-      "quantity": "Miktar",
-      "secondProductDiscount": "2. Ürünü %10 İndirim",
-      "allBankTransferDiscount": "Tüm HAVALE Siparişlerinde %5 İndirim"
+  "contacts": {
+    "Address": {
+      "name": "Adres",
+      "value": "Kaliningrad, M. Gvardii Cd. 34k2"
+    },
+    "Phone": {
+      "name": "Telefon",
+      "value": "+7 (906) 230-20-22"
+    },
+    "E-Mail": {
+      "name": "E-Posta",
+      "value": "salon@koenigroom.ru"
+    },
+    "WhatsApp": {
+      "name": "Vatsap",
+      "value": "7 (906) 230-20-22"
+    },
+    "Instagram": {
+      "name": "Sosyal Medya",
+      "value": "koenigroom"
+    },
+    "social": {
+      "label": "Sosyal Medya",
+      "icon": "Share2",
+      "value": [
+        {
+          "platform": "Instagram",
+          "username": "koenigroom",
+          "link": "https://instagram.com/koenigroom"
+        },
+        {
+          "platform": "Facebook",
+          "username": "koenigroom",
+          "link": "https://facebook.com/koenigroom"
+        },
+        {
+          "platform": "Linkedin",
+          "username": "koenigroom",
+          "link": "https://linkedin.com/company/koenigroom"
+        },
+        {
+          "platform": "MessageCircle",
+          "username": "WhatsApp",
+          "link": "https://wa.me/79062302022"
+        }
+      ]
     }
+  },
+  "cart": {
+    "basket": "Sepet",
+    "clearCart": "Sepeti Temizle",
+    "freeShipping": "Ücretsiz kargo hakkınız sepetinize uygulandı",
+    "continueShopping": "Alışverişe Devam Et",
+    "campaigns": "Kampanyalar",
+    "orderSummary": "Sipariş Özeti",
+    "basketAmount": "Sepet tutarı",
+    "shippingCost": "Kargo ücreti",
+    "free": "Ücretsiz",
+    "discount": "İndirim",
+    "totalAmount": "Toplam tutar",
+    "completeShopping": "Alışverişi Tamamla",
+    "redeemGiftVoucher": "Hediye Çeki Kullan",
+    "lastViewed": "Son | Görüntülenen",
+    "addToBasket": "Sepete Ekle",
+    "inBasket": "Sepette",
+    "piece": "Adet",
+    "yourCustomizations": "Özelleştirmeleriniz",
+    "quantity": "Miktar",
+    "secondProductDiscount": "2. Ürünü %10 İndirim",
+    "allBankTransferDiscount": "Tüm HAVALE Siparişlerinde %5 İndirim"
+  }
 }
