@@ -1,5 +1,6 @@
 "use client"
 
+import { useDictionary } from "@/hooks/useDictionary"
 import { Locale } from "@/localization/config"
 import { RugProduct } from "@/types/product"
 import Image from "next/image"
@@ -14,10 +15,11 @@ type Props = {
 
 const RugColors: FC<Props> = ({ rugs, locale}) => {
     const router = useRouter()
+    const {dictionary} = useDictionary()
 
     return (
         <div className="flex flex-col">
-            <h2 className="mb-2">Colors</h2>
+            <h2 className="mb-2">{dictionary?.shared.colors}</h2>
             <div className="grid grid-cols-[repeat(auto-fill,minmax(70px,1fr))] gap-4">
                 {rugs.map((rug, i) => (
                     <figure
