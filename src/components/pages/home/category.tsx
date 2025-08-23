@@ -19,7 +19,7 @@ const Category: FC<CategoryProps> = ({ category }) => {
   const path = `/${locale}/${category.path}`
   return (
     <div className="h-full w-full flex flex-col items-center justify-center relative">
-      <Image src={category.image} alt={category.title} fill priority className="object-cover" />
+      <Image src={category.image} alt={category.title} width={1470} height={730} priority className="w-full h-full absolute object-cover" />
       <div className="absolute inset-0 bg-black/20"></div>
       <div className="relative z-10 text-center text-white px-4">
         <Link

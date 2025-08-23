@@ -12,12 +12,12 @@
     "openGraph": {
       "title": "Магазин ковров - Премиальные ковры онлайн",
       "description": "Покупайте премиальные ковры и коврики онлайн. Ручная работа, индивидуальные размеры и современные дизайны.",
-      "image": "https://www.koenigcarpet.ru/og-root.jpg"
+      "image": "https://www.koenigcarpet.ru/og-image.png"
     },
     "twitter": {
       "title": "Магазин ковров - Премиальные ковры онлайн",
       "description": "Покупайте премиальные ковры и коврики онлайн. Ручная работа, индивидуальные размеры и современные дизайны.",
-      "image": "https://www.koenigcarpet.ru/og-root.jpg"
+      "image": "https://www.koenigcarpet.ru/og-image.png"
     }
   },
   "header": {
@@ -307,6 +307,10 @@
     "produced": "Произведен в течение 14 бизнес-дней по заказу.",
     "notFound": "Товар не найден",
     "colors": "ЦВЕТА",
+    "standartSize": "Стандартный размер",
+    "customSize": "Индивидуальный размер",
+    "calculatePrice": "Рассчитать цену",
+    "selectedPrice": "Выбранная цена",
     "styles": "СТИЛИ",
     "collections": "КОЛЛЕКЦИИ",
     "sizes": "РАЗМЕРЫ",

@@ -2,35 +2,36 @@
 
 import { FC, useState } from "react";
 import { RugProduct } from "@/types/product";
+import { useDictionary } from "@/hooks/useDictionary";
 
 const RugSize: FC<{ rug: RugProduct }> = ({ rug }) => {
   const [customWidth, setCustomWidth] = useState<number | "">("");
   const [customHeight, setCustomHeight] = useState<number | "">("");
   const [selectSizeType, setSelectSizeType] = useState<"standard" | "custom">("standard");
   const [selectSize, setSelectSize] = useState<string>();
-
+  const {dictionary} = useDictionary()
   const sizes = rug.sizes || [];
 
 
   return (
     <div className="mt-6">
-      <h2 className="mb-2">Sizes</h2>
+      <h2 className="mb-2 capitalize">{dictionary?.shared.sizes}</h2>
       <div className="flex gap-4">
         <button
           data-selected={selectSizeType === "standard"}
           onClick={() => setSelectSizeType("standard")}
-          className="border px-4 py-2 cursor-pointer transition
+          className="border px-4 py-2 cursor-pointer transition capitalize
           data-[selected=true]:bg-black data-[selected=true]:text-white"
         >
-          Standard Size
+          {dictionary?.shared.standartSize}
         </button>
         <button
           data-selected={selectSizeType === "custom"}
           onClick={() => setSelectSizeType("custom")}
-          className="border px-4 py-2 cursor-pointer transition
+          className="border px-4 py-2 cursor-pointer transition capitalize
           data-[selected=true]:bg-black data-[selected=true]:text-white"
         >
-          Custom Size
+          {dictionary?.shared.customSize}
         </button>
       </div>
 
@@ -72,9 +73,9 @@ const RugSize: FC<{ rug: RugProduct }> = ({ rug }) => {
               className="w-full p-2 border"
             />
             <button
-              className="border border-black text-black w-full px-4 py-2 cursor-pointer hover:text-white hover:bg-black transition"
+              className="border border-black text-black w-full capitalize px-4 py-2 cursor-pointer hover:text-white hover:bg-black transition"
             >
-              Calculate Price
+              {dictionary?.shared.calculatePrice}
             </button>
           </div>
         )}
@@ -82,7 +83,7 @@ const RugSize: FC<{ rug: RugProduct }> = ({ rug }) => {
 
       {selectSize && (
         <div className="flex items-center justify-between flex-wrap mt-4 p-2 border bg-gray-50">
-          <p className="font-medium text-gray-800">Selected Size: {selectSize}</p>
+          <p className="font-medium text-gray-800">{dictionary?.shared.selectedPrice}: {selectSize}</p>
         </div>
       )}
     </div>

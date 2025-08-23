@@ -81,17 +81,17 @@ export async function generateMetadata({ params }: ProductDetailsProps): Promise
   const description = rug.description[locale];
 
   return {
-    title: `${productName} | Carpet Store`,
+    title: `${productName}`,
     description: description,
     keywords: keywords,
     openGraph: {
-      title: `${productName} | Carpet Store`,
+      title: `${productName}`,
       description: description,
-      url: `https://www.koenigcarpet.ru/rugs/${rugId}`,
+      url: `https://www.koenigcarpet.ru/${locale}/rugs/${rugId}`,
       siteName: "Carpet Store",
       images: [
         {
-          url: `https://www.koenigcarpet.ru${ogImage}`,
+          url: ogImage,
           width: 1200,
           height: 630,
           alt: productName,
@@ -101,9 +101,9 @@ export async function generateMetadata({ params }: ProductDetailsProps): Promise
     },
     twitter: {
       card: "summary_large_image",
-      title: `${productName} | Carpet Store`,
+      title: `${productName}`,
       description: description,
-      images: [`https://www.koenigcarpet.ru${ogImage}`],
+      images: [ogImage],
     },
     alternates: {
       canonical: `https://www.koenigcarpet.ru/rugs/${rugId}`,
