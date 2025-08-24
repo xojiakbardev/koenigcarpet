@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, Search, Heart } from "lucide-react";
+import { Menu, Search, User2 } from "lucide-react";
 import clsx from "clsx";
 import useDrawerStore from "@/hooks/useDrawerStore";
 import CartButton from "./cartButton";
@@ -77,10 +77,10 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
               <Search className="size-4 md:size-6" />
             </button>
             <button className="cursor-pointer p-2 rounded-full transition">
-              <Heart className="size-4 md:size-6" />
+              <User2 className="size-4 md:size-6" />
             </button>
             <Link href={`/${locale}/cart`}>
-            <CartButton />
+              <CartButton />
             </Link>
           </div>
         </div>
@@ -116,12 +116,12 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
               <Search className="w-6 h-6" />
             </button>
             <button className="cursor-pointer p-2 rounded-full transition">
-              <Heart className="w-6 h-6" />
+              <User2 className="w-6 h-6" />
             </button>
-                        <Link href={`/${locale}/cart`}>
+            <Link href={`/${locale}/cart`}>
 
-            <CartButton />
-                        </Link>
+              <CartButton />
+            </Link>
 
           </div>
         </div>
