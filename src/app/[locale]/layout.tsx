@@ -9,8 +9,8 @@ import Sidebar from "@/components/shared/sidebar";
 import FilterDrawer from "@/components/shared/filterDrawer";
 import NextTopLoader from "nextjs-toploader";
 import { notFound } from "next/navigation";
-import LocaleSwitch from "@/components/shared/localeSwitch"
-import { Analytics } from "@vercel/analytics/next"
+import LocaleSwitch from "@/components/shared/localeSwitch";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,10 +29,6 @@ const RootLayout: FC<RootLayoutProps> = ({ children, params }) => {
 
   return (
     <html lang={locale}>
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="keywords" content={dictionary.meta.keywords.join(", ")} />
-      </head>
       <body className={inter.className}>
         <LocaleProvider dictionary={dictionary}>
           {children}
@@ -41,8 +37,8 @@ const RootLayout: FC<RootLayoutProps> = ({ children, params }) => {
             <FilterDrawer />
           </Suspense>
         </LocaleProvider>
-        <LocaleSwitch/>
-        <Analytics/>
+        <LocaleSwitch />
+        <Analytics />
         <NextTopLoader color="#3563E9" height={4} showSpinner={false} />
       </body>
     </html>
@@ -56,30 +52,35 @@ export const generateStaticParams = async () => {
   return locales.map((locale) => ({ locale }));
 };
 
-
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
-  const locale = (await params).locale
+  const locale = (await params).locale;
   const dictionary = await getDictionary(locale);
 
   return {
-    title: dictionary.meta.title,
+    title: {
+      default: dictionary.meta.title,
+      template: `%s | Koenig Carpet`,
+    },
     description: dictionary.meta.description,
     keywords: dictionary.meta.keywords,
+    icons: {
+      icon: "/favicon.ico",
+    },
     openGraph: {
       title: dictionary.meta.openGraph.title,
       description: dictionary.meta.openGraph.description,
       url: `https://www.koenigcarpet.ru/${locale}`,
-      siteName: "Carpet Store",
+      siteName: "Koenig Carpet",
       images: [
         {
           url: dictionary.meta.openGraph.image,
           width: 1200,
           height: 630,
-          alt: "Carpet Store",
+          alt: "Koenig Carpet",
         },
       ],
       locale,

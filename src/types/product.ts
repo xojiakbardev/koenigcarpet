@@ -45,7 +45,6 @@ export interface RugProduct {
     value: string;
   }
   sizes: string[];
-  url: string;
   product_code: string;
   price: string;
   images: string[];
