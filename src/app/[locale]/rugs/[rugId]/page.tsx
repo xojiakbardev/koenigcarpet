@@ -24,45 +24,54 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
 
   const currentRug = data.find((rug) => rug.id === Number(rugId));
 
+  // Early return if rug not found
+  if (!currentRug) {
+    return (
+      <>
+        <Banner
+          filter={dictionary.shared.notFound}
+          image="/static/image1.png"
+        />
+        <Footer />
+      </>
+    );
+  }
+
   const relatedProducts = data.filter(
     (rug) =>
-      rug.product_name[locale].split(" ")[0] ===
-      currentRug?.product_name[locale].split(" ")[0]
+      rug.product_name?.[locale]?.split(" ")?.[0] ===
+      currentRug.product_name?.[locale]?.split(" ")?.[0]
   );
 
   const baseUrl = "https://www.koenigcarpet.ru";
-  const productName = currentRug?.product_name[locale];
-  const description = currentRug?.description[locale];
+  const productName = currentRug.product_name?.[locale];
+  const description = currentRug.description?.[locale];
 
   return (
     <>
       <Banner
-        filter={
-          currentRug ? dictionary.shared.rugDetail : dictionary.shared.notFound
-        }
+        filter={dictionary.shared.rugDetail}
         image="/static/image1.png"
       />
-      {currentRug ? (
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full md:w-2/5 p-2">
-            <RugImages
-              rug={currentRug}
-              locale={locale}
-              relatedProducts={relatedProducts}
-            />
-          </div>
-          <div className="flex-1 p-10">
-            <div className="sticky top-16">
-              <RugDetails rug={currentRug} locale={locale} />
-              <RugColors rugs={relatedProducts} locale={locale} />
-              <RugSize rug={currentRug} />
-            </div>
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full md:w-2/5 p-2">
+          <RugImages
+            rug={currentRug}
+            locale={locale}
+            relatedProducts={relatedProducts}
+          />
+        </div>
+        <div className="flex-1 p-10">
+          <div className="sticky top-16">
+            <RugDetails rug={currentRug} locale={locale} />
+            <RugColors rugs={relatedProducts} locale={locale} />
+            <RugSize rug={currentRug} />
           </div>
         </div>
-      ) : null}
+      </div>
 
       {/* ✅ Product JSON-LD Schema */}
-      {currentRug && (
+      {productName && description && currentRug.images && Array.isArray(currentRug.images) && (
         <Script
           id="product-schema"
           type="application/ld+json"
@@ -72,9 +81,11 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
               "@context": "https://schema.org/",
               "@type": "Product",
               name: productName,
-              image: currentRug.images.map((img) =>
-                img.startsWith("http") ? img : `${baseUrl}${img}`
-              ),
+              image: currentRug.images
+                .filter(img => typeof img === 'string' && img.length > 0)
+                .map((img) => 
+                  img.startsWith("http") ? img : `${baseUrl}${img}`
+                ),
               description: description,
               sku: currentRug.id,
               brand: {
@@ -85,7 +96,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
                 "@type": "Offer",
                 url: `${baseUrl}/${locale}/rugs/${rugId}`,
                 priceCurrency: "RUB",
-                price: currentRug.price,
+                price: currentRug.price || 0,
                 availability: "https://schema.org/InStock",
               },
             }),
@@ -94,7 +105,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
       )}
 
       {/* ✅ Breadcrumb JSON-LD Schema */}
-      {currentRug && (
+      {productName && (
         <Script
           id="breadcrumb-schema"
           type="application/ld+json"
@@ -152,19 +163,20 @@ export async function generateMetadata({
     };
   }
 
-  const productName = rug.product_name[locale];
-  const description = rug.description[locale];
-  const ogImage = rug.images[0];
+  const productName = rug.product_name?.[locale] || "Unnamed Product";
+  const description = rug.description?.[locale] || "No description available";
+  const ogImage = rug.images?.[0] || "/static/default-rug.jpg";
 
+  // Safely build keywords array
   const keywords = [
-    rug.product_name[locale],
-    rug.collection[locale],
-    rug.style[locale],
-    rug.description[locale],
-    ...rug.features[locale].technical_info,
-    ...rug.features[locale].care_and_warranty,
-    ...rug.sizes,
-  ].join(", ");
+    rug.product_name?.[locale],
+    rug.collection?.[locale],
+    rug.style?.[locale],
+    rug.description?.[locale],
+    ...(rug.features?.[locale]?.technical_info || []),
+    ...(rug.features?.[locale]?.care_and_warranty || []),
+    ...(rug.sizes || []),
+  ].filter(Boolean).join(", ");
 
   return {
     title: productName,
