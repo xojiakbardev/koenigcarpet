@@ -4,6 +4,7 @@ import RugImages from "@/components/pages/rugDetails/rugImages";
 import RugSize from "@/components/pages/rugDetails/rugSizes";
 import Banner from "@/components/shared/banner";
 import { FC, use } from "react";
+import Script from "next/script";
 
 import type { Metadata } from "next";
 import { Locale } from "@/localization/config";
@@ -29,10 +30,16 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
       currentRug?.product_name[locale].split(" ")[0]
   );
 
+  const baseUrl = "https://www.koenigcarpet.ru";
+  const productName = currentRug?.product_name[locale];
+  const description = currentRug?.description[locale];
+
   return (
     <>
       <Banner
-        filter={currentRug ? dictionary.shared.rugDetail : dictionary.shared.notFound}
+        filter={
+          currentRug ? dictionary.shared.rugDetail : dictionary.shared.notFound
+        }
         image="/static/image1.png"
       />
       {currentRug ? (
@@ -53,6 +60,74 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
           </div>
         </div>
       ) : null}
+
+      {/* ✅ Product JSON-LD Schema */}
+      {currentRug && (
+        <Script
+          id="product-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org/",
+              "@type": "Product",
+              name: productName,
+              image: currentRug.images.map((img) =>
+                img.startsWith("http") ? img : `${baseUrl}${img}`
+              ),
+              description: description,
+              sku: currentRug.id,
+              brand: {
+                "@type": "Brand",
+                name: "Koenig Carpet",
+              },
+              offers: {
+                "@type": "Offer",
+                url: `${baseUrl}/${locale}/rugs/${rugId}`,
+                priceCurrency: "RUB",
+                price: currentRug.price,
+                availability: "https://schema.org/InStock",
+              },
+            }),
+          }}
+        />
+      )}
+
+      {/* ✅ Breadcrumb JSON-LD Schema */}
+      {currentRug && (
+        <Script
+          id="breadcrumb-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: `${baseUrl}/${locale}`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Rugs",
+                  item: `${baseUrl}/${locale}/rugs`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: productName,
+                  item: `${baseUrl}/${locale}/rugs/${rugId}`,
+                },
+              ],
+            }),
+          }}
+        />
+      )}
+
       <Footer />
     </>
   );
@@ -79,9 +154,7 @@ export async function generateMetadata({
 
   const productName = rug.product_name[locale];
   const description = rug.description[locale];
-
-  
-  const ogImage = rug.images[0]
+  const ogImage = rug.images[0];
 
   const keywords = [
     rug.product_name[locale],
@@ -104,20 +177,22 @@ export async function generateMetadata({
       siteName: "Koenig Carpet",
       images: [
         {
-          url: ogImage,
+          url: ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`,
           width: 1200,
           height: 630,
           alt: productName,
         },
       ],
-      type: "website", 
+      type: "website",
       locale,
     },
     twitter: {
       card: "summary_large_image",
       title: productName,
       description,
-      images: [ogImage],
+      images: [
+        ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`,
+      ],
     },
     alternates: {
       canonical: `${baseUrl}/${locale}/rugs/${rugId}`,
