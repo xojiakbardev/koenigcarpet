@@ -10,7 +10,6 @@ import data from "@/context/data.json";
 import {Locale} from "@/localization/config"
 import {getDictionary} from "@/localization/dictionary"
 import { HOME_CATEGORIES } from "@/lib/const";
-import { CloudCog } from "lucide-react";
 
 
 type RugsPageProps = {
