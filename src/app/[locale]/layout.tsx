@@ -11,6 +11,7 @@ import NextTopLoader from "nextjs-toploader";
 import { notFound } from "next/navigation";
 import LocaleSwitch from "@/components/shared/localeSwitch";
 import { Analytics } from "@vercel/analytics/next";
+import SearchComponent from "@/components/shared/searchComponent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +38,8 @@ const RootLayout: FC<RootLayoutProps> = ({ children, params }) => {
             <FilterDrawer />
           </Suspense>
         </LocaleProvider>
-        <LocaleSwitch />
+        <LocaleSwitch locale={locale} />
+        <SearchComponent locale={locale}/>
         <Analytics />
         <NextTopLoader color="#3563E9" height={4} showSpinner={false} />
       </body>

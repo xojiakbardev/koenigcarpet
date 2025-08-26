@@ -5,6 +5,7 @@ type DrawerStore = {
   cart: boolean;
   sidebar: boolean;
   filterbar: boolean;
+  searchComp: boolean;
   open: (type: keyof Omit<DrawerStore, "open" | "close">) => void;
   close: (type: keyof Omit<DrawerStore, "open" | "close">) => void;
 };
@@ -14,6 +15,7 @@ const useDrawerStore = create<DrawerStore>((set) => ({
   cart: false,
   sidebar: false,
   filterbar: false,
+  searchComp: false,
   open: (type) => set({ [type]: true }),
   close: (type) => set({ [type]: false }),
 }));

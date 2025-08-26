@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { ChevronDown, Check, X } from 'lucide-react'
 import useDrawerStore from '@/hooks/useDrawerStore'
 import nProgress from "nprogress";
+import { useDictionary } from '@/hooks/useDictionary'
 
 interface SortOption {
   value: string
@@ -21,6 +22,7 @@ const ProductControl: React.FC = () => {
   const [grid, setGrid] = useQueryState('grid', false)
   const [sortBy, setSortBy, clearSortBy] = useQueryState('sortBy', false)
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
+  const { dictionary } = useDictionary()
 
   // drawer
   const { open } = useDrawerStore()
@@ -33,16 +35,17 @@ const ProductControl: React.FC = () => {
   const [sizes, , clearSizes] = useQueryState("sizes", true)
 
   // sort tanlovlari ("" EMAS!)
-  const sortOptions: SortOption[] = [
-    { value: 'default', label: 'SORT BY' },
-    { value: 'name_asc', label: 'PRODUCT NAME (A TO Z)' },
-    { value: 'name_desc', label: 'PRODUCT NAME (Z TO A)' },
-    { value: 'price_asc', label: 'PRICE (LOW TO HIGH)' },
-    { value: 'price_desc', label: 'PRICE (HIGH TO LOW)' },
-    { value: 'stock_code', label: 'STOCK CODE' },
-    { value: 'newest', label: 'YENİDEN ESKİYE' },
-    { value: 'oldest', label: 'ESKİDEN YENİYE' }
-  ]
+const sortOptions: SortOption[] = [
+  { value: 'default', label: dictionary?.shared.sortBy ?? "SORT BY" },
+  { value: 'name_asc', label: dictionary?.shared.sortNameAsc ?? "PRODUCT NAME (A TO Z)" },
+  { value: 'name_desc', label: dictionary?.shared.sortNameDesc ?? "PRODUCT NAME (Z TO A)" },
+  { value: 'price_asc', label: dictionary?.shared.sortPriceAsc ?? "PRICE (LOW TO HIGH)" },
+  { value: 'price_desc', label: dictionary?.shared.sortPriceDesc ?? "PRICE (HIGH TO LOW)" },
+  { value: 'stock_code', label: dictionary?.shared.sortStockCode ?? "STOCK CODE" },
+  { value: 'newest', label: dictionary?.shared.sortNewest ?? "YENİDEN ESKİYE" },
+  { value: 'oldest', label: dictionary?.shared.sortOldest ?? "ESKİDEN YENİYE" }
+];
+
   const currentSort: SortOption =
     sortOptions.find(o => o.value === sortBy) || sortOptions[0]
 
@@ -161,7 +164,7 @@ const ProductControl: React.FC = () => {
           className="hidden md:block cursor-pointer uppercase hover:text-gray-600 transition-colors"
           onClick={() => open('filterbar')}
         >
-          Filter by
+          {dictionary?.shared.filterBy}
         </button>
 
         {/* MOBILE (faqat <md) — 2 ta tugma 50%/50% */}
@@ -169,12 +172,12 @@ const ProductControl: React.FC = () => {
           {/* SORT (mobile) */}
           <div className="relative flex-1">
             <button
-              className="w-full border border-black px-3 py-2 text-xs uppercase text-center hover:bg-black hover:text-white transition-colors"
+              className="w-full border border-black px-3 py-2 text-[10px] uppercase text-center hover:bg-black hover:text-white transition-colors"
               onClick={() => setIsDropdownOpen(o => !o)}
               aria-haspopup="menu"
               aria-expanded={isDropdownOpen}
             >
-              Sort
+              {dictionary?.shared.sortBy}
             </button>
 
             {isDropdownOpen && (
@@ -201,10 +204,10 @@ const ProductControl: React.FC = () => {
 
           {/* FILTER (mobile) */}
           <button
-            className="flex-1 border border-black px-3 py-2 text-xs uppercase text-center hover:bg-black hover:text-white transition-colors"
+            className="flex-1 border border-black px-3 py-2 text-[10px] uppercase text-center hover:bg-black hover:text-white transition-colors"
             onClick={() => open('filterbar')}
           >
-            Filter
+            {dictionary?.shared.filterBy}
           </button>
         </div>
       </div>

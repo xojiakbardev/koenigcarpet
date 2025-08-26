@@ -73,7 +73,8 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <button className="cursor-pointer p-2 rounded-full transition">
+            <button className="cursor-pointer p-2 rounded-full transition"
+            onClick={()=>open("searchComp")}>
               <Search className="size-4 md:size-6" />
             </button>
             <button className="cursor-pointer p-2 rounded-full transition">

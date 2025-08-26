@@ -315,7 +315,14 @@
     "collections": "COLLECTIONS",
     "sizes": "SIZES",
     "sortBy": "SORT BY",
-    "sortByPrice": "SORT BY PRICE",
+    "sortNameAsc": "PRODUCT NAME (A TO Z)",
+    "sortNameDesc": "PRODUCT NAME (Z TO A)",
+    "sortPriceAsc": "PRICE (LOW TO HIGH)",
+    "sortPriceDesc": "PRICE (HIGH TO LOW)",
+    "sortStockCode": "STOCK CODE",
+    "sortNewest": "NEWEST TO OLDEST",
+    "sortOldest": "OLDEST TO NEWEST",
+    "filterBy": "FILTER BY",
     "sideBarLinks": [
       {
         "title": "All Rugs",
@@ -607,5 +614,14 @@
     "quantity": "Quantity",
     "secondProductDiscount": "2nd Product 10% Discount",
     "allBankTransferDiscount": "All BANK TRANSFER Orders 5% Discount"
+  },
+  "searchComp": {
+    "placeholder": "Search for rugs...",
+    "colors": "Colors",
+    "searching": "Searching...",
+    "unnamedProduct": "Unnamed Product",
+    "noProducts": "No products found for \"{query}\"",
+    "tryDifferent": "Try a different search term",
+    "startTyping": "Start typing to search products"
   }
 }

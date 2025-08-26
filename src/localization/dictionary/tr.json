@@ -314,8 +314,15 @@
     "styles": "STİLLER",
     "collections": "KOLEKSİYONLAR",
     "sizes": "BEDENLER",
-    "sortBy": "Sıralama",
-    "sortByPrice": "Fiyat'a göre sırala",
+    "sortBy": "SIRALAMA KRİTERİ",
+    "sortNameAsc": "ÜRÜN ADI (A'DAN Z'YE)",
+    "sortNameDesc": "ÜRÜN ADI (Z'DEN A'YA)",
+    "sortPriceAsc": "FİYAT (DÜŞÜKTEN YÜKSEĞE)",
+    "sortPriceDesc": "FİYAT (YÜKSEKTEN DÜŞÜĞE)",
+    "sortStockCode": "STOK KODU",
+    "sortNewest": "YENİDEN ESKİYE",
+    "sortOldest": "ESKİDEN YENİYE",
+    "filterBy": "FİLTRELEME KRİTERİ",
     "sideBarLinks": [
       {
         "title": "Tüm Halılar",
@@ -607,5 +614,14 @@
     "quantity": "Miktar",
     "secondProductDiscount": "2. Ürünü %10 İndirim",
     "allBankTransferDiscount": "Tüm HAVALE Siparişlerinde %5 İndirim"
+  },
+  "searchComp": {
+    "placeholder": "Halı ara...",
+    "colors": "Renkler",
+    "searching": "Aranıyor...",
+    "unnamedProduct": "İsimsiz Ürün",
+    "noProducts": "\"{query}\" için ürün bulunamadı",
+    "tryDifferent": "Farklı bir arama terimi deneyin",
+    "startTyping": "Ürün aramaya başlamak için yazmaya başlayın"
   }
 }

@@ -4,8 +4,8 @@ import {useLocale} from "@/hooks/useLocale"
 import {localeConfig} from "@/localization/config"
 import nProgress from "nprogress"
 
-const LocaleSwitch = () => {
-    const [locale, setLocale] = useLocale()
+const LocaleSwitch = ({locale}: {locale: string}) => {
+    const [, setLocale] = useLocale()
   return (
     <div className="flex flex-col gap-1 fixed z-50 bottom-4 right-4">
         {

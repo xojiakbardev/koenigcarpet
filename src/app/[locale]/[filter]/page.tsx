@@ -9,6 +9,8 @@ import { generateFilterData } from "@/lib/generateFilterData";
 import data from "@/context/data.json";
 import {Locale} from "@/localization/config"
 import {getDictionary} from "@/localization/dictionary"
+import { HOME_CATEGORIES } from "@/lib/const";
+import { CloudCog } from "lucide-react";
 
 
 type RugsPageProps = {
@@ -74,10 +76,11 @@ const mergedSearchParams = {
   const displayedRugs = filteredRugs.slice(start, end);
   
   const filterData=generateFilterData(data, pathParams.locale, dict)
+  const category = HOME_CATEGORIES[pathParams.locale].find((item)=>"/"+filter===item.path)
 
   return (
     <div className="flex flex-col">
-      <Banner filter={filter} image={images[filter]} />
+      <Banner filter={category?.title?category.title:""} image={images[filter]} />
       <Suspense fallback={null}>
         <ProductControl />
       </Suspense>

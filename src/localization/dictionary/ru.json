@@ -314,8 +314,15 @@
     "styles": "СТИЛИ",
     "collections": "КОЛЛЕКЦИИ",
     "sizes": "РАЗМЕРЫ",
-    "sortBy": "СОРТИРОВКА",
-    "sortByPrice": "СОРТИРОВКА ПО ЦЕНЕ",
+    "sortBy": "СОРТИРОВАТЬ ПО",
+    "sortNameAsc": "НАЗВАНИЕ (А-Я)",
+    "sortNameDesc": "НАЗВАНИЕ (Я-А)",
+    "sortPriceAsc": "ЦЕНА (НИЗКАЯ → ВЫСОКАЯ)",
+    "sortPriceDesc": "ЦЕНА (ВЫСОКАЯ → НИЗКАЯ)",
+    "sortStockCode": "КОД ТОВАРА",
+    "sortNewest": "СНАЧАЛА НОВЫЕ",
+    "sortOldest": "СНАЧАЛА СТАРЫЕ",
+    "filterBy": "ФИЛЬТРОВАТЬ ПО",
     "sideBarLinks": [
       {
         "title": "Все ковры",
@@ -329,7 +336,7 @@
         "title": "Новые ковры",
         "path": "/new-rugs"
       },
-            {
+      {
         "title": "Дорожки",
         "path": "/runners"
       },
@@ -527,7 +534,6 @@
         ],
         "path": "/style"
       },
-
       {
         "title": "Контакты",
         "path": "/contact"
@@ -608,5 +614,14 @@
     "quantity": "Количество",
     "secondProductDiscount": "2-й товар скидка 10%",
     "allBankTransferDiscount": "Все заказы БАНКОВСКИЙ ПЕРЕВОД скидка 5%"
+  },
+  "searchComp": {
+    "placeholder": "Поиск ковров...",
+    "colors": "Цвета",
+    "searching": "Поиск...",
+    "unnamedProduct": "Продукт без названия",
+    "noProducts": "Продукты не найдены по запросу \"{query}\"",
+    "tryDifferent": "Попробуйте другой поисковый запрос",
+    "startTyping": "Начните печатать для поиска товаров"
   }
 }
