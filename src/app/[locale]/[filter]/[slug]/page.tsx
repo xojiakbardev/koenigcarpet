@@ -6,7 +6,6 @@ import { Locale, localeConfig } from '@/localization/config'
 import { FC, Suspense, use } from 'react'
 import { RugProduct } from '@/types/product'
 import { filterProducts } from "@/lib/filterProduct";
-import data from "@/context/data.json";
 import { generateFilterData } from "@/lib/generateFilterData";
 import {getDictionary} from "@/localization/dictionary"
 
@@ -21,7 +20,7 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   const urlSearchParams = use(searchParams);
   const pathParams = use(params)
   const dict = use(getDictionary())  
-
+  const data = use(import("@/context/data.json").then((m) => m.default)) as RugProduct[];
   const filteredRugs = filterProducts(data, urlSearchParams);
   
 
@@ -47,7 +46,6 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
       <FilterProduct
         searchParams={urlSearchParams}
         rugs={displayedRugs}
-        perPage={12}
         rugsCount={filteredRugs.length}
         filterData={filterData}
 
