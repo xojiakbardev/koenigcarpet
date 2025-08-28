@@ -4,35 +4,29 @@ import { RugProduct } from "@/types/product";
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const query = searchParams.get("query");
-    const locale =
-      (searchParams.get("locale") as Locale) || localeConfig.defaultLocale;
+    const url = new URL(request.url);
+    const acceptLanguage = request.headers.get("accept-language") as Locale ?? "";
+    const locale = acceptLanguage ?? localeConfig.defaultLocale
+    const query = url.searchParams.get("query")?.toLowerCase() ?? "";
 
     const products = await import("@/context/data.json").then((m) => m.default) as RugProduct[];
 
     let filteredProducts = products;
 
     if (query) {
-      filteredProducts = products.filter((product) => {
-        const name =
-          product.product_name?.[locale] ||
-          product.product_name?.en ||
-          "";
-        const description =
-          product.description?.[locale] ||
-          product.description?.en ||
-          "";
+      filteredProducts = products.filter((item) => {
+        const name = item.product_name[locale]
+        const description = item.description[locale]
         const searchText = `${name} ${description}`.toLowerCase();
         return searchText.includes(query.toLowerCase());
       });
     }
 
-    return NextResponse.json({
-      success: true,
-      products: filteredProducts,
-      total: filteredProducts.length,
-    });
+    return NextResponse.json(
+      {
+        products: filteredProducts,
+        total: filteredProducts.length,
+      });
   } catch (error) {
     console.error("Search API error:", error);
     return NextResponse.json(

@@ -6,21 +6,22 @@ import PaginationNumbers from "@/components/shared/paginationNumbers";
 import { RugProduct } from "@/types/product";
 import { FC, Suspense, useEffect } from "react";
 import { useDictionary } from "@/hooks/useDictionary";
-import {useFilterStore} from "@/hooks/useFilterDataStore"
+import { useFilterStore } from "@/hooks/useFilterDataStore"
 
 type Props = {
   rugs: RugProduct[];
   searchParams: Record<string, string | string[]>;
-  rugsCount: number; 
-  perPage: number;  
-  filterData:any[]
+  rugsCount: number;
+  filterData: any[]
 };
 
-const FilterProduct: FC<Props> = ({ rugs = [], searchParams, rugsCount, perPage, filterData }) => {
+const FilterProduct: FC<Props> = ({ rugs = [], searchParams, rugsCount, filterData }) => {
   const { dictionary } = useDictionary();
-  const {setFilters} = useFilterStore()
+  const { setFilters } = useFilterStore()
 
-  useEffect(()=>{setFilters(filterData)},[filterData, setFilters])
+  useEffect(() => {
+    setFilters(filterData)
+  }, [filterData, setFilters])
 
   return (
     <ProductWrapper searchParams={searchParams}>
@@ -32,11 +33,11 @@ const FilterProduct: FC<Props> = ({ rugs = [], searchParams, rugsCount, perPage,
         </p>
       )}
       <Suspense fallback={null}>
-              <PaginationNumbers
-        totalItemsCount={rugsCount}
-        defaultPerPage={perPage}
-        maxPerPage={200}
-      />
+        <PaginationNumbers
+          totalItemsCount={rugsCount}
+          defaultPerPage={12}
+          maxPerPage={200}
+        />
       </Suspense>
     </ProductWrapper>
   );

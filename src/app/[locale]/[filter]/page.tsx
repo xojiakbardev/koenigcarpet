@@ -6,14 +6,13 @@ import { notFound } from "next/navigation";
 import { FC, Suspense, use } from "react";
 import { filterProducts } from "@/lib/filterProduct";
 import { generateFilterData } from "@/lib/generateFilterData";
-import data from "@/context/data.json";
-import {Locale} from "@/localization/config"
-import {getDictionary} from "@/localization/dictionary"
-import { HOME_CATEGORIES } from "@/lib/const";
+import { Locale } from "@/localization/config"
+import { getDictionary } from "@/localization/dictionary"
+import { RugProduct } from "@/types/product";
 
 
 type RugsPageProps = {
-  params: Promise<{ filter: string, locale:Locale }>;
+  params: Promise<{ filter: string, locale: Locale }>;
   searchParams: Promise<Record<string, string>>;
 };
 
@@ -47,39 +46,45 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
     "new-rugs": "/static/banner/new-rugs.jpg",
     runners: "/static/banner/runners.png",
     marquise: "/static/banner/marquise.png",
-    oriential: "/static/banner/oriental.jpg",
+    oriential: "/static/banner/oriential.jpg",
     amorph: "/static/banner/amorph.png",
     ethnique: "/static/banner/ethnique.png",
     shell: "/static/banner/shell.png",
   };
 
-  
-const mergedSearchParams = {
-  ...urlSearchParams,
-  ...(filter !== "all-rugs" &&
-    ["marquise", "oriental", "amorph", "ethnique", "shell"].includes(filter)
+
+  const mergedSearchParams = {
+    ...urlSearchParams,
+    ...(filter !== "all-rugs" &&
+      ["marquise", "oriential", "amorph", "ethnique", "shell"].includes(filter)
       ? { collection: filter }
       : {}),
-};
-  const filteredRugs = filterProducts(data, mergedSearchParams);
+  };
+
+  const data = use(import("@/context/data.json").then((m) => m.default)) as RugProduct[];
   
-  
+  let filteredRugs = filterProducts(data, mergedSearchParams);
+
+  if (filter === "new-rugs") {
+    filteredRugs = filteredRugs.filter((r) => r.isNew === true);
+  }
+
   const pageRaw = urlSearchParams.page;
   const perPageRaw = urlSearchParams.perPage;
-  
+
   const perPage = Math.max(1, Math.min(parseInt(perPageRaw as string) || 12, 200));
   const currentPage = Math.max(1, parseInt(pageRaw as string) || 1);
-  
+
   const start = (currentPage - 1) * perPage;
   const end = start + perPage;
   const displayedRugs = filteredRugs.slice(start, end);
-  
-  const filterData=generateFilterData(data, pathParams.locale, dict)
-  const category = HOME_CATEGORIES[pathParams.locale].find((item)=>"/"+filter===item.path)
+
+  const filterData = generateFilterData(data, pathParams.locale, dict)
+  const category = dict.home.categories.find((item) => "/" + filter === item.path)
 
   return (
     <div className="flex flex-col">
-      <Banner filter={category?.title?category.title:""} image={images[filter]} />
+      <Banner filter={category?.title ? category.title : ""} image={images[filter]} />
       <Suspense fallback={null}>
         <ProductControl />
       </Suspense>
@@ -87,7 +92,6 @@ const mergedSearchParams = {
       <FilterProduct
         searchParams={urlSearchParams}
         rugs={displayedRugs}
-        perPage={12}
         rugsCount={filteredRugs.length}
         filterData={filterData}
       />

@@ -42,16 +42,50 @@
     "copyright": "© 2025 BM HOME Все права защищены."
   },
   "home": {
-    "categories": {
-      "all-ruges": {
-        "title": "ВСЕ КОВРЫ",
-        "description": "КОВРЫ НА ЗАКАЗ"
-      },
-      "new-ruges": {
+    "categories": [
+      {
         "title": "НОВЫЕ КОВРЫ",
-        "description": "ПОСЛЕДНИЕ КОЛЛЕКЦИИ КОВРОВ"
+        "description": "ПОСЛЕДНИЕ МОДЕЛИ КОВРОВ",
+        "image": "/static/image1.png",
+        "path": "/new-rugs"
+      },
+      {
+        "title": "ВСЕ КОВРЫ",
+        "description": "ИЗГОТОВЛЕНЫ ПО ЗАКАЗУ",
+        "image": "/static/image2.png",
+        "path": "/all-rugs"
+      },
+      {
+        "title": "МАРКЕЗА",
+        "description": "ИНТЕНСИВНАЯ ФАКТУРА, ЯРКИЕ ЦВЕТА",
+        "image": "/static/image3.png",
+        "path": "/marquise"
+      },
+      {
+        "title": "ОРИЕНТАЛЬ",
+        "description": "КЛАССИЧЕСКИЕ КОВРЫ С СОВРЕМЕННОЙ ФАКТУРОЙ",
+        "image": "/static/image4.png",
+        "path": "/oriential"
+      },
+      {
+        "title": "АМОРФ",
+        "description": "ОРГАНИЧЕСКАЯ ФОРМА, ВДОХНОВЛЕННАЯ ПРИРОДОЙ",
+        "image": "/static/image5.png",
+        "path": "/amorph"
+      },
+      {
+        "title": "ЭТНИЧЕСКИЙ",
+        "description": "МОДЕРН КОВРЫ С ТРАДИЦИОННЫМ МОТИВОМ",
+        "image": "/static/image6.png",
+        "path": "/ethnique"
+      },
+      {
+        "title": "РАКУШКА",
+        "description": "МИНИМАЛИСТИЧЕСКИЕ КОВРЫ НАТУРАЛЬНОГО ЦВЕТА",
+        "image": "/static/image7.png",
+        "path": "/shell"
       }
-    },
+    ],
     "meta": {
       "title": "Магазин ковров | Премиальные ковры и коврики",
       "description": "Откройте для себя нашу широкую коллекцию ручных и премиальных машинных ковров. Покупайте ковры по размеру, цвету и дизайну для вашего дома.",

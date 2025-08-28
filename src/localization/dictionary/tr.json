@@ -42,16 +42,50 @@
     "copyright": "© 2025 BM HOME All rights reserved."
   },
   "home": {
-    "categories": {
-      "all-ruges": {
-        "title": "ALL RUGS",
-        "description": "MADE TO ORDER RUG MODELS"
+    "categories": [
+      {
+        "title": "YENİ HALILAR",
+        "description": "EN SON HALI MODELLERİ",
+        "image": "/static/image1.png",
+        "path": "/new-rugs"
       },
-      "new-ruges": {
-        "title": "NEW RUGS",
-        "description": "LATEST COLLECTIONS OF RUGS"
+      {
+        "title": "TÜM HALILAR",
+        "description": "SİPARİŞE GÖRE ÜRETİLEN HALI MODELLERİ",
+        "image": "/static/image2.png",
+        "path": "/all-rugs"
+      },
+      {
+        "title": "MARKİZ",
+        "description": "YOĞUN DOKULU, CANLI RENKLİ HALILAR",
+        "image": "/static/image3.png",
+        "path": "/marquise"
+      },
+      {
+        "title": "ORYANTAL",
+        "description": "KLASİK HALILAR MODERN DOKU İLE",
+        "image": "/static/image4.png",
+        "path": "/oriential"
+      },
+      {
+        "title": "AMORF",
+        "description": "DOĞADAN İLHAM ALINMIŞ ORGANİK ŞEKİLLİ HALILAR",
+        "image": "/static/image5.png",
+        "path": "/amorph"
+      },
+      {
+        "title": "ETNİK",
+        "description": "GELENEKSEL MOTİF İLE MODERN HALILAR",
+        "image": "/static/image6.png",
+        "path": "/ethnique"
+      },
+      {
+        "title": "KABUK",
+        "description": "DOĞAL RENKLİ MİNİMAL HALILAR",
+        "image": "/static/image7.png",
+        "path": "/shell"
       }
-    },
+    ],
     "meta": {
       "title": "Carpet Store | Premium Rugs & Carpets",
       "description": "Discover our wide collection of handmade and premium machine-woven carpets. Shop rugs by size, color, and design for your home.",

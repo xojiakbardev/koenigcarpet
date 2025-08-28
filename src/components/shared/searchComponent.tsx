@@ -18,7 +18,6 @@ interface SearchComponentProps {
 const SearchComponent: React.FC<SearchComponentProps> = ({ locale }) => {
   const { searchComp, close } = useDrawerStore();
   const { dictionary } = useDictionary();
-
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState<RugProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<RugProduct[]>([]);
@@ -51,18 +50,15 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ locale }) => {
 
       setIsLoading(true);
       try {
-        const res = await fetch(
-          `/api/search?query=${encodeURIComponent(
-            debouncedQuery
-          )}&locale=${locale}`
-        );
+        const res = await fetch(`/api/search?query=${encodeURIComponent(debouncedQuery)}`, {
+          headers: {"accept-language": locale}
+        });
         const data = await res.json();
 
         if (res.ok) {
           const prods: RugProduct[] = data.products || [];
           setProducts(prods);
 
-          // faqat color[locale]
           const uniqueColors = Array.from(
             new Set(prods.map((p) => p.color?.[locale]).filter(Boolean))
           );
@@ -179,10 +175,10 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ locale }) => {
                         <li
                           key={color}
                           className={`px-3 py-2 text-xs sm:text-sm cursor-pointer rounded-lg whitespace-nowrap transition-all duration-200 snap-start ${selectedCategory === color
-                              ? "bg-blue-500 text-white font-medium shadow-sm"
-                              : hoveredCategory === color
-                                ? "bg-blue-100 text-blue-700 font-medium shadow-sm"
-                                : "text-gray-600 hover:bg-white hover:shadow-sm"
+                            ? "bg-blue-500 text-white font-medium shadow-sm"
+                            : hoveredCategory === color
+                              ? "bg-blue-100 text-blue-700 font-medium shadow-sm"
+                              : "text-gray-600 hover:bg-white hover:shadow-sm"
                             }`}
                           onMouseEnter={() => setHoveredCategory(color)}
                           onClick={() => setSelectedCategory(color)}

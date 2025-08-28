@@ -42,16 +42,50 @@
     "copyright": "© 2025 BM HOME All rights reserved."
   },
   "home": {
-    "categories": {
-      "all-ruges": {
-        "title": "ALL RUGS",
-        "description": "MADE TO ORDER RUG MODELS"
-      },
-      "new-ruges": {
+    "categories": [
+      {
         "title": "NEW RUGS",
-        "description": "LATEST COLLECTIONS OF RUGS"
+        "description": "LATEST RUG MODELS",
+        "image": "/static/image1.png",
+        "path": "/new-rugs"
+      },
+      {
+        "title": "ALL RUGS",
+        "description": "MADE TO ORDER RUG MODELS",
+        "image": "/static/image2.png",
+        "path": "/all-rugs"
+      },
+      {
+        "title": "MARQUISE",
+        "description": "INTENSE TEXTURED, VIBRANT COLORED RUGS",
+        "image": "/static/image3.png",
+        "path": "/marquise"
+      },
+      {
+        "title": "ORIENTAL",
+        "description": "CLASSIC RUGS WITH MODERN TEXTURE",
+        "image": "/static/image4.png",
+        "path": "/oriential"
+      },
+      {
+        "title": "AMORPH",
+        "description": "ORGANIC SHAPE RUGS INSPIRED BY NATURE",
+        "image": "/static/image5.png",
+        "path": "/amorph"
+      },
+      {
+        "title": "ETHNIQUE",
+        "description": "MODERN RUGS WITH TRADITIONAL MOTIF",
+        "image": "/static/image6.png",
+        "path": "/ethnique"
+      },
+      {
+        "title": "SHELL",
+        "description": "NATURAL COLORED MINIMAL RUGS",
+        "image": "/static/image7.png",
+        "path": "/shell"
       }
-    },
+    ],
     "meta": {
       "title": "Carpet Store | Premium Rugs & Carpets",
       "description": "Discover our wide collection of handmade and premium machine-woven carpets. Shop rugs by size, color, and design for your home.",

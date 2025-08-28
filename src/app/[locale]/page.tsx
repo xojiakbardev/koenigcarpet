@@ -2,27 +2,21 @@ import Category from "@/components/pages/home/category";
 import SlideWrapper from "@/components/pages/home/slideWrapper";
 import Footer from "@/components/shared/footer";
 import Navbar from "@/components/shared/navbar";
-import { HOME_CATEGORIES } from "@/lib/const";
 import type { Metadata } from "next";
 import { getDictionary } from "@/localization/dictionary";
 import { Locale } from "@/localization/config";
 import { use } from "react";
 
 
-type Props = {
-  params: Promise<{ locale: Locale }>
-};
-
-export default function Home({ params }: Props) {
-
-  const pathParams = use(params);
+export default function Home() {
+  const dict = use(getDictionary())
 
   return (
     <div className="h-screen w-full overflow-hidden relative">
       <Navbar fixed />
       <SlideWrapper elem={<Footer />}>
-        {HOME_CATEGORIES[pathParams.locale].map((category) => (
-          <Category key={category.title} category={category}/>
+        {dict.home.categories.map((category) => (
+          <Category key={category.title} category={category} />
         ))}
       </SlideWrapper>
     </div>
