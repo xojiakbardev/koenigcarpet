@@ -66,6 +66,7 @@ export const filterProducts = (
   slug?: string
 ): RugProduct[] => {
   const filters = getFilters(searchParams, filter, slug);
+  
 
   return products.filter((product) => {
     return Object.entries(filters).every(([key, filterValue]) => {

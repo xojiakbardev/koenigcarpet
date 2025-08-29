@@ -382,71 +382,71 @@
         "title": "Коллекция",
         "children": [
           {
-            "title": "Amorph",
+            "title": "Аморфный",
             "value": "amorph"
           },
           {
-            "title": "Coral",
+            "title": "Коралловый",
             "value": "coral"
           },
           {
-            "title": "Crystal",
+            "title": "Кристалл",
             "value": "crystal"
           },
           {
-            "title": "Ethnique",
+            "title": "Этнический",
             "value": "ethnique"
           },
           {
-            "title": "Istanbul",
+            "title": "Стамбул",
             "value": "istanbul"
           },
           {
-            "title": "Marquise",
+            "title": "Маркиз",
             "value": "marquise"
           },
           {
-            "title": "Marrakesh",
+            "title": "Марракеш",
             "value": "marrakesh"
           },
           {
-            "title": "Monochrome",
+            "title": "Монохром",
             "value": "monochrome"
           },
           {
-            "title": "Naturale",
+            "title": "Натуральный",
             "value": "naturale"
           },
           {
-            "title": "Oriental",
+            "title": "Ориентальный",
             "value": "oriental"
           },
           {
-            "title": "Patch",
+            "title": "Пэч (лоскутный)",
             "value": "patch"
           },
           {
-            "title": "Pearl",
+            "title": "Жемчуг",
             "value": "pearl"
           },
           {
-            "title": "Plain",
+            "title": "Простой",
             "value": "plain"
           },
           {
-            "title": "Sapphire",
+            "title": "Сапфир",
             "value": "sapphire"
           },
           {
-            "title": "Shell",
+            "title": "Ракушка",
             "value": "shell"
           },
           {
-            "title": "Trinity",
+            "title": "Троица",
             "value": "trinity"
           },
           {
-            "title": "Vintage",
+            "title": "Винтаж",
             "value": "vintage"
           }
         ],

@@ -386,27 +386,27 @@
             "value": "amorph"
           },
           {
-            "title": "Coral",
+            "title": "Mercan",
             "value": "coral"
           },
           {
-            "title": "Crystal",
+            "title": "Kristal",
             "value": "crystal"
           },
           {
-            "title": "Ethnique",
+            "title": "Etnik",
             "value": "ethnique"
           },
           {
-            "title": "Istanbul",
+            "title": "İstanbul",
             "value": "istanbul"
           },
           {
-            "title": "Marquise",
+            "title": "Markiz",
             "value": "marquise"
           },
           {
-            "title": "Marrakesh",
+            "title": "Marakeş",
             "value": "marrakesh"
           },
           {
@@ -414,35 +414,35 @@
             "value": "monochrome"
           },
           {
-            "title": "Naturale",
+            "title": "Doğal",
             "value": "naturale"
           },
           {
-            "title": "Oriental",
+            "title": "Oryantal",
             "value": "oriental"
           },
           {
-            "title": "Patch",
+            "title": "Patch (Yamali)",
             "value": "patch"
           },
           {
-            "title": "Pearl",
+            "title": "İnci",
             "value": "pearl"
           },
           {
-            "title": "Plain",
+            "title": "Düz",
             "value": "plain"
           },
           {
-            "title": "Sapphire",
+            "title": "Safir",
             "value": "sapphire"
           },
           {
-            "title": "Shell",
+            "title": "Kabuk",
             "value": "shell"
           },
           {
-            "title": "Trinity",
+            "title": "Teslis",
             "value": "trinity"
           },
           {
@@ -450,7 +450,7 @@
             "value": "vintage"
           }
         ],
-        "path": "/collections"
+        "path": "/collection"
       },
       {
         "title": "Renkler",

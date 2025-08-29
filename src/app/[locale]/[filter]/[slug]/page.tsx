@@ -21,7 +21,7 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   const pathParams = use(params)
   const dict = use(getDictionary())  
   const data = use(import("@/context/data.json").then((m) => m.default)) as RugProduct[];
-  const filteredRugs = filterProducts(data, urlSearchParams);
+  const filteredRugs = filterProducts(data, urlSearchParams, pathParams.filter, pathParams.slug);
   
 
   const pageRaw = urlSearchParams.page;

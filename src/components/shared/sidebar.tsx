@@ -74,9 +74,7 @@ export default function Sidebar({ locale }: SidebarProps) {
                       }`}
                     >
                       {item.children.map(child => {
-                        const childPath = `/${item.title.replace(/\s+/g, "-").toLowerCase()}/${child.title
-                          .replace(/\s+/g, "-")
-                          .toLowerCase()}`;
+                        const childPath = `${item.path}/${child.value}`;
                         return (
                           <Link
                             key={child.title}
