@@ -1,14 +1,24 @@
 "use client";
 
 import { useDictionary } from "@/hooks/useDictionary";
-import { Facebook, Instagram, LinkedinIcon, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone, Share2 } from "lucide-react";
 
 const Footer = () => {
-  const {dictionary} = useDictionary();
+  const { dictionary } = useDictionary();
 
+  const iconMap: Record<string, React.ElementType> = {
+    MapPin,
+    Phone,
+    Mail,
+    Facebook,
+    Instagram,
+    Linkedin,
+    MessageCircle,
+    Share2,
+  };
   return (
     <footer className="bg-white w-full h-full py-12 flex flex-col items-center justify-center gap-10">
-      
+
       <div className="flex flex-col items-center mb-8">
         <input
           type="email"
@@ -21,10 +31,20 @@ const Footer = () => {
       </div>
 
       <div className="flex gap-6 mb-8">
-        <Facebook className="text-black cursor-pointer" />
-        <Instagram className="text-black cursor-pointer" />
-        <LinkedinIcon className="text-black cursor-pointer" />
-        <Phone className="text-black cursor-pointer" />
+        {dictionary?.contacts.social.value.map((social: any, i: number) => {
+          const SocialIcon = iconMap[social.platform] || Share2;
+          return (
+            <a
+              key={i}
+              href={social.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600"
+            >
+              <SocialIcon className="w-5 h-5" />
+            </a>
+          );
+        })}
       </div>
 
 
@@ -32,7 +52,7 @@ const Footer = () => {
       <div className="flex flex-col md:flex-row gap-12 text-center md:text-left">
         <div className="flex flex-col items-center">
           <h3 className="text-md text-black underline font-semibold mb-2 flex justify-center md:justify-start items-center gap-2">
-            {dictionary?.footer.policies} 
+            {dictionary?.footer.policies}
           </h3>
           <ul className="flex flex-col items-center text-gray-500 text-sm space-y-1">
             <li>{dictionary?.footer.sales}</li>
@@ -43,7 +63,7 @@ const Footer = () => {
 
         <div className="flex flex-col items-center">
           <h3 className="text-md text-black underline font-semibold mb-2 flex justify-center md:justify-start items-center gap-2">
-            {dictionary?.footer.company} 
+            {dictionary?.footer.company}
           </h3>
           <ul className="flex flex-col items-center text-gray-500 text-sm space-y-1">
             <li>{dictionary?.footer.faq}</li>
@@ -55,7 +75,7 @@ const Footer = () => {
         {/* Support */}
         <div className="flex flex-col items-center">
           <h3 className="text-md text-black underline font-semibold mb-2 flex justify-center md:justify-start items-center gap-2">
-            {dictionary?.footer.support} 
+            {dictionary?.footer.support}
           </h3>
           <ul className="flex flex-col items-center text-gray-500 text-sm space-y-1">
             <li>{dictionary?.footer.blog}</li>
@@ -63,7 +83,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-        <div className="text-center text-gray-400 text-xs mb-4">
+      <div className="text-center text-gray-400 text-xs mb-4">
         {dictionary?.footer.copyright}
       </div>
     </footer>
