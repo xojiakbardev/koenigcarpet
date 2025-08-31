@@ -6,10 +6,4 @@ export const INTERNAL_API_URL = process.env.NEXT_PUBLIC_INTERNAL_API_URL;
 export const EXTERNAL_API_URL = process.env.NEXT_PUBLIC_EXTERNAL_API_URL;
 
 
-type HomeCategory = {
-  title: string;
-  description: string;
-  image: string;
-  path: string;
-};
 

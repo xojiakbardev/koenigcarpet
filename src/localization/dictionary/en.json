@@ -84,6 +84,12 @@
         "description": "NATURAL COLORED MINIMAL RUGS",
         "image": "/static/image7.png",
         "path": "/shell"
+      },
+      {
+        "title": "RUNNERS",
+        "description": "NATURAL COLORED MINIMAL RUGS",
+        "image": "/static/image7.png",
+        "path": "/runners"
       }
     ],
     "meta": {

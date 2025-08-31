@@ -62,12 +62,22 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   };
 
   const data = use(import("@/context/data.json").then((m) => m.default)) as RugProduct[];
-  
+
   let filteredRugs = filterProducts(data, mergedSearchParams);
 
   if (filter === "new-rugs") {
     filteredRugs = filteredRugs.filter((r) => r.isNew === true);
   }
+
+  if (filter === "runners") {
+    filteredRugs = filteredRugs.filter((r) => r.isRunners === true);
+  }
+  console.log(filteredRugs)
+
+  if (filter === "rugs-in-stock") {
+    filteredRugs = filteredRugs.filter((r) => r.inStock === true);
+  }
+
 
   const pageRaw = urlSearchParams.page;
   const perPageRaw = urlSearchParams.perPage;

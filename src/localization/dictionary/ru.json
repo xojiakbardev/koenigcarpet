@@ -84,6 +84,12 @@
         "description": "МИНИМАЛИСТИЧЕСКИЕ КОВРЫ НАТУРАЛЬНОГО ЦВЕТА",
         "image": "/static/image7.png",
         "path": "/shell"
+      },
+      {
+        "title": "Дорожка",
+        "description": "МИНИМАЛИСТИЧЕСКИЕ КОВРЫ НАТУРАЛЬНОГО ЦВЕТА",
+        "image": "/static/image7.png",
+        "path": "/runners"
       }
     ],
     "meta": {

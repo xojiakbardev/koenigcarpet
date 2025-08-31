@@ -84,6 +84,12 @@
         "description": "DOĞAL RENKLİ MİNİMAL HALILAR",
         "image": "/static/image7.png",
         "path": "/shell"
+      },
+      {
+        "title": "Yolluk",
+        "description": "DOĞAL RENKLİ MİNİMAL HALILAR",
+        "image": "/static/image7.png",
+        "path": "/runners"
       }
     ],
     "meta": {

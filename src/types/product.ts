@@ -50,4 +50,6 @@ export interface RugProduct {
   images: string[];
   id: number;
   isNew:boolean
+  isRunners:boolean
+  inStock:boolean
 }
