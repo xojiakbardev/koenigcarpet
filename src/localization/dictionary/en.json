@@ -581,6 +581,10 @@
       {
         "title": "FAQ",
         "path": "/faq"
+      },
+      {
+        "title": "Feedback",
+        "path": "/feedback"
       }
     ]
   },

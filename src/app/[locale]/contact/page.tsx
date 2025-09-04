@@ -12,6 +12,7 @@ import {
   MessageCircle,
   Share2,
 } from "lucide-react";
+import Script from "next/script";
 
 const iconMap: Record<string, React.ElementType> = {
   MapPin,
@@ -138,16 +139,18 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Yandex Map */}
       <iframe
         src="https://yandex.ru/map-widget/v1/?um=constructor%3A6c10b516473bd8e3336e1d0ce529ccf5aa08dce0c2438ecf2eeff8ab484ad83c&source=constructor"
         width="100%"
         className="aspect-video"
         style={{ border: 0 }}
-        allowFullScreen
+        
         loading="lazy"
       ></iframe>
 
       <Footer />
+
     </div>
   );
 };

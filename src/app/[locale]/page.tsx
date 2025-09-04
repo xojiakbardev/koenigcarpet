@@ -19,6 +19,7 @@ export default function Home() {
           <Category key={category.title} category={category} />
         ))}
       </SlideWrapper>
+      
     </div>
   );
 }

@@ -88,7 +88,6 @@ const PaginationNumbers: FC<Props> = ({
 
   const handlePerPageChange = (val: string) => {
     const next = clamp(safeParseInt(val, defaultPerPage), 1, maxPerPage);
-    console.log(next)
     nProgress.start();
     setPerPage(String(next));
   };

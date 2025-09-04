@@ -72,7 +72,6 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   if (filter === "runners") {
     filteredRugs = filteredRugs.filter((r) => r.isRunners === true);
   }
-  console.log(filteredRugs)
 
   if (filter === "rugs-in-stock") {
     filteredRugs = filteredRugs.filter((r) => r.inStock === true);

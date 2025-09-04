@@ -12,9 +12,10 @@ import Image from "next/image";
 
 interface NavbarProps {
   fixed?: boolean;
+  mode?:string
 }
 
-const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
+const Navbar: React.FC<NavbarProps> = ({ fixed = false, mode="light" }) => {
   const [scrolled, setScrolled] = useState(false);
   const { open } = useDrawerStore()
   const [locale] = useLocale();
@@ -49,7 +50,8 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
         </div>
       </div>
 
-      <nav className="text-white w-full z-50 transition-all duration-500">
+      <nav data-mode={mode} className="text-white w-full z-50 transition-all duration-500
+      data-[mode='dark']:text-black">
 
         <div className="mx-auto px-4 md:px-10 flex items-center justify-between h-16">
 
@@ -62,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false }) => {
 
             <Link href={`/${locale}`}>
               <Image
-                src="/logo-light.png"
+                src={`/logo-${mode}.png`}
                 alt="Logo"
                 width={850}
                 height={430}

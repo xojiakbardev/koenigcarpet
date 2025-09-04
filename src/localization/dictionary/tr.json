@@ -581,6 +581,10 @@
       {
         "title": "SSS",
         "path": "/faq"
+      },
+      {
+        "title": "Geri Bildirim",
+        "path": "/feedbacl"
       }
     ]
   },

@@ -78,7 +78,6 @@ export const filterProducts = (
       const filterValuesStr = (Array.isArray(filterValue) ? filterValue : [filterValue]).map((v) =>
         String(v).toLowerCase()
       );
-      console.log(filterValuesStr)
       return filterValuesStr.some((v) => propValues.includes(v));
     });
   });
