@@ -519,7 +519,7 @@
             "value": "green"
           }
         ],
-        "path": "/colors"
+        "path": "/color"
       },
       {
         "title": "Style",

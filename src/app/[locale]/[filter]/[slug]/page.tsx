@@ -7,11 +7,11 @@ import { FC, Suspense, use } from 'react'
 import { RugProduct } from '@/types/product'
 import { filterProducts } from "@/lib/filterProduct";
 import { generateFilterData } from "@/lib/generateFilterData";
-import {getDictionary} from "@/localization/dictionary"
+import { getDictionary } from "@/localization/dictionary"
 
 
 type FilteredRugsProps = {
-  params: Promise<{ locale: Locale, filter:"color" | "style" | "collection", slug: string }>
+  params: Promise<{ locale: Locale, filter: "color" | "style" | "collection", slug: string }>
   searchParams: Promise<Record<string, string>>
 }
 
@@ -19,29 +19,29 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
 
   const urlSearchParams = use(searchParams);
   const pathParams = use(params)
-  const dict = use(getDictionary())  
+  const dict = use(getDictionary())
   const data = use(import("@/context/data.json").then((m) => m.default)) as RugProduct[];
   const filteredRugs = filterProducts(data, urlSearchParams, pathParams.filter, pathParams.slug);
-  
+
 
   const pageRaw = urlSearchParams.page;
   const perPageRaw = urlSearchParams.perPage;
-  
+
   const perPage = Math.max(1, Math.min(parseInt(perPageRaw as string) || 12, 200));
   const currentPage = Math.max(1, parseInt(pageRaw as string) || 1);
-  
+
   const start = (currentPage - 1) * perPage;
   const end = start + perPage;
   const displayedRugs = filteredRugs.slice(start, end);
 
-  const filterData=generateFilterData(data, pathParams.locale, dict)
+  const filterData = generateFilterData(data, pathParams.locale, dict)
 
   return (
     <div>
-      <Banner filter={decodeURIComponent(pathParams.filter)} image={"/static/image1.png"} />
-            <Suspense fallback={null}>
-              <ProductControl />
-            </Suspense>
+      <Banner filter={decodeURIComponent(pathParams.slug)} image={"/static/image1.png"} />
+      <Suspense fallback={null}>
+        <ProductControl />
+      </Suspense>
 
       <FilterProduct
         searchParams={urlSearchParams}
@@ -65,31 +65,31 @@ export const generateStaticParams = async () => {
   const params: { filter: string; slug: string }[] = [];
 
   localeConfig.locales.map((locale) => {
-      data.forEach((rug) => {
-    const entries: [string, string | string[]][] = [
-      ["color", rug.color[locale]],
-      ["style", rug.style[locale]],
-      ["collection", rug.collection[locale]],
-    ];
+    data.forEach((rug) => {
+      const entries: [string, string | string[]][] = [
+        ["color", rug.color[locale]],
+        ["style", rug.style[locale]],
+        ["collection", rug.collection[locale]],
+      ];
 
-    entries.forEach(([filter, value]) => {
-      if (Array.isArray(value)) {
-        value.forEach((v) => {
-          const key = `${filter}-${v}`;
+      entries.forEach(([filter, value]) => {
+        if (Array.isArray(value)) {
+          value.forEach((v) => {
+            const key = `${filter}-${v}`;
+            if (!paramsSet.has(key)) {
+              paramsSet.add(key);
+              params.push({ filter, slug: v });
+            }
+          });
+        } else if (value) {
+          const key = `${filter}-${value}`;
           if (!paramsSet.has(key)) {
             paramsSet.add(key);
-            params.push({ filter, slug: v });
+            params.push({ filter, slug: value });
           }
-        });
-      } else if (value) {
-        const key = `${filter}-${value}`;
-        if (!paramsSet.has(key)) {
-          paramsSet.add(key);
-          params.push({ filter, slug: value });
         }
-      }
+      });
     });
-  });
   })
 
   return params;
