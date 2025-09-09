@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useLocale } from "@/hooks/useLocale";
 import nProgress from "nprogress";
 import { useCartStore } from '@/hooks/useCartStore';
+import { useDictionary } from "@/hooks/useDictionary";
 
 type Props = {
   product: RugProduct;
@@ -20,6 +21,7 @@ const ProductCard: FC<Props> = ({ product }) => {
   const preloadTriggered = useRef(false);
   const router = useRouter();
   const [locale] = useLocale();
+  const {dictionary} = useDictionary()
   const {addToCart} = useCartStore()
 
 
@@ -128,11 +130,12 @@ const ProductCard: FC<Props> = ({ product }) => {
 
         <button
           onClick={handleAddToCart}
-          className="absolute bottom-3 left-1/2 -translate-x-1/2 cursor-pointer hover:shadow-lg transition
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 cursor-pointer hover:shadow-lg transition-all
                      bg-white text-gray-900 px-4 py-2 rounded-lg shadow-md
-                     opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30"
+                     opacity-0 group-hover:opacity-100 duration-300 z-30
+                     text-xs md:text-sm whitespace-nowrap"
         >
-          Add to Cart
+          {dictionary?.shared.addToCart}
         </button>
       </div>
 

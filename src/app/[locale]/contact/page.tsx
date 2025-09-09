@@ -12,7 +12,6 @@ import {
   MessageCircle,
   Share2,
 } from "lucide-react";
-import Script from "next/script";
 
 const iconMap: Record<string, React.ElementType> = {
   MapPin,

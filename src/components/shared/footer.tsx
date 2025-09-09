@@ -1,10 +1,21 @@
 "use client";
 
 import { useDictionary } from "@/hooks/useDictionary";
-import { Facebook, Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone, Share2 } from "lucide-react";
+import { useLocale } from "@/hooks/useLocale";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Share2,
+} from "lucide-react";
 
 const Footer = () => {
   const { dictionary } = useDictionary();
+  const [locale] = useLocale();
 
   const iconMap: Record<string, React.ElementType> = {
     MapPin,
@@ -16,9 +27,10 @@ const Footer = () => {
     MessageCircle,
     Share2,
   };
+
   return (
     <footer className="bg-white w-full h-full py-12 flex flex-col items-center justify-center gap-10">
-
+      {/* Newsletter */}
       <div className="flex flex-col items-center mb-8">
         <input
           type="email"
@@ -30,6 +42,7 @@ const Footer = () => {
         </button>
       </div>
 
+      {/* Social icons */}
       <div className="flex gap-6 mb-8">
         {dictionary?.contacts.social.value.map((social: any, i: number) => {
           const SocialIcon = iconMap[social.platform] || Share2;
@@ -47,42 +60,69 @@ const Footer = () => {
         })}
       </div>
 
-
-
+      {/* Footer links */}
       <div className="flex flex-col md:flex-row gap-12 text-center md:text-left">
+        {/* POLICIES */}
         <div className="flex flex-col items-center">
-          <h3 className="text-md text-black underline font-semibold mb-2 flex justify-center md:justify-start items-center gap-2">
+          <h3 className="text-md text-black underline font-semibold mb-2">
             {dictionary?.footer.policies}
           </h3>
           <ul className="flex flex-col items-center text-gray-500 text-sm space-y-1">
-            <li>{dictionary?.footer.sales}</li>
-            <li>{dictionary?.footer.privacy}</li>
-            <li>{dictionary?.footer["delivery-return"]}</li>
+            <li>
+              <a href={`/${locale}/faq`}>{dictionary?.footer.sales}</a>
+            </li>
+            <li>
+              <a href={`/${locale}/faq`}>{dictionary?.footer.privacy}</a>
+            </li>
+            <li>
+              <a href={`/${locale}/faq`}>
+                {dictionary?.footer["delivery-return"]}
+              </a>
+            </li>
           </ul>
         </div>
 
+        {/* COMPANY */}
         <div className="flex flex-col items-center">
-          <h3 className="text-md text-black underline font-semibold mb-2 flex justify-center md:justify-start items-center gap-2">
+          <h3 className="text-md text-black underline font-semibold mb-2">
             {dictionary?.footer.company}
           </h3>
           <ul className="flex flex-col items-center text-gray-500 text-sm space-y-1">
-            <li>{dictionary?.footer.faq}</li>
-            <li>{dictionary?.footer.contact}</li>
-            <li>{dictionary?.footer["about-us"]}</li>
+            <li>
+              <a href={`/${locale}/blog`}>{dictionary?.footer.blog}</a>
+            </li>
+            <li>
+              <a href={`/${locale}/contact`}>{dictionary?.footer.contact}</a>
+            </li>
+            <li>
+              <a href={`/${locale}/about`}>{dictionary?.footer["about-us"]}</a>
+            </li>
           </ul>
         </div>
 
-        {/* Support */}
+        {/* SUPPORT */}
         <div className="flex flex-col items-center">
-          <h3 className="text-md text-black underline font-semibold mb-2 flex justify-center md:justify-start items-center gap-2">
+          <h3 className="text-md text-black underline font-semibold mb-2">
             {dictionary?.footer.support}
           </h3>
           <ul className="flex flex-col items-center text-gray-500 text-sm space-y-1">
-            <li>{dictionary?.footer.blog}</li>
-            <li>{dictionary?.footer["whatsapp-line"]}</li>
+            <li>
+              <a href={`/${locale}/faq`}>{dictionary?.footer.faq}</a>
+            </li>
+            <li>
+              <a
+                href="https://wa.me/79062302022"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {dictionary?.footer["whatsapp-line"]}
+              </a>
+            </li>
           </ul>
         </div>
       </div>
+
+      {/* Copyright */}
       <div className="text-center text-gray-400 text-xs mb-4">
         {dictionary?.footer.copyright}
       </div>
