@@ -8,6 +8,7 @@ import { RugProduct } from '@/types/product'
 import { filterProducts } from "@/lib/filterProduct";
 import { generateFilterData } from "@/lib/generateFilterData";
 import { getDictionary } from "@/localization/dictionary"
+import { SideBarItem } from '@/types/sidebar'
 
 
 type FilteredRugsProps = {
@@ -36,9 +37,11 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
 
   const filterData = generateFilterData(data, pathParams.locale, dict)
 
+  const filterType = findItem(dict.shared.sideBarLinks, pathParams.filter);
+  const value = findItem(filterType?.children as SideBarItem[], pathParams.slug);
   return (
     <div>
-      <Banner filter={decodeURIComponent(pathParams.slug)} image={"/static/image1.png"} />
+      <Banner filter={value?.title || ""} image={"/static/image1.png"} />
       <Suspense fallback={null}>
         <ProductControl />
       </Suspense>
@@ -94,3 +97,23 @@ export const generateStaticParams = async () => {
 
   return params;
 };
+
+
+function findItem(items: SideBarItem[], param: string): SideBarItem | null {
+  for (const item of items) {
+    // Agar title mos tushsa
+    if (item.path === "/" + param.toLowerCase()) {
+      return item;
+    }
+    // Agar value mos tushsa
+    if (item.value?.toLowerCase() === param.toLowerCase()) {
+      return item;
+    }
+    // Agar children bo‘lsa ichidan qidiramiz (rekursiya)
+    if (item.children) {
+      const found = findItem(item.children, param);
+      if (found) return found;
+    }
+  }
+  return null;
+}
