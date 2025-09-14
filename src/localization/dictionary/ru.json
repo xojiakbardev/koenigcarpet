@@ -364,6 +364,8 @@
     "sortOldest": "СНАЧАЛА СТАРЫЕ",
     "filterBy": "ФИЛЬТРОВАТЬ ПО",
     "addToCart":"Добавить в корзину",
+    "careAndWarranty":"Состояние и гарантия",
+    "technicalInfo":"Техническая информация",
     "sideBarLinks": [
       {
         "title": "Все ковры",

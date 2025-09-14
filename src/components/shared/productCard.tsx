@@ -7,8 +7,8 @@ import { RugProduct } from "@/types/product";
 import { useRouter } from "next/navigation";
 import { useLocale } from "@/hooks/useLocale";
 import nProgress from "nprogress";
-import { useCartStore } from '@/hooks/useCartStore';
 import { useDictionary } from "@/hooks/useDictionary";
+import { useCurrency } from "@/hooks/useCurrency";
 
 type Props = {
   product: RugProduct;
@@ -21,8 +21,8 @@ const ProductCard: FC<Props> = ({ product }) => {
   const preloadTriggered = useRef(false);
   const router = useRouter();
   const [locale] = useLocale();
-  const {dictionary} = useDictionary()
-  const {addToCart} = useCartStore()
+  const { dictionary } = useDictionary();
+  const { usdToRub, convert } = useCurrency();
 
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const ProductCard: FC<Props> = ({ product }) => {
         if (idx > 0) {
           setTimeout(() => {
             setPreloadedImages(prev => new Set(prev).add(idx));
-          }, idx * 100); 
+          }, idx * 100);
         }
       });
     }
@@ -60,19 +60,18 @@ const ProductCard: FC<Props> = ({ product }) => {
   };
 
   const navigateToDetails = () => {
-    nProgress.start()
+    nProgress.start();
     router.push(`/${locale}/rugs/${product.id}`);
   };
 
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.stopPropagation(); 
-    addToCart(product); 
-  };
+
+
   return (
-    <div 
+    <div
       className="group flex w-full flex-col cursor-pointer"
       onClick={navigateToDetails}
     >
+      {/* --- Rasmlar --- */}
       <div
         className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100"
         onMouseLeave={handleMouseLeave}
@@ -80,13 +79,12 @@ const ProductCard: FC<Props> = ({ product }) => {
         {product.images.map((src, idx) => {
           const shouldRender = preloadedImages.has(idx);
           const isActive = getActiveImageIndex() === idx;
-          
+
           return (
             <div
               key={`${currentColorIndex}-${idx}`}
-              className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
-                isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                }`}
             >
               {shouldRender && (
                 <LazyImage
@@ -118,18 +116,16 @@ const ProductCard: FC<Props> = ({ product }) => {
             {product.images.map((_, idx) => (
               <div
                 key={`indicator-${idx}`}
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
-                  getActiveImageIndex() === idx
-                    ? 'bg-white shadow-lg'
-                    : 'bg-white/50'
-                }`}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${getActiveImageIndex() === idx
+                  ? 'bg-white shadow-lg'
+                  : 'bg-white/50'
+                  }`}
               />
             ))}
           </div>
         )}
 
         <button
-          onClick={handleAddToCart}
           className="absolute bottom-3 left-1/2 -translate-x-1/2 cursor-pointer hover:shadow-lg transition-all
                      bg-white text-gray-900 px-4 py-2 rounded-lg shadow-md
                      opacity-0 group-hover:opacity-100 duration-300 z-30
@@ -139,17 +135,20 @@ const ProductCard: FC<Props> = ({ product }) => {
         </button>
       </div>
 
+      {/* --- Nomi va narxi --- */}
       <div className="mt-3 flex items-start justify-between px-1">
         <div className="flex-1 min-w-0">
           <h3 className="text-sm font-medium text-gray-900 truncate">
             {product.product_name[locale]}
           </h3>
-          <p className="text-center text-sm text-gray-700 mt-1">
-            ${product.price}
+          <p className="text-sm text-gray-700 mt-1 text-center">
+            {usdToRub && (
+              convert(Number(product.price))
+            )}₽
           </p>
         </div>
-        
-        <button 
+
+        <button
           className="ml-2 p-1 rounded-full hover:bg-gray-100 transition-colors duration-200 group/heart"
           aria-label="Add to wishlist"
           onClick={(e) => e.stopPropagation()}

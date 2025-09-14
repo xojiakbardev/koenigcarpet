@@ -13,7 +13,7 @@ const ProductWrapper: FC<Props> = ({ children, className, searchParams }) => {
 
   const validatedGrid = ["2", "3", "4", "5", "6"].includes(String(grid))
     ? String(grid)
-    : "4";
+    : "6";
 
   return (
     <div

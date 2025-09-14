@@ -29,7 +29,7 @@ const LazyImage: FC<LazyImageProps> = ({
   const [error, setError] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(false);
-  
+
   const wrapRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const imageLoadedRef = useRef(false);
@@ -51,12 +51,12 @@ const LazyImage: FC<LazyImageProps> = ({
         const [entry] = entries;
         if (entry.isIntersecting) {
           setIsVisible(true);
-          setTimeout(() => setShouldLoad(true), 50);
+          setShouldLoad(true); // timeout olib tashlandi
         }
       },
       { 
         threshold: 0.1,
-        rootMargin: '50px'
+        rootMargin: '300px' // oldinroq yuklash uchun kengaytirildi
       }
     );
 
@@ -155,9 +155,8 @@ const LazyImage: FC<LazyImageProps> = ({
           onError={handleError}
           draggable={false}
           className={clsx(
-            "transition-opacity duration-500 ease-out",
-            loading ? "opacity-0" : "opacity-100",
-            "select-none"
+            "transition-all duration-500 ease-out select-none",
+            loading ? "opacity-0 blur-md" : "opacity-100 blur-0"
           )}
           style={{
             objectFit: 'cover',

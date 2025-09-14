@@ -12,6 +12,7 @@ import { notFound } from "next/navigation";
 import LocaleSwitch from "@/components/shared/localeSwitch";
 import { Analytics } from "@vercel/analytics/next";
 import SearchComponent from "@/components/shared/searchComponent";
+import { CurrencyProvider } from "@/components/providers/currencyProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,14 +33,16 @@ const RootLayout: FC<RootLayoutProps> = ({ children, params }) => {
     <html lang={locale}>
       <body className={inter.className}>
         <LocaleProvider dictionary={dictionary}>
-          {children}
-          <Sidebar locale={locale} />
-          <Suspense fallback={null}>
-            <FilterDrawer />
-          </Suspense>
+          <CurrencyProvider>
+            {children}
+            <Sidebar locale={locale} />
+            <Suspense fallback={null}>
+              <FilterDrawer />
+            </Suspense>
+          </CurrencyProvider>
         </LocaleProvider>
         <LocaleSwitch locale={locale} />
-        <SearchComponent locale={locale}/>
+        <SearchComponent locale={locale} />
         <Analytics />
         <NextTopLoader color="#3563E9" height={4} showSpinner={false} />
       </body>

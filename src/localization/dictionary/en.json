@@ -364,6 +364,8 @@
     "sortOldest": "OLDEST TO NEWEST",
     "filterBy": "FILTER BY",
     "addToCart":"Add to Cart",
+    "careAndWarranty":"Care and Warranty",
+    "technicalInfo":"Technical Information",
     "sideBarLinks": [
       {
         "title": "All Rugs",

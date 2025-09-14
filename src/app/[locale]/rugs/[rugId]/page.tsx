@@ -3,14 +3,15 @@ import RugDetails from "@/components/pages/rugDetails/rugDetails";
 import RugImages from "@/components/pages/rugDetails/rugImages";
 import RugSize from "@/components/pages/rugDetails/rugSizes";
 import Banner from "@/components/shared/banner";
-import { FC, use } from "react";
+import { FC, Suspense, use } from "react";
 import Script from "next/script";
 
 import type { Metadata } from "next";
 import { Locale } from "@/localization/config";
 import { getDictionary } from "@/localization/dictionary";
 import Footer from "@/components/shared/footer";
-import data from "@/context/data.json";
+import { RugProduct } from "@/types/product";
+import RugQuantityAddToCart from "@/components/pages/rugDetails/rugQuantity";
 
 type ProductDetailsProps = {
   params: Promise<{ locale: Locale; rugId: string }>;
@@ -21,10 +22,10 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
   const locale = pathParams.locale;
   const rugId = pathParams.rugId;
   const dictionary = use(getDictionary(locale));
+  const data = use(import("@/context/data.json").then((m) => m.default)) as RugProduct[];
 
   const currentRug = data.find((rug) => rug.id === Number(rugId));
 
-  // Early return if rug not found
   if (!currentRug) {
     return (
       <>
@@ -63,14 +64,16 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
         </div>
         <div className="flex-1 p-10">
           <div className="sticky top-16">
-            <RugDetails rug={currentRug} locale={locale} />
-            <RugColors rugs={relatedProducts} locale={locale} />
-            <RugSize rug={currentRug} />
+            <Suspense>
+              <RugDetails rug={currentRug} locale={locale} />
+              <RugColors rugs={relatedProducts} locale={locale} />
+              <RugSize rug={currentRug} />
+              <RugQuantityAddToCart rug={currentRug} />
+            </Suspense>
           </div>
         </div>
       </div>
 
-      {/* ✅ Product JSON-LD Schema */}
       {productName && description && currentRug.images && Array.isArray(currentRug.images) && (
         <Script
           id="product-schema"
@@ -83,7 +86,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
               name: productName,
               image: currentRug.images
                 .filter(img => typeof img === 'string' && img.length > 0)
-                .map((img) => 
+                .map((img) =>
                   img.startsWith("http") ? img : `${baseUrl}${img}`
                 ),
               description: description,
@@ -104,7 +107,6 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
         />
       )}
 
-      {/* ✅ Breadcrumb JSON-LD Schema */}
       {productName && (
         <Script
           id="breadcrumb-schema"
@@ -153,6 +155,8 @@ export async function generateMetadata({
   const pathParams = await params;
   const locale = pathParams.locale;
   const rugId = pathParams.rugId;
+  const data = await import("@/context/data.json").then((m) => m.default) as RugProduct[];
+
   const rug = data.find((item) => item.id === Number(rugId));
 
   if (!rug) {
@@ -167,7 +171,6 @@ export async function generateMetadata({
   const description = rug.description?.[locale] || "No description available";
   const ogImage = rug.images?.[0] || "/static/default-rug.jpg";
 
-  // Safely build keywords array
   const keywords = [
     rug.product_name?.[locale],
     rug.collection?.[locale],
@@ -213,5 +216,7 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = async () => {
+  const data = await import("@/context/data.json").then((m) => m.default) as RugProduct[];
+
   return data.map((rug) => ({ rugId: rug.id.toString() }));
 };
