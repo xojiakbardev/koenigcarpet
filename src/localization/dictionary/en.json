@@ -39,7 +39,11 @@
     "support": "SUPPORT",
     "faq": "FAQ",
     "whatsapp-line": "WhatsApp Line",
-    "copyright": "© 2025 BM HOME All rights reserved."
+    "copyright": "© 2025 BM HOME All rights reserved.",
+    "newsletter": {
+      "title": "New subscriber",
+      "message": "A new user has subscribed:"
+    }
   },
   "home": {
     "categories": [
@@ -344,7 +348,7 @@
     "ourProjects": "OUR PROJECTS",
     "rugDetail": "RUG DETAILS",
     "features": "ITEM FEATURES",
-    "produced": "Produced within 14 business days upon order.",
+    "produced": "Produced within 14 working days.",
     "notFound": "Rug not found",
     "colors": "COLORS",
     "standartSize": "Standart Size",
@@ -363,9 +367,9 @@
     "sortNewest": "NEWEST TO OLDEST",
     "sortOldest": "OLDEST TO NEWEST",
     "filterBy": "FILTER BY",
-    "addToCart":"Add to Cart",
-    "careAndWarranty":"Care and Warranty",
-    "technicalInfo":"Technical Information",
+    "addToCart": "Add to Cart",
+    "careAndWarranty": "Care and Warranty",
+    "technicalInfo": "Technical Information",
     "sideBarLinks": [
       {
         "title": "All Rugs",
@@ -660,7 +664,25 @@
     "yourCustomizations": "Your Customizations",
     "quantity": "Quantity",
     "secondProductDiscount": "2nd Product 10% Discount",
-    "allBankTransferDiscount": "All BANK TRANSFER Orders 5% Discount"
+    "allBankTransferDiscount": "All BANK TRANSFER Orders 5% Discount",
+    "emptyCart":"Your cart is empty",
+    "order": {
+      "name": "Name",
+      "phone": "Phone",
+      "address": "Address",
+      "cart": "Cart",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "total": "Total",
+      "enterDetails": "Enter details",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "sending": "Sending...",
+      "fillAllFields": "Fill all fields",
+      "success": "Order sent!",
+      "error": "Error placing order",
+      "newOrder": "🛒 New order"
+    }
   },
   "searchComp": {
     "placeholder": "Search for rugs...",
