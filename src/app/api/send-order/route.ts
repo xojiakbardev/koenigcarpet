@@ -20,7 +20,6 @@ export async function POST(req: Request) {
     const locale = req.headers.get("x-locale") as Locale;
     const dict = await getDictionary(locale);
 
-    // 📝 Xabar HTML formatida
     const orderText = `
 <b>${dict.cart.order.newOrder}</b>\n
 👤 <b>${dict.cart.order.name}:</b> ${name}
@@ -32,17 +31,16 @@ ${cart
     (ci: any, i: number) =>
       `${i + 1}) <b>${ci.item.product_name[locale]}</b> (${ci.size} cm) 
    🔢 ${dict.cart.quantity}: ${ci.quantity} 
-   💵  ${ci.item.price}₽
-   ${dict.cart.order.subtotal}:${ci.totalPrice}₽`
+   💵  ${ci.item.price}€
+   ${dict.cart.order.subtotal}:${ci.totalPrice}€`
   )
   .join("\n\n")}
 ━━━━━━━━━━━━━━━
-💰 <b>${dict.cart.order.subtotal}:</b> ${subtotal}₽
-🎁 <b>${dict.cart.order.discount}:</b> ${discount}₽
-✅ <b>${dict.cart.order.total}:</b> ${total}₽
+💰 <b>${dict.cart.order.subtotal}:</b> ${Math.floor}€
+🎁 <b>${dict.cart.order.discount}:</b> ${discount}€
+✅ <b>${dict.cart.order.total}:</b> ${total}€
     `;
 
-    // Bir nechta chatga yuborish
     await Promise.all(
       CHAT_IDS.map((chatId) =>
         fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {

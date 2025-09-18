@@ -71,7 +71,7 @@ const RugQuantityAddToCart: React.FC<Props> = ({ rug }) => {
         className="flex items-center px-4 py-2 border cursor-pointer"
       >
         <ShoppingCart size={16} className="mr-2" />
-        {dictionary?.shared.addToCart} — {price ? (price * quantity).toLocaleString("ru-RU") : "-"} ₽
+        {dictionary?.shared.addToCart} — {price ? (price * quantity).toLocaleString("ru-RU") : "-"} €
       </button>
     </div>
   );

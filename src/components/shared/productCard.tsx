@@ -16,14 +16,13 @@ type Props = {
 
 // Narxni string -> number ga o‘tkazuvchi funksiya
 const parsePrice = (price: string): number => {
-  // Masalan: "12 345,67" → "12345.67"
   const cleaned = price
-    .replace(/\s/g, "") // bo‘sh joylarni olib tashlaydi
-    .replace(",", "."); // vergulni nuqtaga almashtiradi
+    .replace(/\s/g, "")
+    .replace(/,/g, "");
+
   const num = parseFloat(cleaned);
   return isNaN(num) ? 0 : num;
 };
-
 const ProductCard: FC<Props> = ({ product }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentColorIndex] = useState(0);
@@ -32,7 +31,7 @@ const ProductCard: FC<Props> = ({ product }) => {
   const router = useRouter();
   const [locale] = useLocale();
   const { dictionary } = useDictionary();
-  const { usdToRub, convert } = useCurrency();
+  const { eurToRub, convert } = useCurrency();
 
   useEffect(() => {
     if (hoveredIndex !== null && !preloadTriggered.current) {
@@ -74,7 +73,8 @@ const ProductCard: FC<Props> = ({ product }) => {
   };
 
   // USD narxini tozalab olamiz
-  const usdPrice = parsePrice(product.price);
+  console.log(product.price)
+  const eurPrice = parsePrice(product.price);
 
   return (
     <div
@@ -127,8 +127,8 @@ const ProductCard: FC<Props> = ({ product }) => {
               <div
                 key={`indicator-${idx}`}
                 className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${getActiveImageIndex() === idx
-                    ? "bg-white shadow-lg"
-                    : "bg-white/50"
+                  ? "bg-white shadow-lg"
+                  : "bg-white/50"
                   }`}
               />
             ))}
@@ -151,9 +151,9 @@ const ProductCard: FC<Props> = ({ product }) => {
             {product.product_name[locale]}
           </h3>
           <p className="text-sm text-gray-700 mt-1 text-center">
-            {usdToRub && (
-              convert(usdPrice)?.toFixed(2)
-            )} ₽
+            {eurToRub && (
+              convert(eurPrice)?.toFixed(2)
+            )} €  <span className="text-[8px]">{product.price}</span>
           </p>
         </div>
 

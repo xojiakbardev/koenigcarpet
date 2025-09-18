@@ -65,7 +65,7 @@ export const RugDetails: FC<Props> = ({ rug, locale }) => {
       <p className="text-sm text-gray-700">{dictionary?.shared.produced}</p>
 
       <p className="text-base text-gray-800 leading-relaxed">
-        {formattedRub ? `${formattedRub} ₽` : "—"} - 
+        {formattedRub ? `${formattedRub} €` : "—"} - 
          {rug.price}$
       </p>
 

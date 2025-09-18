@@ -145,7 +145,7 @@ const CartPage = () => {
                         </button>
                       </div>
                       <div className="text-green-600 font-bold">
-                        {ci.totalPrice.toLocaleString("ru-RU")} ₽
+                        {ci.totalPrice.toLocaleString("ru-RU")} €
                       </div>
                     </div>
                   ))}
@@ -163,7 +163,7 @@ const CartPage = () => {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between">
                   <span>{dictionary?.cart.basketAmount}</span>
-                  <span>{subtotal.toLocaleString("ru-RU")} ₽</span>
+                  <span>{subtotal.toLocaleString("ru-RU")} €</span>
                 </div>
                 <div className="flex justify-between">
                   <span>{dictionary?.cart.shippingCost}</span>
@@ -172,13 +172,13 @@ const CartPage = () => {
                 {discount > 0 && (
                   <div className="flex justify-between text-purple-600">
                     <span>{dictionary?.cart.secondProductDiscount}</span>
-                    <span>-{discount.toLocaleString("ru-RU")} ₽</span>
+                    <span>-{discount.toLocaleString("ru-RU")} €</span>
                   </div>
                 )}
                 <hr />
                 <div className="flex justify-between font-bold text-lg">
                   <span>{dictionary?.cart.totalAmount}</span>
-                  <span>{total.toLocaleString("ru-RU")} ₽</span>
+                  <span>{total.toLocaleString("ru-RU")} €</span>
                 </div>
               </div>
 

@@ -3,12 +3,12 @@
 import { createContext } from "react";
 
 type CurrencyContextType = {
-  usdToRub: number | null;
+  eurToRub: number | null;
   convert: (usd: number) => number | null;
 };
 
 export const CurrencyContext = createContext<CurrencyContextType>({
-  usdToRub: null,
+  eurToRub: null,
   convert: () => null,
 });
 
