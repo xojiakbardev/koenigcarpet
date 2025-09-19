@@ -15,12 +15,6 @@ const CartPage = () => {
 
 
   const subtotal = cart.reduce((sum, ci) => sum + ci.totalPrice, 0);
-  let discount = 0;
-  if (cart.length > 1) {
-    const minPrice = Math.min(...cart.map((ci) => ci.totalPrice));
-    discount = minPrice * 0.1;
-  }
-  const total = subtotal - discount;
 
 
   const [showModal, setShowModal] = useState(false);
@@ -52,15 +46,13 @@ const CartPage = () => {
           address,
           cart,
           subtotal,
-          discount,
-          total,
         }),
       });
 
       const data = await res.json();
       if (data.success) {
         setMessage(dictionary?.cart.order.success || "✅");
-        clearCart();
+        // clearCart();
         setShowModal(false);
       } else {
         setMessage(dictionary?.cart.order.error || "❌");
@@ -75,7 +67,6 @@ const CartPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* header */}
         <div className="flex items-center justify-between mb-8">
           <Link href={`/${locale}/`}>
             <Image src="/logo-dark.png" width={100} height={50} alt="logo" />
@@ -84,7 +75,6 @@ const CartPage = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* cart */}
           <div className="lg:col-span-2">
             <div className="flex items-center justify-between mb-6">
               <h1 className="text-xl font-medium">
@@ -145,7 +135,7 @@ const CartPage = () => {
                         </button>
                       </div>
                       <div className="text-green-600 font-bold">
-                        {ci.totalPrice.toLocaleString("ru-RU")} €
+                        {ci.totalPrice.toLocaleString("ru-RU")} ₽
                       </div>
                     </div>
                   ))}
@@ -154,7 +144,6 @@ const CartPage = () => {
             )}
           </div>
 
-          {/* summary */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg p-6 shadow-sm sticky top-8">
               <h2 className="font-medium text-lg mb-6">
@@ -163,22 +152,17 @@ const CartPage = () => {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between">
                   <span>{dictionary?.cart.basketAmount}</span>
-                  <span>{subtotal.toLocaleString("ru-RU")} €</span>
+                  <span>{subtotal.toLocaleString("ru-RU")} ₽</span>
                 </div>
                 <div className="flex justify-between">
                   <span>{dictionary?.cart.shippingCost}</span>
                   <span className="text-green-600">{dictionary?.cart.free}</span>
                 </div>
-                {discount > 0 && (
-                  <div className="flex justify-between text-purple-600">
-                    <span>{dictionary?.cart.secondProductDiscount}</span>
-                    <span>-{discount.toLocaleString("ru-RU")} €</span>
-                  </div>
-                )}
+
                 <hr />
                 <div className="flex justify-between font-bold text-lg">
                   <span>{dictionary?.cart.totalAmount}</span>
-                  <span>{total.toLocaleString("ru-RU")} €</span>
+                  <span>{subtotal.toLocaleString("ru-RU")}  ₽</span>
                 </div>
               </div>
 
@@ -198,10 +182,9 @@ const CartPage = () => {
         </div>
       </div>
 
-      {/* modal */}
       {showModal && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity"
+          className="fixed inset-0 flex items-center justify-center bg-black/30 bg-opacity-50 transition-opacity"
           onClick={() => !loading && setShowModal(false)}
         >
           <div

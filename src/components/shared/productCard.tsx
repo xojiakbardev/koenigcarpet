@@ -153,7 +153,7 @@ const ProductCard: FC<Props> = ({ product }) => {
           <p className="text-sm text-gray-700 mt-1 text-center">
             {eurToRub && (
               convert(eurPrice)?.toFixed(2)
-            )} €  <span className="text-[8px]">{product.price}</span>
+            )} ₽  <span className="text-[8px]">{product.price}</span>
           </p>
         </div>
 

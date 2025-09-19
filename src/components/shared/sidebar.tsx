@@ -20,6 +20,7 @@ export default function Sidebar({ locale }: SidebarProps) {
     setExpandedSection(prev => (prev === title ? null : title));
   };
 
+
   return (
     <div>
       <div

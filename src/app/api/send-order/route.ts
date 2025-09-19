@@ -7,7 +7,7 @@ const CHAT_IDS = [5738468941, 5050150433];
 
 export async function POST(req: Request) {
   try {
-    const { name, phone, address, cart, subtotal, discount, total } =
+    const { name, phone, address, cart, subtotal } =
       await req.json();
 
     if (!name || !phone || !address || !cart) {
@@ -31,14 +31,12 @@ ${cart
     (ci: any, i: number) =>
       `${i + 1}) <b>${ci.item.product_name[locale]}</b> (${ci.size} cm) 
    🔢 ${dict.cart.quantity}: ${ci.quantity} 
-   💵  ${ci.item.price}€
-   ${dict.cart.order.subtotal}:${ci.totalPrice}€`
+   💵  ${ci.item.price}₽
+   ${dict.cart.order.subtotal}:${ci.totalPrice}₽`
   )
   .join("\n\n")}
 ━━━━━━━━━━━━━━━
-💰 <b>${dict.cart.order.subtotal}:</b> ${Math.floor}€
-🎁 <b>${dict.cart.order.discount}:</b> ${discount}€
-✅ <b>${dict.cart.order.total}:</b> ${total}€
+💰 <b>${dict.cart.order.subtotal}:</b> ${subtotal}₽
     `;
 
     await Promise.all(

@@ -21,7 +21,6 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
     fetchRate();
   }, []);
 
-  // EUR -> RUB
   const convert = (eur: number): number | null => {
     if (eurToRub === null) return null;
     return +(eur * eurToRub).toFixed(2);

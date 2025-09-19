@@ -145,6 +145,11 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ locale }) => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Escape") handleClose();
+
+    if (e.key === "Enter" && query.trim()) {
+      close("searchComp");
+      router.push(`/${locale}/search?query=${encodeURIComponent(query.trim())}`);
+    }
   };
 
   const handleClose = () => {
@@ -198,6 +203,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ locale }) => {
             </button>
           </div>
 
+          {/* Natijalar yoki placeholder */}
           {query.trim() && (
             <div
               className="flex flex-col sm:flex-row bg-white overflow-hidden rounded-b-xl max-h-[75vh] sm:max-h-[70vh]"

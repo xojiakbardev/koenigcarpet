@@ -12,7 +12,7 @@ type Props = {
   rugs: RugProduct[];
   searchParams: Record<string, string | string[]>;
   rugsCount: number;
-  filterData: any[]
+  filterData?: any[]
 };
 
 const FilterProduct: FC<Props> = ({ rugs = [], searchParams, rugsCount, filterData }) => {
@@ -20,8 +20,11 @@ const FilterProduct: FC<Props> = ({ rugs = [], searchParams, rugsCount, filterDa
   const { setFilters } = useFilterStore()
 
   useEffect(() => {
-    setFilters(filterData)
+    if (filterData) {
+      setFilters(filterData)
+    }
   }, [filterData, setFilters])
+  
 
   return (
     <ProductWrapper searchParams={searchParams}>
