@@ -187,11 +187,11 @@ export async function generateMetadata({
   };
 }
 
-export const generateStaticParams = async () => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+// export const generateStaticParams = async () => {
+//   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  const res = await fetch(`${baseUrl}/api/products`, { cache: "no-store" });
-  const { products } = (await res.json()) as { products: RugProduct[] };
+//   const res = await fetch(`${baseUrl}/api/products`, { cache: "no-store" });
+//   const { products } = (await res.json()) as { products: RugProduct[] };
 
-  return products.map((rug) => ({ rugId: rug.id.toString() }));
-};
+//   return products.map((rug) => ({ rugId: rug.id.toString() }));
+// };
