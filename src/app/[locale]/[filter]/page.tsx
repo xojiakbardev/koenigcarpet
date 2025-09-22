@@ -6,13 +6,12 @@ import { notFound } from "next/navigation";
 import { FC, Suspense, use } from "react";
 import { filterProducts } from "@/lib/filterProduct";
 import { generateFilterData } from "@/lib/generateFilterData";
-import { Locale } from "@/localization/config"
-import { getDictionary } from "@/localization/dictionary"
+import { Locale } from "@/localization/config";
+import { getDictionary } from "@/localization/dictionary";
 import { RugProduct } from "@/types/product";
 
-
 type RugsPageProps = {
-  params: Promise<{ filter: string, locale: Locale }>;
+  params: Promise<{ filter: string; locale: Locale }>;
   searchParams: Promise<Record<string, string>>;
 };
 
@@ -33,8 +32,8 @@ type FilterType = (typeof VALID_FILTERS)[number];
 const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   const filter = use(params).filter;
   const urlSearchParams = use(searchParams);
-  const pathParams = use(params)
-  const dict = use(getDictionary())
+  const pathParams = use(params);
+  const dict = use(getDictionary());
 
   if (!VALID_FILTERS.includes(filter as FilterType)) {
     return notFound();
@@ -52,18 +51,21 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
     shell: "/static/banner/shell.png",
   };
 
-
   const mergedSearchParams = {
     ...urlSearchParams,
     ...(filter !== "all-rugs" &&
-      ["marquise", "oriential", "amorph", "ethnique", "shell"].includes(filter)
+    ["marquise", "oriential", "amorph", "ethnique", "shell"].includes(filter)
       ? { collection: filter }
       : {}),
   };
 
-  const data = use(import("@/context/data.json").then((m) => m.default)) as RugProduct[];
+  const data = use(
+    fetch("http://localhost:3000/api/products", {
+      cache: "no-store",
+    }).then((res) => res.json())
+  ) as { products: RugProduct[] };
 
-  let filteredRugs = filterProducts(data, mergedSearchParams);
+  let filteredRugs = filterProducts(data.products, mergedSearchParams);
 
   if (filter === "new-rugs") {
     filteredRugs = filteredRugs.filter((r) => r.isNew === true);
@@ -77,7 +79,6 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
     filteredRugs = filteredRugs.filter((r) => r.inStock === true);
   }
 
-
   const pageRaw = urlSearchParams.page;
   const perPageRaw = urlSearchParams.perPage;
 
@@ -88,8 +89,8 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   const end = start + perPage;
   const displayedRugs = filteredRugs.slice(start, end);
 
-  const filterData = generateFilterData(data, pathParams.locale, dict)
-  const category = dict.home.categories.find((item) => "/" + filter === item.path)
+  const filterData = generateFilterData(data.products, pathParams.locale, dict);
+  const category = dict.home.categories.find((item) => "/" + filter === item.path);
 
   return (
     <div className="flex flex-col">

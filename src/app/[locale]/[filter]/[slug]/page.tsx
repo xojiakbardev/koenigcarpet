@@ -101,15 +101,12 @@ export const generateStaticParams = async () => {
 
 function findItem(items: SideBarItem[], param: string): SideBarItem | null {
   for (const item of items) {
-    // Agar title mos tushsa
     if (item.path === "/" + param.toLowerCase()) {
       return item;
     }
-    // Agar value mos tushsa
     if (item.value?.toLowerCase() === param.toLowerCase()) {
       return item;
     }
-    // Agar children bo‘lsa ichidan qidiramiz (rekursiya)
     if (item.children) {
       const found = findItem(item.children, param);
       if (found) return found;

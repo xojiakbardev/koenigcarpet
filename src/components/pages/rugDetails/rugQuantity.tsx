@@ -6,7 +6,6 @@ import { RugProduct } from "@/types/product";
 import { useCartStore } from "@/hooks/useCartStore";
 import { useSearchParams } from "next/navigation";
 import { calculateRugPrice } from "@/lib/calculatePrice";
-import { useCurrency } from "@/hooks/useCurrency";
 import { useDictionary } from "@/hooks/useDictionary";
 
 type Props = {
@@ -16,12 +15,8 @@ type Props = {
 const RugQuantityAddToCart: React.FC<Props> = ({ rug }) => {
   const { addToCart } = useCartStore();
   const searchParams = useSearchParams();
-  const { convert } = useCurrency();
   const { dictionary } = useDictionary();
-  const [selectedSize, setSelectedSize] = useState(
-    rug.sizes?.[0] ?? ""
-  );
-
+  const [selectedSize, setSelectedSize] = useState(rug.sizes?.[0] ?? "");
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -29,30 +24,22 @@ const RugQuantityAddToCart: React.FC<Props> = ({ rug }) => {
     const widthParam = searchParams.get("width");
     const heightParam = searchParams.get("height");
 
-    if (sizeParam) setSelectedSize(sizeParam);
-    else if (widthParam && heightParam)
+    if (sizeParam) {
+      setSelectedSize(sizeParam);
+    } else if (widthParam && heightParam) {
       setSelectedSize(`${widthParam}x${heightParam} cm`);
-    else setSelectedSize(rug.sizes?.[0] ?? "");
+    } else {
+      setSelectedSize(rug.sizes?.[0] ?? "");
+    }
   }, [searchParams, rug.sizes]);
 
-    const basePrice = useMemo(() => {
-  if (!rug.price) return 0;
 
-  if (typeof rug.price === "string") {
-    const cleaned = rug.price.replace(/,/g, "").trim();
-    return parseFloat(cleaned) || 0;
-  }
-
-  return Number(rug.price) || 0;
-}, [rug.price]);
-
+  const basePrice = rug.price ?? 0;
 
   const price = useMemo(() => {
     const sizes = rug.sizes ?? [];
-    const usdPrice = calculateRugPrice(basePrice, sizes, selectedSize);
-    return convert ? convert(usdPrice) : usdPrice;
-  }, [ rug.sizes,selectedSize, convert, basePrice]);
-
+    return calculateRugPrice(basePrice, sizes, selectedSize);
+  }, [rug.sizes, selectedSize, basePrice]);
 
   const handleDecrease = () => {
     if (quantity > 1) setQuantity(quantity - 1);
@@ -63,7 +50,11 @@ const RugQuantityAddToCart: React.FC<Props> = ({ rug }) => {
   };
 
   const handleAddToCart = () => {
-    addToCart({ ...rug, sizes: [selectedSize], price: String(price) ?? "" }, quantity, selectedSize);
+    addToCart(
+      { ...rug, sizes: [selectedSize], price: price ?? "" },
+      quantity,
+      selectedSize
+    );
   };
 
   return (
@@ -83,7 +74,8 @@ const RugQuantityAddToCart: React.FC<Props> = ({ rug }) => {
         className="flex items-center px-4 py-2 border cursor-pointer"
       >
         <ShoppingCart size={16} className="mr-2" />
-        {dictionary?.shared.addToCart} — {price ? (price * quantity).toLocaleString("ru-RU") : "-"} ₽
+        {dictionary?.shared.addToCart} —{" "}
+        {price ? (price * quantity).toLocaleString("ru-RU") : "-"} ₽
       </button>
     </div>
   );

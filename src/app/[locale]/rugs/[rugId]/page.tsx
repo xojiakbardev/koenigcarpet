@@ -22,38 +22,39 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
   const locale = pathParams.locale;
   const rugId = pathParams.rugId;
   const dictionary = use(getDictionary(locale));
-  const data = use(import("@/context/data.json").then((m) => m.default)) as RugProduct[];
 
-  const currentRug = data.find((rug) => rug.id === Number(rugId));
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+
+  const data = use(
+    fetch(`${baseUrl}/api/products`, {
+      cache: "no-store",
+      headers: { "accept-language": locale },
+    }).then((res) => res.json())
+  ) as { products: RugProduct[] };
+
+  const currentRug = data.products.find((rug) => rug.id === Number(rugId));
 
   if (!currentRug) {
     return (
       <>
-        <Banner
-          filter={dictionary.shared.notFound}
-          image="/static/image1.png"
-        />
+        <Banner filter={dictionary.shared.notFound} image="/static/image1.png" />
         <Footer />
       </>
     );
   }
 
-  const relatedProducts = data.filter(
+  const relatedProducts = data.products.filter(
     (rug) =>
       rug.product_name?.[locale]?.split(" ")?.[0] ===
       currentRug.product_name?.[locale]?.split(" ")?.[0]
   );
 
-  const baseUrl = "https://www.koenigcarpet.ru";
   const productName = currentRug.product_name?.[locale];
   const description = currentRug.description?.[locale];
 
   return (
     <>
-      <Banner
-        filter={dictionary.shared.rugDetail}
-        image="/static/image1.png"
-      />
+      <Banner filter={dictionary.shared.rugDetail} image="/static/image1.png" />
       <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-2/5 p-2">
           <RugImages
@@ -85,7 +86,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
               "@type": "Product",
               name: productName,
               image: currentRug.images
-                .filter(img => typeof img === 'string' && img.length > 0)
+                .filter((img) => typeof img === "string" && img.length > 0)
                 .map((img) =>
                   img.startsWith("http") ? img : `${baseUrl}${img}`
                 ),
@@ -107,40 +108,6 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
         />
       )}
 
-      {productName && (
-        <Script
-          id="breadcrumb-schema"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Home",
-                  item: `${baseUrl}/${locale}`,
-                },
-                {
-                  "@type": "ListItem",
-                  position: 2,
-                  name: "Rugs",
-                  item: `${baseUrl}/${locale}/rugs`,
-                },
-                {
-                  "@type": "ListItem",
-                  position: 3,
-                  name: productName,
-                  item: `${baseUrl}/${locale}/rugs/${rugId}`,
-                },
-              ],
-            }),
-          }}
-        />
-      )}
-
       <Footer />
     </>
   );
@@ -151,13 +118,18 @@ export default ProductDetails;
 export async function generateMetadata({
   params,
 }: ProductDetailsProps): Promise<Metadata> {
-  const baseUrl = "https://www.koenigcarpet.ru";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
   const pathParams = await params;
   const locale = pathParams.locale;
   const rugId = pathParams.rugId;
-  const data = await import("@/context/data.json").then((m) => m.default) as RugProduct[];
 
-  const rug = data.find((item) => item.id === Number(rugId));
+  const res = await fetch(`${baseUrl}/api/products`, {
+    cache: "no-store",
+    headers: { "accept-language": locale },
+  });
+  const { products } = (await res.json()) as { products: RugProduct[] };
+
+  const rug = products.find((item) => item.id === Number(rugId));
 
   if (!rug) {
     return {
@@ -179,7 +151,9 @@ export async function generateMetadata({
     ...(rug.features?.[locale]?.technical_info || []),
     ...(rug.features?.[locale]?.care_and_warranty || []),
     ...(rug.sizes || []),
-  ].filter(Boolean).join(", ");
+  ]
+    .filter(Boolean)
+    .join(", ");
 
   return {
     title: productName,
@@ -205,9 +179,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: productName,
       description,
-      images: [
-        ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`,
-      ],
+      images: [ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`],
     },
     alternates: {
       canonical: `${baseUrl}/${locale}/rugs/${rugId}`,
@@ -216,7 +188,10 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = async () => {
-  const data = await import("@/context/data.json").then((m) => m.default) as RugProduct[];
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  return data.map((rug) => ({ rugId: rug.id.toString() }));
+  const res = await fetch(`${baseUrl}/api/products`, { cache: "no-store" });
+  const { products } = (await res.json()) as { products: RugProduct[] };
+
+  return products.map((rug) => ({ rugId: rug.id.toString() }));
 };

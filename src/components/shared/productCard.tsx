@@ -8,21 +8,12 @@ import { useRouter } from "next/navigation";
 import { useLocale } from "@/hooks/useLocale";
 import nProgress from "nprogress";
 import { useDictionary } from "@/hooks/useDictionary";
-import { useCurrency } from "@/hooks/useCurrency";
 
 type Props = {
   product: RugProduct;
 };
 
-// Narxni string -> number ga o‘tkazuvchi funksiya
-const parsePrice = (price: string): number => {
-  const cleaned = price
-    .replace(/\s/g, "")
-    .replace(/,/g, "");
 
-  const num = parseFloat(cleaned);
-  return isNaN(num) ? 0 : num;
-};
 const ProductCard: FC<Props> = ({ product }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentColorIndex] = useState(0);
@@ -31,7 +22,7 @@ const ProductCard: FC<Props> = ({ product }) => {
   const router = useRouter();
   const [locale] = useLocale();
   const { dictionary } = useDictionary();
-  const { eurToRub, convert } = useCurrency();
+
 
   useEffect(() => {
     if (hoveredIndex !== null && !preloadTriggered.current) {
@@ -72,16 +63,13 @@ const ProductCard: FC<Props> = ({ product }) => {
     router.push(`/${locale}/rugs/${product.id}`);
   };
 
-  // USD narxini tozalab olamiz
-  console.log(product.price)
-  const eurPrice = parsePrice(product.price);
+
 
   return (
     <div
       className="group flex w-full flex-col cursor-pointer"
       onClick={navigateToDetails}
     >
-      {/* --- Rasmlar --- */}
       <div
         className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100"
         onMouseLeave={handleMouseLeave}
@@ -151,9 +139,7 @@ const ProductCard: FC<Props> = ({ product }) => {
             {product.product_name[locale]}
           </h3>
           <p className="text-sm text-gray-700 mt-1 text-center">
-            {eurToRub && (
-              convert(eurPrice)?.toFixed(2)
-            )} ₽  <span className="text-[8px]">{product.price}</span>
+            {Intl.NumberFormat('ru-RU').format(product.price)} ₽
           </p>
         </div>
 

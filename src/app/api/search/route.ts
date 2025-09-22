@@ -17,7 +17,6 @@ export async function GET(request: Request) {
     let filteredProducts: RugProduct[] = products;
 
     if (query) {
-      // Avval product_code bo‘yicha qidiruv
       const codeMatches = products.filter((item) => {
         if (!item.product_code) return false;
         const normalizedCode = item.product_code.toLowerCase().replace(/-/g, "");
@@ -28,7 +27,6 @@ export async function GET(request: Request) {
       if (codeMatches.length > 0) {
         filteredProducts = codeMatches;
       } else {
-        // Agar code bo‘yicha topilmasa → faqat product_name bo‘yicha qidiruv
         filteredProducts = products.filter((item) => {
           const name = item.product_name?.[locale] || "";
           return name.toLowerCase().includes(query);
@@ -36,17 +34,44 @@ export async function GET(request: Request) {
       }
     }
 
-    // Pagination
     const start = (page - 1) * limit;
     const end = start + limit;
     const paginated = filteredProducts.slice(start, end);
 
+
+    const res = await fetch("https://www.cbr.ru/scripts/XML_daily.asp");
+    const xmlText = await res.text();
+
+    const usdMatch = xmlText.match(/<CharCode>USD<\/CharCode>[\s\S]*?<Value>([\d,]+)<\/Value>/);
+    if (!usdMatch) {
+      throw new Error("USD kursini topib bo‘lmadi");
+    }
+    const usdRate = parseFloat(usdMatch[1].replace(",", "."));
+
+    const updatedProducts = paginated.map((p) => {
+      let priceNum = typeof p.price === "string" ? parseFloat(p.price) : Number(p.price);
+      if (isNaN(priceNum)) priceNum = 0;
+
+
+      const priceWithPercent = priceNum * 1.02;
+
+
+      const priceInRub = Number((priceWithPercent * usdRate).toFixed(2));
+
+      return {
+        ...p,
+        price: priceInRub,
+        currency: "RUB",
+      };
+    });
+
     return NextResponse.json({
-      products: paginated,
+      products: updatedProducts,
       total: filteredProducts.length,
       page,
       limit,
       hasMore: end < filteredProducts.length,
+      usdRate,
     });
   } catch (error) {
     console.error("Search API error:", error);

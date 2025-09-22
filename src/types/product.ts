@@ -46,7 +46,7 @@ export interface RugProduct {
   }
   sizes: string[];
   product_code: string;
-  price: string;
+  price: number;
   images: string[];
   id: number;
   isNew:boolean

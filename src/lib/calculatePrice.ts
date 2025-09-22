@@ -21,5 +21,5 @@ export const calculateRugPrice = (
 
   const price = (selectedArea / baseSizeArea) * basePrice;
 
-  return +(price * 1.02).toFixed(2);
+  return +price.toFixed(2);
 };

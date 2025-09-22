@@ -6,7 +6,7 @@ interface CartItem {
   item: RugProduct;
   quantity: number;
   totalPrice: number;
-  size: string; // qo'shimcha: tanlangan size
+  size: string; 
 }
 
 interface CartStore {
@@ -28,7 +28,7 @@ export const useCartStore = create<CartStore>()(
         const existing = cart.find(
           (c) => c.item.id === product.id && c.size === size
         );
-        const price = parseFloat(product.price);
+        const price = product.price;
 
         if (existing) {
           set({
