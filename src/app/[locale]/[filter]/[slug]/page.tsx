@@ -68,7 +68,7 @@ export default FilteredRugs
 export const generateStaticParams = async () => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const data = use(fetch(`${baseUrl}/api/products`, { cache: "no-store" }).then((res) => res.json())
+  const data = await fetch(`${baseUrl}/api/products`, { cache: "no-store" }).then((res) => res.json()
   ) as { products: RugProduct[] };
 
   const paramsSet = new Set<string>();
