@@ -115,83 +115,83 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
 
 export default ProductDetails;
 
-// export async function generateMetadata({
-//   params,
-// }: ProductDetailsProps): Promise<Metadata> {
-//   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
-//   const pathParams = await params;
-//   const locale = pathParams.locale;
-//   const rugId = pathParams.rugId;
+export async function generateMetadata({
+  params,
+}: ProductDetailsProps): Promise<Metadata> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+  const pathParams = await params;
+  const locale = pathParams.locale;
+  const rugId = pathParams.rugId;
 
-//   const res = await fetch(`${baseUrl}/api/products`, {
-//     cache: "no-store",
-//     headers: { "accept-language": locale },
-//   });
-//   const { products } = (await res.json()) as { products: RugProduct[] };
+  const res = await fetch(`${baseUrl}/api/products`, {
+    cache: "no-store",
+    headers: { "accept-language": locale },
+  });
+  const { products } = (await res.json()) as { products: RugProduct[] };
 
-//   const rug = products.find((item) => item.id === Number(rugId));
+  const rug = products.find((item) => item.id === Number(rugId));
 
-//   if (!rug) {
-//     return {
-//       title: "Product Not Found | Carpet Store",
-//       description: "The requested rug could not be found.",
-//       keywords: ["rug", "carpet", "product not found"],
-//     };
-//   }
+  if (!rug) {
+    return {
+      title: "Product Not Found | Carpet Store",
+      description: "The requested rug could not be found.",
+      keywords: ["rug", "carpet", "product not found"],
+    };
+  }
 
-//   const productName = rug.product_name?.[locale] || "Unnamed Product";
-//   const description = rug.description?.[locale] || "No description available";
-//   const ogImage = rug.images?.[0] || "/static/default-rug.jpg";
+  const productName = rug.product_name?.[locale] || "Unnamed Product";
+  const description = rug.description?.[locale] || "No description available";
+  const ogImage = rug.images?.[0] || "/static/default-rug.jpg";
 
-//   const keywords = [
-//     rug.product_name?.[locale],
-//     rug.collection?.[locale],
-//     rug.style?.[locale],
-//     rug.description?.[locale],
-//     ...(rug.features?.[locale]?.technical_info || []),
-//     ...(rug.features?.[locale]?.care_and_warranty || []),
-//     ...(rug.sizes || []),
-//   ]
-//     .filter(Boolean)
-//     .join(", ");
+  const keywords = [
+    rug.product_name?.[locale],
+    rug.collection?.[locale],
+    rug.style?.[locale],
+    rug.description?.[locale],
+    ...(rug.features?.[locale]?.technical_info || []),
+    ...(rug.features?.[locale]?.care_and_warranty || []),
+    ...(rug.sizes || []),
+  ]
+    .filter(Boolean)
+    .join(", ");
 
-//   return {
-//     title: productName,
-//     description,
-//     keywords,
-//     openGraph: {
-//       title: productName,
-//       description,
-//       url: `${baseUrl}/${locale}/rugs/${rugId}`,
-//       siteName: "Koenig Carpet",
-//       images: [
-//         {
-//           url: ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`,
-//           width: 1200,
-//           height: 630,
-//           alt: productName,
-//         },
-//       ],
-//       type: "website",
-//       locale,
-//     },
-//     twitter: {
-//       card: "summary_large_image",
-//       title: productName,
-//       description,
-//       images: [ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`],
-//     },
-//     alternates: {
-//       canonical: `${baseUrl}/${locale}/rugs/${rugId}`,
-//     },
-//   };
-// }
+  return {
+    title: productName,
+    description,
+    keywords,
+    openGraph: {
+      title: productName,
+      description,
+      url: `${baseUrl}/${locale}/rugs/${rugId}`,
+      siteName: "Koenig Carpet",
+      images: [
+        {
+          url: ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`,
+          width: 1200,
+          height: 630,
+          alt: productName,
+        },
+      ],
+      type: "website",
+      locale,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: productName,
+      description,
+      images: [ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`],
+    },
+    alternates: {
+      canonical: `${baseUrl}/${locale}/rugs/${rugId}`,
+    },
+  };
+}
 
-// export const generateStaticParams = async () => {
-//   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+export const generateStaticParams = async () => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-//   const res = await fetch(`${baseUrl}/api/products`, { cache: "no-store" });
-//   const { products } = (await res.json()) as { products: RugProduct[] };
+  const res = await fetch(`${baseUrl}/api/products`, { cache: "no-store" });
+  const { products } = (await res.json()) as { products: RugProduct[] };
 
-//   return products.map((rug) => ({ rugId: rug.id.toString() }));
-// };
+  return products.map((rug) => ({ rugId: rug.id.toString() }));
+};
