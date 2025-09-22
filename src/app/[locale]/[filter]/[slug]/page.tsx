@@ -21,8 +21,12 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   const urlSearchParams = use(searchParams);
   const pathParams = use(params)
   const dict = use(getDictionary())
-  const data = use(import("@/context/data.json").then((m) => m.default)) as RugProduct[];
-  const filteredRugs = filterProducts(data, urlSearchParams, pathParams.filter, pathParams.slug);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+  const data = use(fetch(`${baseUrl}/api/products`, { cache: "no-store", headers: { "accept-language": pathParams.locale } }).then((res) => res.json())
+  ) as { products: RugProduct[] };
+
+  const filteredRugs = filterProducts(data.products, urlSearchParams, pathParams.filter, pathParams.slug);
 
 
   const pageRaw = urlSearchParams.page;
@@ -35,7 +39,7 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   const end = start + perPage;
   const displayedRugs = filteredRugs.slice(start, end);
 
-  const filterData = generateFilterData(data, pathParams.locale, dict)
+  const filterData = generateFilterData(data.products, pathParams.locale, dict)
 
   const filterType = findItem(dict.shared.sideBarLinks, pathParams.filter);
   const value = findItem(filterType?.children as SideBarItem[], pathParams.slug);
@@ -62,13 +66,16 @@ export default FilteredRugs
 
 
 export const generateStaticParams = async () => {
-  const data = (await import("@/context/data.json")).default as RugProduct[];
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const data = use(fetch(`${baseUrl}/api/products`, { cache: "no-store" }).then((res) => res.json())
+  ) as { products: RugProduct[] };
 
   const paramsSet = new Set<string>();
   const params: { filter: string; slug: string }[] = [];
 
   localeConfig.locales.map((locale) => {
-    data.forEach((rug) => {
+    data.products.forEach((rug) => {
       const entries: [string, string | string[]][] = [
         ["color", rug.color[locale]],
         ["style", rug.style[locale]],

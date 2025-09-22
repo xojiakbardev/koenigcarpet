@@ -54,15 +54,14 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   const mergedSearchParams = {
     ...urlSearchParams,
     ...(filter !== "all-rugs" &&
-    ["marquise", "oriential", "amorph", "ethnique", "shell"].includes(filter)
+      ["marquise", "oriential", "amorph", "ethnique", "shell"].includes(filter)
       ? { collection: filter }
       : {}),
   };
 
-  const data = use(
-    fetch("http://localhost:3000/api/products", {
-      cache: "no-store",
-    }).then((res) => res.json())
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+  const data = use(fetch(`${baseUrl}/api/products`, { cache: "no-store", headers: { "accept-language": pathParams.locale } }).then((res) => res.json())
   ) as { products: RugProduct[] };
 
   let filteredRugs = filterProducts(data.products, mergedSearchParams);
