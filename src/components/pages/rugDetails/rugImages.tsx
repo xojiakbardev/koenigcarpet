@@ -22,7 +22,7 @@ const RugImages: FC<Props> = ({ rug, locale }) => {
                     <Image
                         key={index}
                         src={image}
-                        alt={`${rug.product_name[locale]}`}
+                        alt={`${String(rug.id)}`}
                         width={270}
                         height={387}
                         priority

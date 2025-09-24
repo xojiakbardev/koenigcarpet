@@ -113,7 +113,7 @@ const CartPage = () => {
                         width={80}
                         height={80}
                         src={ci.item.images[0]}
-                        alt={ci.item.product_name[locale]}
+                        alt={String(ci.item.id)}
                         className="w-20 h-20 object-cover rounded"
                       />
                       <div className="flex-1">

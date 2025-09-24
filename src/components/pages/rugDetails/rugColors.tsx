@@ -27,7 +27,7 @@ const RugColors: FC<Props> = ({ rugs, locale}) => {
                         className="p-1 border cursor-pointer">
                         <Image
                             src={rug.images[0]}
-                            alt={rug.product_name[locale]}
+                            alt={String(rug.id)}
                             width={270}
                             height={380}
                             priority
