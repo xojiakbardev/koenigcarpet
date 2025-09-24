@@ -50,7 +50,7 @@ const CartPage = () => {
       const data = await res.json();
       if (data.success) {
         setMessage(dictionary?.cart.order.success || "✅");
-        // clearCart();
+        clearCart();
         setShowModal(false);
       } else {
         setMessage(dictionary?.cart.order.error || "❌");
