@@ -20,12 +20,11 @@ const CartPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleOrder = async () => {
-    if (!name || !phone || !address) {
+    if (!name || !phone ) {
       setMessage(dictionary?.cart.order.fillAllFields || "⚠️");
       return;
     }
@@ -43,7 +42,6 @@ const CartPage = () => {
         body: JSON.stringify({
           name,
           phone,
-          address,
           cart,
           subtotal,
         }),
@@ -208,13 +206,6 @@ const CartPage = () => {
               onChange={(e) => setPhone(e.target.value)}
               className="w-full border p-2 mb-3 rounded"
             />
-            <textarea
-              placeholder={dictionary?.cart.order.address}
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              className="w-full border p-2 mb-3 rounded"
-            />
-
             {message && <p className="text-sm text-red-500 mb-2">{message}</p>}
 
             <div className="flex justify-end gap-2">

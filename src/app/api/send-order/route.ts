@@ -7,10 +7,10 @@ const CHAT_IDS = [5738468941, 5050150433];
 
 export async function POST(req: Request) {
   try {
-    const { name, phone, address, cart, subtotal } =
+    const { name, phone, cart, subtotal } =
       await req.json();
 
-    if (!name || !phone || !address || !cart) {
+    if (!name || !phone  || !cart) {
       return NextResponse.json(
         { success: false, error: "❌ Missing params" },
         { status: 400 }
@@ -24,7 +24,6 @@ export async function POST(req: Request) {
 <b>${dict.cart.order.newOrder}</b>\n
 👤 <b>${dict.cart.order.name}:</b> ${name}
 📞 <b>${dict.cart.order.phone}:</b> ${phone}
-🏠 <b>${dict.cart.order.address}:</b> ${address}\n
 <b>${dict.cart.order.cart}:</b>
 ${cart
   .map(
@@ -47,7 +46,7 @@ ${cart
           body: JSON.stringify({
             chat_id: chatId,
             text: orderText,
-            parse_mode: "HTML", // 📌 Formatlash uchun
+            parse_mode: "HTML",
           }),
         })
       )
