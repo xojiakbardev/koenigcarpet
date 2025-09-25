@@ -18,38 +18,38 @@ const toList = (v: any): string[] => {
 }
 
 const ProductControl: React.FC = () => {
-  // grid & sort
+
   const [grid, setGrid] = useQueryState('grid', false)
   const [sortBy, setSortBy, clearSortBy] = useQueryState('sortBy', false)
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
   const { dictionary } = useDictionary()
 
-  // drawer
+
   const { open } = useDrawerStore()
 
-  // filters (ko‘p qiymatlilar uchun 3-return clear funksiyasidan foydalandik)
+
   const [inStock, , clearInStock] = useQueryState("inStock", false)
   const [colors, , clearColors] = useQueryState("color", true)
   const [styles, , clearStyles] = useQueryState("style", true)
   const [collections, , clearCollections] = useQueryState("collection", true)
   const [sizes, , clearSizes] = useQueryState("sizes", true)
 
-  // sort tanlovlari ("" EMAS!)
-const sortOptions: SortOption[] = [
-  { value: 'default', label: dictionary?.shared.sortBy ?? "SORT BY" },
-  { value: 'name_asc', label: dictionary?.shared.sortNameAsc ?? "PRODUCT NAME (A TO Z)" },
-  { value: 'name_desc', label: dictionary?.shared.sortNameDesc ?? "PRODUCT NAME (Z TO A)" },
-  { value: 'price_asc', label: dictionary?.shared.sortPriceAsc ?? "PRICE (LOW TO HIGH)" },
-  { value: 'price_desc', label: dictionary?.shared.sortPriceDesc ?? "PRICE (HIGH TO LOW)" },
-  { value: 'stock_code', label: dictionary?.shared.sortStockCode ?? "STOCK CODE" },
-  { value: 'newest', label: dictionary?.shared.sortNewest ?? "YENİDEN ESKİYE" },
-  { value: 'oldest', label: dictionary?.shared.sortOldest ?? "ESKİDEN YENİYE" }
-];
+
+  const sortOptions: SortOption[] = [
+    { value: 'default', label: dictionary?.shared.sortBy ?? "SORT BY" },
+    { value: 'name_asc', label: dictionary?.shared.sortNameAsc ?? "PRODUCT NAME (A TO Z)" },
+    { value: 'name_desc', label: dictionary?.shared.sortNameDesc ?? "PRODUCT NAME (Z TO A)" },
+    { value: 'price_asc', label: dictionary?.shared.sortPriceAsc ?? "PRICE (LOW TO HIGH)" },
+    { value: 'price_desc', label: dictionary?.shared.sortPriceDesc ?? "PRICE (HIGH TO LOW)" },
+    { value: 'stock_code', label: dictionary?.shared.sortStockCode ?? "STOCK CODE" },
+    { value: 'newest', label: dictionary?.shared.sortNewest ?? "YENİDEN ESKİYE" },
+    { value: 'oldest', label: dictionary?.shared.sortOldest ?? "ESKİDEN YENİYE" }
+  ];
 
   const currentSort: SortOption =
     sortOptions.find(o => o.value === sortBy) || sortOptions[0]
 
-  // dropdown outside-click (desktop/mobil alohida)
+
 
   const handleSortSelect = (value: string) => {
     nProgress.start()
@@ -61,7 +61,7 @@ const sortOptions: SortOption[] = [
     setIsDropdownOpen(false)
   }
 
-  // badge’lar
+
   const badges: { label: string; onClear: () => void }[] = []
   if (inStock) {
     badges.push({ label: 'In Stock', onClear: () => clearInStock() })

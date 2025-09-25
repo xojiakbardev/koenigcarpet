@@ -16,7 +16,7 @@ interface CategoryProps {
 
 const Category: FC<CategoryProps> = ({ category }) => {
   const [locale] = useLocale()
-  const path = `/${locale}/${category.path}`
+  const path = `/${locale}${category.path}`
   return (
     <div className="h-full w-full flex flex-col items-center justify-center relative">
       <Image src={category.image} alt={category.title} width={1470} height={730} priority className="w-full h-full absolute object-cover" />

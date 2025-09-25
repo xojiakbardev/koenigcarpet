@@ -1,5 +1,6 @@
 "use client";
 
+import useDrawerStore from "@/hooks/useDrawerStore";
 import { ChevronDown } from "lucide-react";
 import React, { Children, FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
@@ -11,11 +12,13 @@ interface SlideWrapperProps {
 const SlideWrapper: FC<SlideWrapperProps> = ({ children, elem }) => {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { searchComp } = useDrawerStore();
+
   const isScrolling = useRef(false);
   const touchStartY = useRef<number | null>(null);
 
   const scrollToSection = useCallback((index: number) => {
-    if (index < 0 || index > children.length) return; 
+    if (index < 0 || index > children.length) return;
     isScrolling.current = true;
     setActiveIndex(index);
     sectionRefs.current[index]?.scrollIntoView({
@@ -28,6 +31,8 @@ const SlideWrapper: FC<SlideWrapperProps> = ({ children, elem }) => {
   }, [children.length]);
 
   useEffect(() => {
+    if (searchComp) return;
+
     const handleWheel = (e: WheelEvent) => {
       if (isScrolling.current) return;
       e.preventDefault();
@@ -58,7 +63,7 @@ const SlideWrapper: FC<SlideWrapperProps> = ({ children, elem }) => {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [activeIndex, scrollToSection]);
+  }, [activeIndex, scrollToSection, searchComp]);
 
   return (
     <>
