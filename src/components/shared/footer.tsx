@@ -18,7 +18,6 @@ const Footer = () => {
   const { dictionary } = useDictionary();
   const [locale] = useLocale();
 
-  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -33,62 +32,49 @@ const Footer = () => {
     Share2,
   };
 
-  const handleSubscribe = async () => {
-    if (!email) {
-      setMessage("❌ Email kerak");
+  const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const sendContact = async () => {
+    setLoading(true);
+    if (!name || !phone) {
+      setMessage(dictionary?.cart.order.fillAllFields || "⚠️");
+      setLoading(false);
       return;
     }
-
-    setLoading(true);
+    await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/api/send-contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-locale": locale,
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+      }),
+    })
+    setLoading(false);
     setMessage("");
+    setShowModal(false);
+    setPhone("");
+    setName("");
+  }
 
-    try {
-      const res = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-locale": locale },
-        body: JSON.stringify({
-          to: "hojiakbarnasriddinov2006@gmail.com",
-          email,
-        }),
-      });
-
-      const data = await res.json();
-      if (data.success) {
-        setMessage("✅ Email yuborildi!");
-        setEmail("");
-      } else {
-        setMessage("❌ Xatolik yuz berdi!");
-      }
-    } catch (err) {
-      console.error(err);
-      setMessage("❌ Server bilan muammo!");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <footer className="bg-white w-full h-full py-12 flex flex-col items-center justify-center gap-10">
-      {/* Newsletter */}
       <div className="flex flex-col items-center mb-8">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder={dictionary?.footer.placeholder}
-          className="border-b border-black text-black placeholder:text-black placeholder:uppercase focus:outline-none text-center mb-4 w-72 md:w-96 p-4"
-        />
         <button
-          onClick={handleSubscribe}
+          onClick={() => setShowModal(true)}
           disabled={loading}
-          className="border text-black border-black px-20 py-4 hover:bg-black hover:text-white transition disabled:opacity-50"
+          type="button"
+          className="cursor-pointer border text-black border-black px-20 py-4 hover:bg-black hover:text-white transition disabled:opacity-50"
         >
-          {loading ? "⏳..." : dictionary?.footer.send}
+          {dictionary?.footer.send}
         </button>
-        {message && <p className="mt-2 text-sm text-gray-600">{message}</p>}
       </div>
 
-      {/* Social icons */}
       <div className="flex gap-6 mb-8">
         {dictionary?.contacts?.social?.value.map((social: any, i: number) => {
           const SocialIcon = iconMap[social.platform] || Share2;
@@ -106,9 +92,7 @@ const Footer = () => {
         })}
       </div>
 
-      {/* Footer links */}
       <div className="flex flex-col md:flex-row gap-12 text-center md:text-left">
-        {/* POLICIES */}
         <div className="flex flex-col items-center">
           <h3 className="text-md text-black underline font-semibold mb-2">
             {dictionary?.footer.policies}
@@ -120,7 +104,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* COMPANY */}
         <div className="flex flex-col items-center">
           <h3 className="text-md text-black underline font-semibold mb-2">
             {dictionary?.footer.company}
@@ -132,7 +115,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* SUPPORT */}
         <div className="flex flex-col items-center">
           <h3 className="text-md text-black underline font-semibold mb-2">
             {dictionary?.footer.support}
@@ -152,12 +134,79 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Copyright */}
       <div className="text-center text-gray-400 text-xs mb-4">
         {dictionary?.footer.copyright}
       </div>
+
+      {showModal && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black/30 bg-opacity-50 transition-opacity z-50"
+          onClick={() => !loading && setShowModal(false)}
+        >
+          <div
+            className="bg-white rounded-xl shadow-lg p-6 w-96 transform transition-all scale-95 animate-fadeIn"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-lg font-medium mb-4">
+              {dictionary?.cart.order.enterDetails}
+            </h2>
+            <input
+              type="text"
+              placeholder={dictionary?.cart.order.name}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full border p-2 mb-3 rounded"
+            />
+            <input
+              type="tel"
+              placeholder={dictionary?.cart.order.phone}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full border p-2 mb-3 rounded"
+            />
+            {message && <p className="text-sm text-red-500 mb-2">{message}</p>}
+
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 border rounded"
+                disabled={loading}
+              >
+                {dictionary?.cart.order.cancel}
+              </button>
+              <button
+                onClick={sendContact}
+                disabled={loading}
+                className="cursor-pointer px-4 py-2 bg-green-600 text-white rounded flex items-center gap-2 disabled:opacity-50"
+              >
+                {loading && (
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                )}
+                {loading
+                  ? dictionary?.cart.order.sending
+                  : dictionary?.footer.send}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out;
+        }
+      `}</style>
     </footer>
   );
 };
 
-export default Footer;
+export default Footer

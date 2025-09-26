@@ -13,6 +13,8 @@ import Footer from "@/components/shared/footer";
 import { RugProduct } from "@/types/product";
 import RugQuantityAddToCart from "@/components/pages/rugDetails/rugQuantity";
 
+import productsData from "@/context/data.json";
+
 type ProductDetailsProps = {
   params: Promise<{ locale: Locale; rugId: string }>;
 };
@@ -25,14 +27,16 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
+  
   const data = use(
-    fetch(`${baseUrl}/api/products`, {
+    fetch(`${baseUrl}/api/products/${rugId}`, {
       cache: "no-store",
       headers: { "accept-language": locale },
     }).then((res) => res.json())
-  ) as { products: RugProduct[] };
+  ) as { product: RugProduct; relatedProducts: RugProduct[] };
 
-  const currentRug = data.products.find((rug) => rug.id === Number(rugId));
+  const currentRug = data.product
+  const relatedProducts = data.relatedProducts
 
   if (!currentRug) {
     return (
@@ -42,12 +46,6 @@ const ProductDetails: FC<ProductDetailsProps> = ({ params }) => {
       </>
     );
   }
-
-  const relatedProducts = data.products.filter(
-    (rug) =>
-      rug.product_name?.[locale]?.split(" ")?.[0] ===
-      currentRug.product_name?.[locale]?.split(" ")?.[0]
-  );
 
   const productName = currentRug.product_name?.[locale];
   const description = currentRug.description?.[locale];
@@ -123,12 +121,8 @@ export async function generateMetadata({
   const locale = pathParams.locale;
   const rugId = pathParams.rugId;
 
-  const res = await fetch(`${baseUrl}/api/products`, {
-    cache: "no-store",
-    headers: { "accept-language": locale },
-  });
-  const { products } = (await res.json()) as { products: RugProduct[] };
-
+  
+  const products = productsData as RugProduct[];
   const rug = products.find((item) => item.id === Number(rugId));
 
   if (!rug) {
@@ -187,11 +181,11 @@ export async function generateMetadata({
   };
 }
 
+
 export const generateStaticParams = async () => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-  const res = await fetch(`${baseUrl}/api/products`, { cache: "no-store" });
-  const { products } = (await res.json()) as { products: RugProduct[] };
-
-  return products.map((rug) => ({ rugId: rug.id.toString() }));
+  const products = productsData as RugProduct[];
+  
+  return products.map((rug) => ({ 
+    rugId: rug.id.toString() 
+  }));
 };

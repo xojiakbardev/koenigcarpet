@@ -10,6 +10,7 @@ import { generateFilterData } from "@/lib/generateFilterData";
 import { getDictionary } from "@/localization/dictionary"
 import { SideBarItem } from '@/types/sidebar'
 
+import data from "@/context/data.json";
 
 type FilteredRugsProps = {
   params: Promise<{ locale: Locale, filter: "color" | "style" | "collection", slug: string }>
@@ -27,7 +28,6 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   ) as { products: RugProduct[] };
 
   const filteredRugs = filterProducts(data.products, urlSearchParams, pathParams.filter, pathParams.slug);
-
 
   const pageRaw = urlSearchParams.page;
   const perPageRaw = urlSearchParams.perPage;
@@ -66,16 +66,13 @@ export default FilteredRugs
 
 
 export const generateStaticParams = async () => {
-
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const data = await fetch(`${baseUrl}/api/products`, { cache: "no-store" }).then((res) => res.json()
-  ) as { products: RugProduct[] };
+  const products = data as RugProduct[];
 
   const paramsSet = new Set<string>();
   const params: { filter: string; slug: string }[] = [];
 
   localeConfig.locales.map((locale) => {
-    data.products.forEach((rug) => {
+    products.forEach((rug) => {
       const entries: [string, string | string[]][] = [
         ["color", rug.color[locale]],
         ["style", rug.style[locale]],
@@ -104,7 +101,6 @@ export const generateStaticParams = async () => {
 
   return params;
 };
-
 
 function findItem(items: SideBarItem[], param: string): SideBarItem | null {
   for (const item of items) {

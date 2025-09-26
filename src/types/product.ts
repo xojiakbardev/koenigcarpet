@@ -53,3 +53,11 @@ export interface RugProduct {
   isRunners:boolean
   inStock:boolean
 }
+
+
+export interface ILocalizedField {
+  en: string
+  ru: string
+  tr: string
+  value?: string
+}

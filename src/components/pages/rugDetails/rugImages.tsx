@@ -11,7 +11,7 @@ type Props = {
     relatedProducts:RugProduct[]
 }
 
-const RugImages: FC<Props> = ({ rug, locale }) => {
+const RugImages: FC<Props> = ({ rug }) => {
 
 
 

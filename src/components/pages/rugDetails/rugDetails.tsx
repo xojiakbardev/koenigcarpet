@@ -74,7 +74,8 @@ export const RugDetails: FC<Props> = ({ rug, locale }) => {
         </button>
       </div>
 
-      <p className="text-sm text-gray-600">{stockCode}</p>
+      <p className="text-sm text-gray-600">
+        {dictionary?.shared.sku}: ({stockCode})</p>
 
       <p className="text-sm text-gray-700">
         {dictionary?.shared?.produced || "Produced"}

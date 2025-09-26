@@ -345,6 +345,7 @@
   },
   "shared": {
     "loadMore": "Daha fazla göster",
+    "sku": "Stok Kodu",
     "ourProjects": "ÜRÜNLERIMIZ",
     "rugDetail": "HALI AYRILMALAR",
     "features": "ÜRÜN ÖZELLİKLERİ",
@@ -596,6 +597,9 @@
     ]
   },
   "contacts": {
+    "newContact": "Yeni iletişim",
+    "phone": "Telefon",
+    "name": "Ad",
     "Address": {
       "name": "Adres",
       "value": "Kaliningrad, M. Gvardii Cd. 34k2"
@@ -692,5 +696,65 @@
     "noProducts": "\"{query}\" için ürün bulunamadı",
     "tryDifferent": "Farklı bir arama terimi deneyin",
     "startTyping": "Ürün aramaya başlamak için yazmaya başlayın"
+  },
+  "addProduct": {
+    "title": "Yeni Ürün Ekle",
+    "subtitle": "Birincil dili seçin, diğerleri otomatik olarak çevrilecek",
+    "save": "Ürünü Kaydet",
+    "translating": "Çeviriliyor...",
+    "primaryLanguage": "Birincil dil:",
+    "primary": "Birincil",
+    "sections": {
+      "productName": "Ürün Adı",
+      "description": "Açıklama",
+      "features": "Özellikler",
+      "metaData": "Meta Bilgiler",
+      "images": "Resimler",
+      "sizes": "Boyutlar",
+      "details": "Detaylar",
+      "flags": "Durum Bayrakları"
+    },
+    "fields": {
+      "color": "Renk",
+      "collection": "Koleksiyon",
+      "style": "Stil",
+      "productCode": "Ürün Kodu",
+      "price": "Fiyat",
+      "width": "Genişlik (cm)",
+      "height": "Yükseklik (cm)"
+    },
+    "features": {
+      "head": "Başlık",
+      "careWarranty": "Bakım ve Garanti",
+      "technicalInfo": "Teknik Bilgi",
+      "featuresFor": "Özellikler için"
+    },
+    "placeholders": {
+      "images": "Her satıra bir resim URL'si girin",
+      "productCodeExample": "ör. RG001"
+    },
+    "buttons": {
+      "add": "Ekle",
+      "addSize": "Boyut Ekle",
+      "edit": "Düzenle",
+      "save": "Kaydet"
+    },
+    "flags": {
+      "newProduct": "Yeni Ürün",
+      "runners": "Koşu için",
+      "inStock": "Stokta"
+    },
+    "counters": {
+      "imagesCount": "Resim sayısı:",
+      "noSizes": "Hiç boyut eklenmedi"
+    },
+    "validation": {
+      "required": "Bu alan zorunludur",
+      "priceRequired": "Fiyat 0'dan büyük olmalıdır"
+    },
+    "messages": {
+      "success": "Ürün başarıyla kaydedildi!",
+      "error": "Bir hata oluştu!"
+    }
   }
 }

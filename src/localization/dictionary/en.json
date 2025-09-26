@@ -345,6 +345,7 @@
   },
   "shared": {
     "loadMore": "LOAD MORE",
+    "sku": "Stock Code",
     "ourProjects": "OUR PROJECTS",
     "rugDetail": "RUG DETAILS",
     "features": "ITEM FEATURES",
@@ -596,6 +597,9 @@
     ]
   },
   "contacts": {
+    "newContact": "New contact",
+    "phone": "Phone",
+    "name": "Name",
     "Address": {
       "name": "Address",
       "value": "Kaliningrad, M. Gvardii St. 34k2"
@@ -665,7 +669,7 @@
     "quantity": "Quantity",
     "secondProductDiscount": "2nd Product 10% Discount",
     "allBankTransferDiscount": "All BANK TRANSFER Orders 5% Discount",
-    "emptyCart":"Your cart is empty",
+    "emptyCart": "Your cart is empty",
     "order": {
       "name": "Name",
       "phone": "Phone",
@@ -692,5 +696,65 @@
     "noProducts": "No products found for \"{query}\"",
     "tryDifferent": "Try a different search term",
     "startTyping": "Start typing to search products"
+  },
+  "addProduct": {
+    "title": "Add New Product",
+    "subtitle": "Select primary language, others will be auto-translated",
+    "save": "Save Product",
+    "translating": "Translating...",
+    "primaryLanguage": "Primary language:",
+    "primary": "Primary",
+    "sections": {
+      "productName": "Product Name",
+      "description": "Description",
+      "features": "Features",
+      "metaData": "Meta Information",
+      "images": "Images",
+      "sizes": "Sizes",
+      "details": "Details",
+      "flags": "Status Flags"
+    },
+    "fields": {
+      "color": "Color",
+      "collection": "Collection",
+      "style": "Style",
+      "productCode": "Product Code",
+      "price": "Price",
+      "width": "Width (cm)",
+      "height": "Height (cm)"
+    },
+    "features": {
+      "head": "Heading",
+      "careWarranty": "Care and Warranty",
+      "technicalInfo": "Technical Information",
+      "featuresFor": "Features for"
+    },
+    "placeholders": {
+      "images": "Enter one image URL per line",
+      "productCodeExample": "e.g. RG001"
+    },
+    "buttons": {
+      "add": "Add",
+      "addSize": "Add Size",
+      "edit": "Edit",
+      "save": "Save"
+    },
+    "flags": {
+      "newProduct": "New Product",
+      "runners": "For Running",
+      "inStock": "In Stock"
+    },
+    "counters": {
+      "imagesCount": "Images count:",
+      "noSizes": "No sizes added"
+    },
+    "validation": {
+      "required": "This field is required",
+      "priceRequired": "Price must be greater than 0"
+    },
+    "messages": {
+      "success": "Product saved successfully!",
+      "error": "An error occurred!"
+    }
   }
 }
