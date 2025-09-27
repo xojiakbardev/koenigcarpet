@@ -85,7 +85,7 @@ const ProductControl: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-3 bg-white py-4 px-4 md:px-10 relative">
-      {/* Active filter badges */}
+
       {badges.length > 0 && (
         <div className="flex flex-wrap gap-1">
           {badges.map((b, i) => (
@@ -106,10 +106,10 @@ const ProductControl: React.FC = () => {
         </div>
       )}
 
-      {/* CONTROL BAR */}
+
       <div className="flex gap-4 justify-end items-center">
 
-        {/* SORT (desktop) */}
+
         <div className="relative hidden md:block" >
           <button
             className="cursor-pointer uppercase flex items-center gap-2 hover:text-gray-600 transition-colors"
@@ -145,7 +145,7 @@ const ProductControl: React.FC = () => {
           )}
         </div>
 
-        {/* GRID (faqat md↑) */}
+
         <div className="hidden md:flex gap-2">
           {['3', '4', '6'].map(num => (
             <button
@@ -159,7 +159,7 @@ const ProductControl: React.FC = () => {
           ))}
         </div>
 
-        {/* FILTER (desktop) */}
+
         <button
           className="hidden md:block cursor-pointer uppercase hover:text-gray-600 transition-colors"
           onClick={() => open('filterbar')}
@@ -167,9 +167,9 @@ const ProductControl: React.FC = () => {
           {dictionary?.shared.filterBy}
         </button>
 
-        {/* MOBILE (faqat <md) — 2 ta tugma 50%/50% */}
+
         <div className="flex w-full gap-2 md:hidden">
-          {/* SORT (mobile) */}
+
           <div className="relative flex-1">
             <button
               className="w-full border border-black px-3 py-2 text-[10px] uppercase text-center hover:bg-black hover:text-white transition-colors"
@@ -202,7 +202,7 @@ const ProductControl: React.FC = () => {
             )}
           </div>
 
-          {/* FILTER (mobile) */}
+
           <button
             className="flex-1 border border-black px-3 py-2 text-[10px] uppercase text-center hover:bg-black hover:text-white transition-colors"
             onClick={() => open('filterbar')}
@@ -212,7 +212,7 @@ const ProductControl: React.FC = () => {
         </div>
       </div>
 
-      {/* BACKDROP — har ikkala rejim uchun */}
+
       {isDropdownOpen && (
         <div
           className="fixed inset-0 z-40"

@@ -12,7 +12,7 @@ interface SlideWrapperProps {
 const SlideWrapper: FC<SlideWrapperProps> = ({ children, elem }) => {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const { searchComp } = useDrawerStore();
+  const { searchComp, sidebar } = useDrawerStore();
 
   const isScrolling = useRef(false);
   const touchStartY = useRef<number | null>(null);
@@ -31,7 +31,7 @@ const SlideWrapper: FC<SlideWrapperProps> = ({ children, elem }) => {
   }, [children.length]);
 
   useEffect(() => {
-    if (searchComp) return;
+    if (searchComp || sidebar) return;
 
     const handleWheel = (e: WheelEvent) => {
       if (isScrolling.current) return;
@@ -63,7 +63,7 @@ const SlideWrapper: FC<SlideWrapperProps> = ({ children, elem }) => {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [activeIndex, scrollToSection, searchComp]);
+  }, [activeIndex, scrollToSection, searchComp, sidebar]);
 
   return (
     <>

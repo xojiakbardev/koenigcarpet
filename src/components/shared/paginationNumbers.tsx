@@ -37,15 +37,15 @@ const buildRange = (current: number, total: number, delta = 2): (number | string
 
 const PaginationNumbers: FC<Props> = ({
   totalItemsCount,
-  defaultPerPage = 12,
+  defaultPerPage = 24,
   maxPerPage = 200,
-  perPageOptions = [12, 24, 48],
+  perPageOptions = [24, 48],
 }) => {
-  
+
   const [pageRaw, setPage] = useQueryState("page", false);
   const [perPageRaw, setPerPage] = useQueryState("perPage", false);
 
-  
+
   const rawPer = safeParseInt(perPageRaw, defaultPerPage);
   const perPage = clamp(rawPer, 1, maxPerPage);
 
@@ -55,7 +55,7 @@ const PaginationNumbers: FC<Props> = ({
   const rawPage = safeParseInt(pageRaw, 1);
   const currentPage = clamp(rawPage, 1, totalPages);
 
-  
+
   useEffect(() => {
     const needsPerFix = rawPer !== perPage;
     const needsPageFix = rawPage !== currentPage;
@@ -66,10 +66,10 @@ const PaginationNumbers: FC<Props> = ({
     if (needsPageFix) {
       setPage(String(currentPage));
     }
-    
+
   }, [rawPer, perPage, rawPage, currentPage, setPage, setPerPage]);
 
-  
+
   const pages = useMemo(() => buildRange(currentPage, totalPages, 2), [currentPage, totalPages]);
 
   if (items === 0 || totalPages <= 1) return null;
@@ -92,7 +92,7 @@ const PaginationNumbers: FC<Props> = ({
     setPerPage(String(next));
   };
 
-  
+
   const normalizedOptions = Array.from(
     new Set([...perPageOptions, defaultPerPage].map((n) => clamp(n, 1, maxPerPage)))
   ).sort((a, b) => a - b);
@@ -102,7 +102,7 @@ const PaginationNumbers: FC<Props> = ({
       className="col-span-full mt-6 flex flex-wrap items-center justify-center gap-2"
       aria-label="Pagination"
     >
-      {/* First (md dan katta) */}
+
       <button
         onClick={handleFirst}
         disabled={currentPage === 1}
@@ -112,7 +112,7 @@ const PaginationNumbers: FC<Props> = ({
         «
       </button>
 
-      {/* Prev */}
+
       <button
         onClick={handlePrev}
         disabled={currentPage === 1}
@@ -122,7 +122,7 @@ const PaginationNumbers: FC<Props> = ({
         ‹
       </button>
 
-      {/* Katta ekran: raqamlar + ellipsis */}
+
       <div className="hidden md:flex gap-2">
         {pages.map((p, i) =>
           p === "..." ? (
@@ -148,7 +148,7 @@ const PaginationNumbers: FC<Props> = ({
         )}
       </div>
 
-      {/* Kichik ekran: faqat current / total */}
+
       <div className="flex md:hidden items-center gap-2">
         <span
           className="px-3 py-1 border rounded bg-gray-900 text-white"
@@ -159,7 +159,7 @@ const PaginationNumbers: FC<Props> = ({
         <span className="text-gray-500 text-sm select-none">/ {String(totalPages)}</span>
       </div>
 
-      {/* Next */}
+
       <button
         onClick={handleNext}
         disabled={currentPage === totalPages}
@@ -169,7 +169,7 @@ const PaginationNumbers: FC<Props> = ({
         ›
       </button>
 
-      {/* Last (md dan katta) */}
+
       <button
         onClick={handleLast}
         disabled={currentPage === totalPages}

@@ -5,7 +5,7 @@ export interface FilterOption {
 }
 
 export interface FilterData {
-  key: "color" | "style" | "collection" | "size";
+  key: "color" | "style" | "collections" | "size";
   title: string;
   options: FilterOption[];
 }

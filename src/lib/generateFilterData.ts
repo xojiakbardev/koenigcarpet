@@ -71,7 +71,7 @@ export const generateFilterData = (
   return [
     { key: "color", title: dict?.shared.colors || "Colors", options: mapToOptions(colorMap) },
     { key: "style", title: dict?.shared.styles || "Styles", options: mapToOptions(styleMap) },
-    { key: "collection", title: dict?.shared.collections || "Collections", options: mapToOptions(collectionMap) },
+    { key: "collections", title: dict?.shared.collections || "Collections", options: mapToOptions(collectionMap) },
     { key: "size", title: dict?.shared.sizes || "Sizes", options: mapToOptions(sizeMap) },
   ];
 };

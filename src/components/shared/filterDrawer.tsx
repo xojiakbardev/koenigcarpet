@@ -17,7 +17,7 @@ const FilterDrawer: React.FC = () => {
   // const [inStock, setInStock] = useQueryState("inStock", false)
   const [colors, setColors, clearColors] = useQueryState("color", true)
   const [styles, setStyles, clearStyles] = useQueryState("style", true)
-  const [collections, setCollections, clearCollections] = useQueryState("collection", true)
+  const [collections, setCollections, clearCollections] = useQueryState("collections", true)
   const [sizes, setSizes, clearSizes] = useQueryState("sizes", true)
 
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
@@ -29,14 +29,14 @@ const FilterDrawer: React.FC = () => {
   const segments = pathname.split("/").filter(Boolean)
   const secondLast = segments[segments.length - 2] as FilterData["key"] | undefined
   const hiddenKey: FilterData["key"] | null =
-    secondLast && (["color", "style", "collection", "size"] as const).includes(secondLast)
+    secondLast && (["color", "style", "collections", "size"] as const).includes(secondLast)
       ? (secondLast as FilterData["key"])
       : null
 
   const selectedValues = {
     color: colors || [],
     style: styles || [],
-    collection: collections || [],
+    collections: collections || [],
     size: sizes || []
   }
   const updateQuery = (key: FilterData["key"], value: string) => {
@@ -44,7 +44,7 @@ const FilterDrawer: React.FC = () => {
     const setter =
       key === "color" ? setColors :
         key === "style" ? setStyles :
-          key === "collection" ? setCollections :
+          key === "collections" ? setCollections :
             key === "size" ? setSizes :
               () => { }
 
@@ -117,7 +117,7 @@ const FilterDrawer: React.FC = () => {
                 const clearer =
                   section.key === "color" ? clearColors :
                     section.key === "style" ? clearStyles :
-                      section.key === "collection" ? clearCollections :
+                      section.key === "collections" ? clearCollections :
                         clearSizes
                 return (
                   <div key={section.key} className="border-b border-gray-100 last:border-b-0">
