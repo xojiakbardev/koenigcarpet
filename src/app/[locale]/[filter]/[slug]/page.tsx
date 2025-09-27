@@ -32,7 +32,7 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   const pageRaw = urlSearchParams.page;
   const perPageRaw = urlSearchParams.perPage;
 
-  const perPage = Math.max(1, Math.min(parseInt(perPageRaw as string) || 12, 200));
+  const perPage = Math.max(1, Math.min(parseInt(perPageRaw as string) || 24, 200));
   const currentPage = Math.max(1, parseInt(pageRaw as string) || 1);
 
   const start = (currentPage - 1) * perPage;

@@ -38,7 +38,6 @@ const FilterProduct: FC<Props> = ({ rugs = [], searchParams, rugsCount, filterDa
       <Suspense fallback={null}>
         <PaginationNumbers
           totalItemsCount={rugsCount}
-          defaultPerPage={12}
           maxPerPage={200}
         />
       </Suspense>

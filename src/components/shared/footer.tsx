@@ -35,6 +35,7 @@ const Footer = () => {
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [stock, setStock] = useState("");
 
   const sendContact = async () => {
     setLoading(true);
@@ -52,6 +53,7 @@ const Footer = () => {
       body: JSON.stringify({
         name,
         phone,
+        stock
       }),
     })
     setLoading(false);
@@ -59,6 +61,7 @@ const Footer = () => {
     setShowModal(false);
     setPhone("");
     setName("");
+    setStock("");
   }
 
 
@@ -71,7 +74,7 @@ const Footer = () => {
           type="button"
           className="cursor-pointer border text-black border-black px-20 py-4 hover:bg-black hover:text-white transition disabled:opacity-50"
         >
-          {dictionary?.footer.send}
+          {dictionary?.shared.sendOrder}
         </button>
       </div>
 
@@ -162,6 +165,13 @@ const Footer = () => {
               placeholder={dictionary?.cart.order.phone}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              className="w-full border p-2 mb-3 rounded"
+            />
+            <input
+              type="text"
+              placeholder={dictionary?.cart.order.stock}
+              value={stock}
+              onChange={(e) => setStock(e.target.value)}
               className="w-full border p-2 mb-3 rounded"
             />
             {message && <p className="text-sm text-red-500 mb-2">{message}</p>}

@@ -7,7 +7,7 @@ const CHAT_IDS = [5738468941, 5050150433];
 
 export async function POST(req: Request) {
   try {
-    const { name, phone } = await req.json();
+    const { name, phone, stock } = await req.json();
 
     if (!name || !phone) {
       return NextResponse.json(
@@ -20,9 +20,10 @@ export async function POST(req: Request) {
     const dict = await getDictionary(locale);
 
     const contactText = `
-<b>${dict.contacts.newContact}</b>\n
+<b>${dict.cart.order.newOrder}</b>\n
 👤 <b>${dict.contacts.name}:</b> ${name}
 📞 <b>${dict.contacts.phone}:</b> ${phone}
+<b>${dict.cart.order.stock}:</b> ${stock}
 ━━━━━━━━━━━━━━━
 `;
 

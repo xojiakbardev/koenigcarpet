@@ -344,6 +344,7 @@
     ]
   },
   "shared": {
+    "sendOrder": "Sipariş Ver",
     "loadMore": "Daha fazla göster",
     "sku": "Stok Kodu",
     "ourProjects": "ÜRÜNLERIMIZ",
@@ -672,11 +673,13 @@
     "allBankTransferDiscount": "Tüm HAVALE Siparişlerinde %5 İndirim",
     "order": {
       "cart": "Sepet",
+      "orderNow": "Sipariş Yap",
       "subtotal": "Ara toplam",
       "discount": "İndirim",
       "total": "Toplam",
       "enterDetails": "Bilgileri girin",
       "name": "İsim",
+      "stock": "Stok",
       "phone": "Telefon",
       "address": "Adres",
       "cancel": "İptal",

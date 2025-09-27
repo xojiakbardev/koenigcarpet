@@ -344,6 +344,7 @@
     ]
   },
   "shared": {
+    "sendOrder": "Send Order",
     "loadMore": "LOAD MORE",
     "sku": "Stock Code",
     "ourProjects": "OUR PROJECTS",
@@ -671,7 +672,9 @@
     "allBankTransferDiscount": "All BANK TRANSFER Orders 5% Discount",
     "emptyCart": "Your cart is empty",
     "order": {
+      "orderNow": "Order Now",
       "name": "Name",
+      "stock":"Stock",
       "phone": "Phone",
       "address": "Address",
       "cart": "Cart",
