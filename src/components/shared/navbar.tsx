@@ -12,10 +12,10 @@ import Image from "next/image";
 
 interface NavbarProps {
   fixed?: boolean;
-  mode?:string
+  mode?: string
 }
 
-const Navbar: React.FC<NavbarProps> = ({ fixed = false, mode="light" }) => {
+const Navbar: React.FC<NavbarProps> = ({ fixed = false, mode = "light" }) => {
   const [scrolled, setScrolled] = useState(false);
   const { open } = useDrawerStore()
   const [locale] = useLocale();
@@ -117,8 +117,8 @@ const Navbar: React.FC<NavbarProps> = ({ fixed = false, mode="light" }) => {
           <div className="flex items-center gap-4">
             <button className="cursor-pointer p-2 rounded-full transition"
               onClick={() => open("searchComp")}>
-              <Search className="w-6 h-6" />
-            </button>
+              <Search className="size-4 md:size-6" />            
+              </button>
             {/* <button className="cursor-pointer p-2 rounded-full transition">
               <User2 className="w-6 h-6" />
             </button> */}
