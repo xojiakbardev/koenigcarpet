@@ -6,7 +6,7 @@ function formatDate(date: Date): string {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://www.koenigcarpet.ru";
+  const baseUrl = "https://koenigcarpet.ru";
 
   const products = (data as any[]).map((product) => {
     const id = product.id;

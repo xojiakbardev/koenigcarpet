@@ -53,7 +53,7 @@ const Footer = () => {
       body: JSON.stringify({
         name,
         phone,
-        stock
+        stock:`<b>${dictionary?.cart.order.stock}:</b> ${stock}`,
       }),
     })
     setLoading(false);

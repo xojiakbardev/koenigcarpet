@@ -78,7 +78,7 @@ export async function generateMetadata({
     openGraph: {
       title: dictionary.meta.openGraph.title,
       description: dictionary.meta.openGraph.description,
-      url: `https://www.koenigcarpet.ru/${locale}`,
+      url: `https://koenigcarpet.ru/${locale}`,
       siteName: "Koenig Carpet",
       images: [
         {
@@ -98,11 +98,11 @@ export async function generateMetadata({
       images: [dictionary.meta.twitter.image],
     },
     alternates: {
-      canonical: `https://www.koenigcarpet.ru/${locale}`,
+      canonical: `https://koenigcarpet.ru/${locale}`,
       languages: {
-        en: "https://www.koenigcarpet.ru/en",
-        ru: "https://www.koenigcarpet.ru/ru",
-        uz: "https://www.koenigcarpet.ru/uz",
+        en: "https://koenigcarpet.ru/en",
+        ru: "https://koenigcarpet.ru/ru",
+        uz: "https://koenigcarpet.ru/uz",
       },
     },
   };

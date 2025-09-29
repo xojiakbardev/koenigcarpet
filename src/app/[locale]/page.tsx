@@ -5,11 +5,10 @@ import Navbar from "@/components/shared/navbar";
 import type { Metadata } from "next";
 import { getDictionary } from "@/localization/dictionary";
 import { Locale } from "@/localization/config";
-import { use } from "react";
 
 
-export default function Home() {
-  const dict = use(getDictionary())
+export default async function Home() {
+  const dict = await getDictionary()
 
   return (
     <div className="h-screen w-full overflow-hidden relative">

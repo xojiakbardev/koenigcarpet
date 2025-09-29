@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
-import { Plus, Minus, ShoppingCart, LucideListOrdered, ArrowBigRightDash } from "lucide-react";
+import { Plus, Minus, ShoppingCart, ArrowBigRightDash } from "lucide-react";
 import { RugProduct } from "@/types/product";
 import { useCartStore } from "@/hooks/useCartStore";
 import { useSearchParams } from "next/navigation";
 import { calculateRugPrice } from "@/lib/calculatePrice";
 import { useDictionary } from "@/hooks/useDictionary";
+import { useLocale } from "@/hooks/useLocale";
 
 type Props = {
   rug: RugProduct;
@@ -23,42 +24,7 @@ const RugQuantityAddToCart: React.FC<Props> = ({ rug }) => {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-
-  const sendOrder = async () => {
-    setLoading(true);
-
-    if (!name || !phone) {
-      setMessage(dictionary?.cart.order.fillAllFields || "⚠️");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/api/send-contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          phone,
-          stock: rug.product_code,        
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Server xatosi");
-      }
-
-      setMessage(dictionary?.cart.order.success || "✅ Buyurtma yuborildi!");
-      setShowModal(false);
-      setPhone("");
-      setName("");
-    } catch (err) {
-      setMessage(dictionary?.cart.order.error || "❌ Xatolik yuz berdi!");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  const [locale] = useLocale()
 
 
   useEffect(() => {
@@ -98,6 +64,49 @@ const RugQuantityAddToCart: React.FC<Props> = ({ rug }) => {
       selectedSize
     );
   };
+
+
+
+  const sendOrder = async () => {
+    setLoading(true);
+
+    if (!name || !phone) {
+      setMessage(dictionary?.cart.order.fillAllFields || "⚠️");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/api/send-contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          stock: `${rug.product_name[locale]} - ${selectedSize}\n
+🔢 ${dictionary?.cart.quantity}: ${quantity}\n
+💵 ${price}₽\n 
+${dictionary?.cart.order.subtotal}: ${price * quantity}₽\n
+<b>${dictionary?.cart.order.stock}:</b> ${rug.product_code}`,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Server xatosi");
+      }
+
+      setMessage(dictionary?.cart.order.success || "✅ Buyurtma yuborildi!");
+      setShowModal(false);
+      setPhone("");
+      setName("");
+    } catch {
+      setMessage(dictionary?.cart.order.error || "❌ Xatolik yuz berdi!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
 
 
 

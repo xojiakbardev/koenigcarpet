@@ -3,7 +3,7 @@ import Banner from "@/components/shared/banner";
 import Footer from "@/components/shared/footer";
 import ProductControl from "@/components/shared/productControl";
 import { notFound } from "next/navigation";
-import { FC, Suspense, use } from "react";
+import { FC, Suspense } from "react";
 import { filterProducts } from "@/lib/filterProduct";
 import { generateFilterData } from "@/lib/generateFilterData";
 import { Locale } from "@/localization/config";
@@ -29,11 +29,11 @@ const VALID_FILTERS = [
 
 type FilterType = (typeof VALID_FILTERS)[number];
 
-const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
-  const filter = use(params).filter;
-  const urlSearchParams = use(searchParams);
-  const pathParams = use(params);
-  const dict = use(getDictionary());
+const RugsPage: FC<RugsPageProps> = async ({ params, searchParams }) => {
+  const pathParams = await params;
+  const filter = pathParams.filter;
+  const urlSearchParams = await searchParams;
+  const dict = await getDictionary()
 
   if (!VALID_FILTERS.includes(filter as FilterType)) {
     return notFound();
@@ -62,9 +62,8 @@ const RugsPage: FC<RugsPageProps> = ({ params, searchParams }) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const sortBy = urlSearchParams.sortBy;
-  
-  const data = use(fetch(`${baseUrl}/api/products?sortBy=${sortBy}`, { cache: "no-store", headers: { "accept-language": pathParams.locale } }).then((res) => res.json())
-  ) as { products: RugProduct[] };
+
+  const data = await fetch(`${baseUrl}/api/products?sortBy=${sortBy}`, { cache: "no-store", headers: { "accept-language": pathParams.locale } }).then((res) => res.json()) as { products: RugProduct[] };
 
   let filteredRugs = filterProducts(data.products, mergedSearchParams);
 
