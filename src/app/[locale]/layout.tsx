@@ -13,6 +13,7 @@ import LocaleSwitch from "@/components/shared/localeSwitch";
 import { Analytics } from "@vercel/analytics/next";
 import SearchComponent from "@/components/shared/searchComponent";
 import { CurrencyProvider } from "@/components/providers/currencyProvider";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,6 +42,8 @@ const RootLayout: FC<RootLayoutProps> = ({ children, params }) => {
             </Suspense>
           </CurrencyProvider>
         </LocaleProvider>
+                <Toaster richColors position="top-right" />
+
         <LocaleSwitch locale={locale} />
         <SearchComponent locale={locale} />
         <Analytics />

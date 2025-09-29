@@ -344,6 +344,7 @@
     ]
   },
   "shared": {
+    "copiedToClipboard": "Copied to clipboard",
     "sendOrder": "Send Order",
     "loadMore": "LOAD MORE",
     "sku": "Stock Code",

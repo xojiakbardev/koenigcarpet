@@ -344,6 +344,7 @@
     ]
   },
   "shared": {
+    "copiedToClipboard": "Kopyalandı",
     "sendOrder": "Sipariş Ver",
     "loadMore": "Daha fazla göster",
     "sku": "Stok Kodu",

@@ -7,6 +7,8 @@ import { Locale } from "@/localization/config";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useSearchParams } from "next/navigation";
 import { calculateRugPrice } from "@/lib/calculatePrice";
+import { toast } from "sonner";
+
 
 type Props = {
   rug: RugProduct;
@@ -74,7 +76,10 @@ export const RugDetails: FC<Props> = ({ rug, locale }) => {
         </button>
       </div>
 
-      <p className="text-sm text-gray-600">
+      <p className="text-sm text-gray-600 font-semibold cursor-pointer" onClick={()=> {
+        navigator.clipboard.writeText(stockCode)
+        toast.success(dictionary?.shared.copiedToClipboard)
+      }}>
         {dictionary?.shared.sku}: ({stockCode})</p>
 
       <p className="text-sm text-gray-700">
