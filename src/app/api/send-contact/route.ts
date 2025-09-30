@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getDictionary } from "@/localization/dictionary";
 import { Locale } from "@/localization/config";
 
-const BOT_TOKEN = "8385602601:AAF-95bgI4WfLVz4vaGfKC5e9QhP4Kn8J4Q";
+const BOT_TOKEN = "8198947567:AAEBgHub2L3mH7kWT-qZBtbs_jZMCALrO48";
 const CHAT_IDS = [5738468941, 5050150433, 6977560174];
 
 export async function POST(req: Request) {
