@@ -92,6 +92,14 @@ const RugsPage: FC<RugsPageProps> = async ({ params, searchParams }) => {
   const filterData = generateFilterData(data.products, pathParams.locale, dict);
   const category = dict.home.categories.find((item) => "/" + filter === item.path);
 
+  if (!category) {
+    return notFound();
+  }
+
+  if (displayedRugs.length === 0) {
+    return notFound();
+  }
+
   return (
     <div className="flex flex-col">
       <Banner filter={category?.title ? category.title : ""} image={images[filter]} />

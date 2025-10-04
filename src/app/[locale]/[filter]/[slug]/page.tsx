@@ -11,6 +11,7 @@ import { getDictionary } from "@/localization/dictionary"
 import { SideBarItem } from '@/types/sidebar'
 
 import data from "@/context/data.json";
+import { notFound } from 'next/navigation'
 
 type FilteredRugsProps = {
   params: Promise<{ locale: Locale, filter: "color" | "style" | "collection", slug: string }>
@@ -26,6 +27,10 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
 
   const data = use(fetch(`${baseUrl}/api/products`, { cache: "no-store", headers: { "accept-language": pathParams.locale } }).then((res) => res.json())
   ) as { products: RugProduct[] };
+
+  if (data.products.length === 0) {
+    return notFound()
+  }
 
   const filter = pathParams.filter;
   const slug = pathParams.slug
@@ -45,7 +50,14 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   const filterData = generateFilterData(data.products, pathParams.locale, dict)
 
   const filterType = findItem(dict.shared.sideBarLinks, pathParams.filter);
-  const value = findItem(filterType?.children as SideBarItem[], pathParams.slug);
+  if (!filterType) {
+    return notFound()
+  }
+  const value = findItem(filterType.children as SideBarItem[], pathParams.slug);
+
+
+
+
   return (
     <div>
       <Banner filter={value?.title || ""} image={"/static/image1.png"} />
