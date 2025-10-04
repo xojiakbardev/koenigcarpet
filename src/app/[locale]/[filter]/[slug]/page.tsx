@@ -27,7 +27,10 @@ const FilteredRugs: FC<FilteredRugsProps> = ({ params, searchParams }) => {
   const data = use(fetch(`${baseUrl}/api/products`, { cache: "no-store", headers: { "accept-language": pathParams.locale } }).then((res) => res.json())
   ) as { products: RugProduct[] };
 
-  const filteredRugs = filterProducts(data.products, urlSearchParams, pathParams.filter, pathParams.slug);
+  const filter = pathParams.filter;
+  const slug = pathParams.slug
+
+  const filteredRugs = filterProducts(data.products, urlSearchParams, filter, slug);
 
   const pageRaw = urlSearchParams.page;
   const perPageRaw = urlSearchParams.perPage;

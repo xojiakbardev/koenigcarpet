@@ -29,11 +29,10 @@ const Contact = () => {
 
   return (
     <div className="flex flex-col">
-      <Banner filter="Contact" image="/static/image1.png" />
+      <Banner filter={dict.contacts.contact} image="/static/image1.png" />
 
       <section className="px-6 md:px-24 py-12 bg-white text-gray-800">
         <div className="max-w-4xl mx-auto divide-y divide-gray-300">
-          {/* Address */}
           <div className="flex items-start gap-10 py-6">
             <MapPin className="w-6 h-6 text-gray-600 shrink-0" />
             <h3 className="font-semibold text-sm uppercase">
@@ -44,7 +43,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Phone */}
           <div className="flex items-start gap-10 py-6">
             <Phone className="w-6 h-6 text-gray-600 shrink-0" />
             <h3 className="font-semibold text-sm uppercase">
@@ -60,7 +58,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Email */}
           <div className="flex items-start gap-10 py-6">
             <Mail className="w-6 h-6 text-gray-600 shrink-0" />
             <h3 className="font-semibold text-sm uppercase">
@@ -76,7 +73,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* WhatsApp */}
           <div className="flex items-start gap-10 py-6">
             <MessageCircle className="w-6 h-6 text-gray-600 shrink-0" />
             <h3 className="font-semibold text-sm uppercase">
@@ -94,7 +90,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Instagram */}
           <div className="flex items-start gap-10 py-6">
             <Instagram className="w-6 h-6 text-gray-600 shrink-0" />
             <h3 className="font-semibold text-sm uppercase">
@@ -112,7 +107,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Social media map */}
           <div className="flex items-start gap-10 py-6">
             <Share2 className="w-6 h-6 text-gray-600 shrink-0" />
             <h3 className="font-semibold text-sm uppercase">
@@ -138,7 +132,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Yandex Map */}
       <iframe
         src="https://yandex.ru/map-widget/v1/?um=constructor%3A6c10b516473bd8e3336e1d0ce529ccf5aa08dce0c2438ecf2eeff8ab484ad83c&source=constructor"
         width="100%"

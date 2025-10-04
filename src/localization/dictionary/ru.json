@@ -547,7 +547,7 @@
           },
           {
             "title": "Арт Деко",
-            "value": "art deco"
+            "value": "art_deco"
           },
           {
             "title": "С рамкой",
@@ -599,6 +599,7 @@
     ]
   },
   "contacts": {
+    "contact": "Контакты",
     "name": "Имя",
     "phone": "Телефон",
     "newContact": "Новый контакт",
